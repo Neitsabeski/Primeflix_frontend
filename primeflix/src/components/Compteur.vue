@@ -9,6 +9,13 @@
         <button @click="increment">
             cliquez ici !
         </button>
+        <hr>
+        <p>
+            Le total général depuis vuex est de {{ totalGeneral }}
+        </p>
+        <p>
+            Le double du total depuis vuex est de {{ doubleDuTotal }}
+        </p>
     </div>
 </template>
 
@@ -18,6 +25,14 @@
         data(){
             return{
                 total: 0
+            }
+        },
+        computed: {
+            totalGeneral(){
+                return this.$store.state.totalFromVuex;
+            },
+            doubleDuTotal(){
+                return this.$store.getters.doubleDuTotal;
             }
         },
         methods: {
