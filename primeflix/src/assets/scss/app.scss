@@ -3,7 +3,54 @@
 */
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
-
 @import "./_variable.scss";
-
 @import './_home';
+
+*{
+    margin:0;
+    padding:0;
+}
+     
+body, html{height:100%;}
+
+body {
+    margin:0 auto;
+    position:relative;
+    min-height: 100%;
+    background-image:   
+        radial-gradient(
+            circle farthest-corner at top left, rgba(201, 0, 118,1) 0%, rgba(225, 243, 97,0) 50%),
+        radial-gradient(
+            circle farthest-corner at top right, rgba(45, 0, 89, 1) 0%, rgba(45, 0, 89, 1) 10%),
+        radial-gradient(
+            circle farthest-side at bottom right, rgba(201, 0, 118,1) 0%, rgba(201, 0, 118,1) 33%),
+        radial-gradient(
+            circle farthest-side at bottom left, rgba(201, 0, 118,1) 0%, rgba(201, 0, 118,1) 33%),
+        radial-gradient(
+            ellipse at bottom center, rgba(201, 0, 118,1) 0%, rgba(201, 0, 118,1) 80%);
+}
+
+nav, .nav-link, nav a, h1, footer {
+    color: white;
+}
+
+#brand {
+    margin-left: 20px;
+    color: rgba(201, 0, 118,1);
+}
+
+.nav-link:hover, a:hover {
+    color:rgba(45, 0, 89, 1);
+}
+
+#brand:hover {
+    color: aqua;
+}
+
+.nav-link {
+    text-transform: uppercase;
+}
+
+footer, nav {
+    background-color: rgba(0, 0, 0, 0.3);   
+}

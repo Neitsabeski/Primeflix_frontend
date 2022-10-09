@@ -1,4 +1,5 @@
 <template>
+    <!--
     <footer class="text-muted py-5">
         <div class="container">
             <p class="float-end mb-1">
@@ -12,6 +13,14 @@
             </li>
             <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
             <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
+        </div>
+    </footer>
+    -->
+
+    <footer class="text-center fixed-bottom">
+        <div class="text-center">
+            © 2022 Copyright:
+            <a href="https://www.isl.com/">ISL Wenkin & Gardier</a>
         </div>
     </footer>
 </template>

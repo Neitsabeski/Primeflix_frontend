@@ -1,5 +1,15 @@
 <template>
   <div class="about">
-    <h1>This is the about page</h1>
+    <MainComp />
   </div>
 </template>
+
+<script>
+import MainComp from '@/components/display/MainComponent'
+
+export default {
+  components:{
+    MainComp
+  }
+}
+</script>

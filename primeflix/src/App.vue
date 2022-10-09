@@ -4,7 +4,6 @@
     <router-view/>
     <FooterComp />
   </div>
-
 </template>
 
 <script>
