@@ -1,7 +1,11 @@
 <template>
   <div>
     <HeaderComp/>
-    <router-view/>
+    <MainComp />
+    <div class="content">
+      <router-view/>
+    </div>
+    
     <FooterComp />
   </div>
 </template>
@@ -11,9 +15,12 @@
   import HeaderComp from '@/components/partials/HeaderComponent'
   import FooterComp from '@/components/partials/FooterComponent'
 
+  import MainComp from '@/components/navigation/MainComponent'
+  
   export default {
     components: {
       FooterComp,
+      MainComp,
       HeaderComp
     }
   }

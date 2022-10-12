@@ -5,18 +5,9 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./_variable.scss";
 @import './_home';
-
-*{
-    margin:0;
-    padding:0;
-}
      
-body, html{height:100%;}
-
 body {
-    margin:0 auto;
-    position:relative;
-    min-height: 100%;
+    background-color: rgba(45, 0, 89, 1);
     background-image:   
         radial-gradient(
             circle farthest-corner at top left, rgba(201, 0, 118,1) 0%, rgba(225, 243, 97,0) 50%),
@@ -47,7 +38,7 @@ nav, .nav-link, nav a, h1, footer {
     color: aqua;
 }
 
-.nav-link {
+.nav-link, .path-nav li {
     text-transform: uppercase;
 }
 
@@ -57,4 +48,28 @@ footer, nav {
 
 section {
     color: white;
+}
+
+.catalog {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    padding: 15px 0px;
+}
+
+.content {
+    min-height: 50vh;
+}
+
+.container * {
+    color: white;
+}
+
+.path-nav li {
+    display: inline-block;
+    margin-right: 10px;
 }
