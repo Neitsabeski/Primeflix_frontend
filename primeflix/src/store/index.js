@@ -65,19 +65,27 @@ const store = createStore({
             state.user.data.phone = data[0].phone;
             state.user.data.lang = data[0].lang;
             state.user.data.email = data[0].email;
-            console.log(state.user);
+
+            localStorage.setItem('jwt', data[0].token)
         },
         logOut: function(state){
             state.user.userId = -1;
             state.user.token  = '';
             state.user.data = {};
             state.status = '';
+
+            localStorage.removeItem('jwt');
         },
 
         setProducts: function(state, data){
             state.products = data.products;
             state.totalPages = data.totalPages;
             state.currentPage = data.currentPage;
+        },
+
+        setCart: function(state, data){
+            state.cart = data['products'];
+            state.cartCount = state.cart.length;
         },
         addToCart: function(state, product){
 
@@ -98,10 +106,17 @@ const store = createStore({
             localStorage.cart = state.cart;
         },
 
+        alreadyConnected: function(state){
+            state.token = localStorage.getItem('jwt');
+            if(state.token) {
+                this.dispatch('user', state.token);
+                this.dispatch('cart', state.token);
+            }
+        },
+
         setCurrentProduct(state, data){
-            console.log("sto - set", data);
             state.currentProduct = data[0];
-        }
+        },
     },
     getters: {
         getLang: function(state){
@@ -142,16 +157,12 @@ const store = createStore({
         },
 
         getCurrentProduct: function(state){
-            console.log("sto - get ", state.currentProduct);
             return state.currentProduct;
         },
         
     },
     actions: {
         register: ({commit}, userInfos) => {
-
-            console.log(userInfos)
-
             commit('setStatus', 'loading');
             return new Promise((resolve, reject) => {
                 instance.post('/users/register', userInfos)
@@ -170,6 +181,25 @@ const store = createStore({
             commit('setStatus', 'loading');
             return new Promise((resolve, reject) => {
                 instance.get('/users', userInfos)
+                .then(function (response) {
+                    commit('setStatus', 'logged');
+                    commit('logUser', response.data);
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    commit('setStatus', 'error_login');
+                    reject(error);
+                });
+            })
+        },
+        user: ({commit}, jwt ) => {
+
+            const config = {
+                headers: { Authorization: `Bearer ${jwt}` }
+            };
+
+            return new Promise((resolve, reject) => {
+                instance.get('/users', config)
                 .then(function (response) {
                     commit('setStatus', 'logged');
                     commit('logUser', response.data);
@@ -202,20 +232,53 @@ const store = createStore({
         product: ({commit}, productId) => {
             
             var query = '';
-            //query += utils.queryLang();
+            query += utils.queryLang();
 
             return new Promise((resolve, reject) => {
                 instance.get('/product?id='+ productId + query)
                 .then(function (response) {
                     commit('setCurrentProduct', response.data);
-                    console.log("sto - act", response.data);
                     resolve(response);
                 })
                 .catch(function (error) {
                     reject(error);
                 });
             })
-        }
+        },
+        cart: ({commit}, jwt) => {
+            
+            const config = {
+                headers: { Authorization: `Bearer ${jwt}` }
+            };
+
+            return new Promise((resolve, reject) => {
+                instance.get('/carts', config)
+                .then(function (response) {
+                    commit('setCart', response.data)
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
+        order: ({commit}, order, jwt) => {
+
+            const config = {
+                headers: { Authorization: `Bearer ${jwt}` }
+            };
+
+            return new Promise((resolve, reject) => {
+                instance.post('/carts', order, config)
+                .then(function (response) {
+                    commit('setCart', response.data)
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
     }
 })
 

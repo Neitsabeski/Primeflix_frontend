@@ -6,24 +6,27 @@
                 <div class="row d-flex justify-content-center align-items-center h-100 pannel">
                     <div class="colxl-10">
                         <div class="row g-0 d-flex justify-content-center">
-                            <div class="col-lg-6 ">
+                            <div class="col-lg-6">
                                 <div class="text-center">
                                     <h2 class="card_title">{{ $t('profile.subTitle') }}</h2>
                                 </div>
-
+                                
                                 <div class="row  mb-4 justify-content-center">
-                                    <div class="col-md-8 ">
-                                        <div class="row"><div class="col pinky text-uppercase">UserId : </div><div class="col">{{ user.userId || emptyField }}</div></div>
+                                    <div class="col-md-8 text-center">
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.userID') }}</div><div class="col">{{ user.userId || emptyField }}</div></div>
                                         <hr/>
-                                        <div class="row"><div class="col pinky text-uppercase">First name : </div><div class="col">{{ user.data.firstName || emptyField }}</div></div>
-                                        <div class="row"><div class="col pinky text-uppercase">Last name :</div><div class="col">{{user.data.lastName || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.firstName') }} </div><div class="col">{{ user.data.firstName || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.lastName') }}</div><div class="col">{{user.data.lastName || emptyField }}</div></div>
                                         <hr/>
-                                        <div class="row"><div class="col pinky text-uppercase">Phone : </div><div class="col">{{ user.data.phone || emptyField }}</div></div>
-                                        <div class="row"><div class="col pinky text-uppercase">Email : </div><div class="col overflow-hidden">{{ user.data.email || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.phone') }}</div><div class="col">{{ user.data.phone || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.email') }}</div><div class="col overflow-hidden">{{ user.data.email || emptyField }}</div></div>
                                         <hr/>
-                                        <div class="row"><div class="col pinky text-uppercase">Lang : </div><div class="col">{{ user.data.lang || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.paiementAddress') }}</div><div class="col">{{ user.data.paiementAddress || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.deliveryAddress') }}</div><div class="col overflow-hidden">{{ user.data.deliveryAddress || emptyField }}</div></div>
                                         <hr/>
-                                        <div class="row"><div class="col pinky text-uppercase">Token : </div><div class="col">{{ user.token || emptyField }}</div></div>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.language') }}</div><div class="col">{{ user.data.lang || emptyField }}</div></div>
+                                        <hr/>
+                                        <div class="row"><div class="col pinky text-uppercase">{{ $t('profile.token') }}</div><div class="col">{{ user.token || emptyField }}</div></div>
                                     </div>
                                 </div>
                             </div>
@@ -42,8 +45,7 @@ export default {
     data: function () {
         return {
             user: null,
-            emptyField: '< >',
-            
+            emptyField: 'NaN',
         }
     },
     created: function () {

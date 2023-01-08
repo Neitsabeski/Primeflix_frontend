@@ -2,7 +2,7 @@
     <div class="product">
         <section class="h-100 gradient-form ">
             <div class="container py-5 h-100">
-                <h1>Product</h1>
+                <h1>{{ $t('product.title') }}</h1>
                 <div class="row d-flex justify-content-center align-items-center h-100 pannel">
                     <div class="col-xl-10">
                         <div class="row g-0 d-flex justify-content-center text-center">
@@ -10,7 +10,7 @@
                             <div class="card_title">
                                 <h2>
                                     <span v-if="product">{{ product.title }}</span>
-                                    <span v-else>No product</span>
+                                    <span v-else>{{ $t('product.noProduct') }}</span>
                                 </h2>
                             </div>
 

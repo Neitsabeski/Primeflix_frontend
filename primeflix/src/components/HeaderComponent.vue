@@ -76,11 +76,11 @@
             
             <div v-if="status == 'logged'" class="nav-link">
               <ul class="navbar-nav">                
-                <li class="nav-item dropstart">
+                <li class="nav-item dropdown">
                   <a class="dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ user.data.firstName || "User" }}<span class="pinky"><font-awesome-icon icon="user" /></span>
                   </a>
-                  <ul class="dropdown-menu" >
+                  <ul class="dropdown-menu dropdown-menu-end" >
                     <li>
                       <router-link to="/profile">
                         {{ $t('profileLink')}}

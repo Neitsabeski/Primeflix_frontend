@@ -4,9 +4,14 @@
     "subTitle": "Ajout récent",
     "noProducts": "Primeflix"
   },
-  "notFound":{
-    "title": "404",
-    "subTitle": "Non trouvé"
+  "error":{
+    "title": "Erreur",
+    "subTitle": "404 Non trouvé"
+  },
+  "orders": {
+    "title": "Commandes",
+    "subTitle": "Vos commandes",
+    "nothing": "Pas de commande"
   },
   "search":{
     "title": "Recherche",
@@ -23,6 +28,7 @@
   },
   "product":{
     "title": "Produit",
+    "noProduct": "Pas de produit",
     "rating": "Note",
     "released": "Parution",
     "summary": "Résumé",
@@ -121,7 +127,17 @@
     "badReg":"Mauvaises données insérées"
   },
   "profile":{
-    "title": "Profile"
+    "title": "Profil",
+    "subTitle": "Vos informations",
+    "userID":"Identifiant",
+    "firstName":"Prénom",
+    "lastName":"Nom",
+    "phone":"Téléphone",
+    "email":"Adresse email",
+    "language":"Langue",
+    "token":"Jeton",
+    "paiementAddress": "Adresse de facturation",
+    "deliveryAddress": "Adresse de livraison"
   },
   "homeLink": "Accueil",
   "productsLink": "Produits",
@@ -135,6 +151,6 @@
   "logoutLink": "Déconnexion",
   "contactLink": "Contact",
   "offersLink": "Offres",
-  "profileLink": "Mon profile",
+  "profileLink": "Mon profil",
   "ordersLink": "Mes commandes"
 }

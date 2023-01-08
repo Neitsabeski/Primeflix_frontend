@@ -22,6 +22,7 @@
     },
     created(){
       this.$store.getters.getStatus;
+      this.$store.commit('alreadyConnected');
     }
   }
 

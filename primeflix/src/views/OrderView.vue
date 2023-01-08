@@ -1,14 +1,16 @@
 <template>
-    <div class="error">
-        <section class="h-100 gradient-form ">
+    <div class="Order">
+        <section class="h-100 gradient-form">
             <div class="container py-5 h-100">
-                <h1>{{ $t('error.title') }}</h1>
+                <h1>Order</h1>
                 <div class="row d-flex justify-content-center align-items-center h-100 pannel">
-                    <div class="col-xl-20">
+                    <div class="col-xl-10">
                         <div class="row g-0 d-flex justify-content-center">
                             <div class="col-lg-6 ">
                                 <div class="text-center">
-                                    <h2 class="card_title">{{ $t('error.subTitle') }}</h2>
+                                    <h2 class="card_title">
+                                        Order
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -18,7 +20,3 @@
         </section>
     </div>
 </template>
-
-<script>
-
-</script>
