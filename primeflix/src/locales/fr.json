@@ -1,0 +1,140 @@
+{
+  "home":{
+    "title": "Accueil",
+    "subTitle": "Ajout récent",
+    "noProducts": "Primeflix"
+  },
+  "notFound":{
+    "title": "404",
+    "subTitle": "Non trouvé"
+  },
+  "search":{
+    "title": "Recherche",
+    "subTitle": "Résultats de la recherche",
+    "noResult": "Pas de résultats"
+  },
+  "products":{
+    "title": "Produits",
+    "subTitle": "Catalogue des produits",
+    "noProducts": "Aucun produits",
+    "previousBtn": "précedent",
+    "nextBtn": "suivant",
+    "filters": "Filtres"
+  },
+  "product":{
+    "title": "Produit",
+    "rating": "Note",
+    "released": "Parution",
+    "summary": "Résumé",
+    "genres": "Genres",
+    "directors": "Réalisateurs",
+    "actors": "Acteurs",
+    "stock": "Stock",
+    "price": "Prix",
+    "format": "Format"
+  },
+  "about":{
+    "title": "A propos",
+    "subTitle": "Primeflix, mais encore ?",
+    "salesLaw": "Conditions générales des ventes",
+    "datasUses": "Utilisation des données personnelles ",
+    "own": "Primeflix",
+    "partners": "Partenaires",
+    "descPrimeflix": {
+      "1": "Primeflix est une société de vente en ligne de DVD qui a été créée il y a quelques années. Depuis sa création, Primeflix s'est rapidement imposée sur le marché grâce à sa sélection de films de qualité et à son service client exemplaire.",
+      "2": "Le site web de Primeflix est facile à utiliser et propose une large gamme de DVD, allant des films d'action aux comédies romantiques en passant par les films d'animation pour enfants. Les clients peuvent facilement naviguer sur le site pour trouver le film qu'ils recherchent et passer leur commande en quelques clics."
+    },
+    "descPartners":{
+      "1": "At Primeflix, we pride ourselves on working with a variety of partners to bring you the best selection of DVDs available on the market.",
+      "2": "Our number one source for DVDs is our distribution partner, who provide us with much of our catalog of movies and TV shows. We also work with independent distributors to bring you a wide range of rare and challenging titles to find.",
+      "3": "In addition to our distribution partners, we also have collaboration agreements with numerous film and television production houses. This allows us to bring you the latest films and TV series directly from their theatrical release or at television.",
+      "4": "Finally, we are also proud to work with local partners to bring you a selection of films and TV series produced locally in your region.",
+      "5": "By working with these different partners, we are able to offer you the widest choice of quality DVDs available on the market, while supporting the film and television industry on different levels. We hope you enjoy our selection of DVDs and that you continue to trust Primeflix for your purchases of films and TV series."  
+    },
+    "rgpd": {
+      "1":"Nous demandons votre autorisation avant de collecter vos données personnelles.",
+      "2":"Nous utilisons ces données pour gérer vos commandes, communiquer avec vous et personnaliser votre expérience d'achat.",
+      "3":"Nous présentons une politique de confidentialité claire et concise sur l'utilisation de vos données.",
+      "4":"Nous protégeons vos données personnelles grâce à des mesures de sécurité adéquates.",
+      "5":"Nous ne collectons que les données nécessaires à l'exécution de nos transactions et à notre communication avec vous.",
+      "6":"Nous respectons les lois en vigueur sur la protection des données personnelles, comme le RGPD en Europe.",
+      "7":"Vous avez le droit d'accéder à vos données personnelles, de les rectifier ou de les effacer.",
+      "8":"Nous mettons en place des mesures pour gérer les fuites de données et prévenir les violations de la vie privée.",
+      "9":"Nous formons notre personnel sur la protection des données et collaborons avec des experts en sécurité.",
+      "10":"Nous mettons tout en œuvre pour garantir la confiance de nos clients et respecter leur vie privée."
+    },
+    "cgv":{
+      "1":"Article 1 - Objet",
+      "10":"Les présentes Conditions générales de vente (ci-après désignées les 'CGV') ont pour objet de définir les modalités de vente en ligne de DVD (films et séries) proposés par Primeflix. Elles s'appliquent à toutes les commandes passées sur le site internet de Primeflix et sont systématiquement présentées à l'acheteur avant toute validation de commande.",
+      "2":"Article 2 - Commande",
+      "20":"L'acheteur peut passer commande sur le site internet de Primeflix. La vente ne sera considérée comme définitive qu'après l'envoi par Primeflix de la confirmation de la commande et de l'acceptation du paiement. Primeflix se réserve le droit de refuser toute commande d'un acheteur avec lequel il existerait un litige ou si l'article commandé est indisponible.",
+      "3":"Article 3 - Paiement",
+      "30":"Le paiement des achats s'effectue via Stripe. Toutes les informations transmises par l'acheteur sont sécurisées et protégées. Le paiement en ligne est exigé pour toute commande passée sur le site internet de Primeflix.",
+      "4":"Article 4 - Livraison",
+      "40":"Les DVD sont livrés à l'adresse de livraison indiquée par l'acheteur lors de sa commande. Les frais de livraison sont à la charge de l'acheteur et sont indiqués avant validation de la commande. Primeflix s'engage à livrer les articles commandés dans les délais les plus courts possibles, mais ne peut être tenu responsable des retards de livraison imputables aux transporteurs.",
+      "5":"Article 5 - Rétractation et remboursement",
+      "50":"L'acheteur dispose d'un délai de 30 jours à compter de la réception de sa commande pour exercer son droit de rétractation et demander un remboursement. Les DVD doivent être retournés dans leur emballage d'origine et en parfait état. Les frais de retour sont à la charge de l'acheteur. Le remboursement sera effectué dans les meilleurs délais et au plus tard dans les 30 jours suivant la date de réception des DVD par Primeflix.",
+      "6":"Article 6 - Garanties légales",
+      "60":"Primeflix s'engage à respecter les garanties légales de conformité : les articles achetés sur le site internet de Primeflix doivent être conformes à la description fournie et doivent être aptes à l'usage habituellement attendu d'un produit similaire."
+    }
+  },
+  "contact":{
+    "title": "Contact",
+    "subTitle": "Contactez-nous !",
+    "placeholderEmail": "Adresse email",
+    "placeholderFullName": "Nom complet",
+    "placeholderSubject": "Sujet du message",
+    "placeholderMessage": "Message",
+    "sendBtn": "Envoyer",
+    "backBtn": "Retour",
+    "sendedMessage": "Message envoyé."
+  },
+  "cart":{
+    "title": "Panier",
+    "subTitle": "Votre panier",
+    "purchaseBtn": "Commander",
+    "productTitleHeader": "Titre",
+    "productQuantityHeader": "Quantité",
+    "productPriceHeader": "Prix",
+    "subtotal": "Sous total",
+    "empty": "Le panier est vide"
+  },
+  "loginRegister":{
+    "title": "Authentification",
+    "registerSubTitle": "Inscription",
+    "loginSubTitle": "Connexion",
+    "noAccount":"Vous n'avez pas encore de compte ? ",
+    "alreadyAccount":"Vous avez des un compte ? ",
+    "registerHere":"Inscrivez-vous ici",
+    "loginHere":"Connectez-vous ici",
+    "emailField":"Adresse email",
+    "firstNameField":"Prénom",
+    "lastNameField":"Nom",
+    "phoneField":"téléhpone",
+    "languageSelect":"Langue",
+    "passwordField": "Mot de passe",
+    "passwordVerifField":"Vérification du mot de passe",
+    "loginBtn":"Connexion",
+    "registerBtn":"Inscription",
+    "forgotPassword":"Mot de passe oublié ?",
+    "badLog":"Mauvais email et/ou mot de passe",
+    "badReg":"Mauvaises données insérées"
+  },
+  "profile":{
+    "title": "Profile"
+  },
+  "homeLink": "Accueil",
+  "productsLink": "Produits",
+  "filmsLink": "Films",
+  "seriesLink": "Séries",
+  "aboutLink": "A propos",
+  "searchField": "Rechercher...",
+  "searchBtn": "Rechercher",
+  "cartLink": "Panier",
+  "loginRegisterLink": "Connexion/Inscription",
+  "logoutLink": "Déconnexion",
+  "contactLink": "Contact",
+  "offersLink": "Offres",
+  "profileLink": "Mon profile",
+  "ordersLink": "Mes commandes"
+}

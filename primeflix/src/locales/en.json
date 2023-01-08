@@ -1,0 +1,141 @@
+{
+  "home":{
+    "title": "Home",
+    "subTitle": "Recently added",
+    "noProducts": "Primeflix"
+  },
+  "notFound":{
+    "title": "404",
+    "subTitle": "Not found"
+  },
+  "search":{
+    "title": "Search",
+    "subTitle": "Search resultats",
+    "noResult": "No match"
+  },
+  "products":{
+    "title": "Products",
+    "subTitle": "Products catalog",
+    "noProducts": "No products available",
+    "previousBtn": "previous",
+    "nextBtn": "next",
+    "filters": "Filters"
+  },
+  "product":{
+    "title": "Product",
+    "rating": "Rating",
+    "released": "Released",
+    "summary": "Summary",
+    "genres": "Genres",
+    "directors": "Directors",
+    "actors": "Actors",
+    "stock": "Stock",
+    "price": "Price",
+    "format": "Format"
+  },
+  "about":{
+    "title": "About",
+    "subTitle": "PRIMEFLIX, what else ?",
+    "salesLaw": "General conditions of sale",
+    "datasUses": "Use of personal datas",
+    "own": "Primeflix",
+    "partners": "Partners",
+    "descPrimeflix": {
+      "1": "Primeflix is ​​an online DVD sales company that was established a few years ago. Since its inception, Primeflix has quickly established itself in the market thanks to its selection of quality films and its service exemplary customer.",
+      "2": "The Primeflix website is easy to use and offers a wide range of DVDs, ranging from action films to romantic comedies to animated children's films. Customers can easily navigate the site to find the movie they're looking for and place their order in just a few clicks."
+    },
+    "descPartners":{
+      "1": "At Primeflix, we pride ourselves on working with a variety of partners to bring you the best selection of DVDs available on the market.",
+      "2": "Our number one source for DVDs is our distribution partner, who provide us with much of our catalog of movies and TV shows. We also work with independent distributors to bring you a wide range of rare and challenging titles to find.",
+      "3": "In addition to our distribution partners, we also have collaboration agreements with numerous film and television production houses. This allows us to bring you the latest films and TV series directly from their theatrical release or at television.",
+      "4": "Finally, we are also proud to work with local partners to bring you a selection of films and TV series produced locally in your region.",
+      "5": "By working with these different partners, we are able to offer you the widest choice of quality DVDs available on the market, while supporting the film and television industry on different levels. We hope you enjoy our selection of DVDs and that you continue to trust Primeflix for your purchases of films and TV series."  
+    },
+    "rgpd": {
+      "1":"We ask your permission before collecting your personal data.",
+      "2":"We use this data to manage your orders, communicate with you and personalize your shopping experience.",
+      "3":"We present a clear and concise privacy policy on the use of your data.",
+      "4":"We protect your personal data with adequate security measures.",
+      "5":"We only collect the data necessary for the execution of our transactions and our communication with you.",
+      "6":"We comply with applicable laws on the protection of personal data, such as the GDPR in Europe.",
+      "7":"You have the right to access, rectify or erase your personal data.",
+      "8":"We are implementing measures to manage data leaks and prevent privacy breaches.",
+      "9":"We train our staff on data protection and collaborate with security experts.",
+      "10":"We make every effort to ensure the trust of our customers and respect their privacy."
+    },
+    "cgv":{
+      "1":"Article 1 - Object",
+      "10":"These General Terms and Conditions of Sale (hereinafter referred to as the 'GTC') are intended to define the terms and conditions for the online sale of DVDs (films and series) offered by Primeflix. They apply to all orders placed on the Primeflix website and are systematically presented to the buyer before any order validation.",
+      "2":"Item 2 - Order",
+      "20":"The buyer can place an order on the Primeflix website. The sale will only be considered final after Primeflix sends the order confirmation and the acceptance of payment. Primeflix reserves the right the right to refuse any order from a buyer with whom there is a dispute or if the item ordered is unavailable.",
+      "3":"Article 3 - Payment",
+      "30":"Payment for purchases is made via Stripe. All information transmitted by the buyer is secure and protected. Online payment is required for all orders placed on the Primeflix website.",
+      "4":"Article 4 - Delivery",
+      "40":"The DVDs are delivered to the delivery address indicated by the buyer when ordering. The delivery costs are the responsibility of the buyer and are indicated before validation of the order. Primeflix undertakes to deliver the items ordered in the shortest possible time, but cannot be held responsible for delays in delivery attributable to carriers.",
+      "5":"Article 5 - Withdrawal and refund",
+      "50":"The buyer has a period of 30 days from receipt of his order to exercise his right of withdrawal and request a refund. DVDs must be returned in their original packaging and in perfect condition . Return costs are the responsibility of the buyer. The refund will be made as soon as possible and at the latest within 30 days from the date of receipt of the DVDs by Primeflix.",
+      "6":"Article 6 - Legal guarantees",
+      "60":"Primeflix undertakes to respect the legal guarantees of conformity: items purchased on the Primeflix website must comply with the description provided and must be suitable for the use usually expected of a similar product."
+    }
+
+  },
+  "contact":{
+    "title": "Contact",
+    "subTitle": "Contact us !",
+    "placeholderEmail": "Email address",
+    "placeholderFullName": "Full Name",
+    "placeholderSubject": "Subject",
+    "placeholderMessage": "Message",
+    "sendBtn": "Send",
+    "backBtn": "Back",
+    "sendedMessage": "Message sent."
+  },
+  "cart":{
+    "title": "Cart",
+    "subTitle": "Your cart",
+    "purchaseBtn": "Purchase",
+    "productTitleHeader": "Title",
+    "productQuantityHeader": "Quantity",
+    "productPriceHeader": "Price",
+    "subtotal": "Subtotal",
+    "empty": "Cart is empty"
+  },
+  "loginRegister":{
+    "title": "Login/Register",
+    "registerSubTitle": "Register",
+    "loginSubTitle": "Login",
+    "noAccount":"Don't have an account ? ",
+    "alreadyAccount":"Already have an account ? ",
+    "registerHere":"Register here",
+    "loginHere":"Login here",
+    "emailField":"Email",
+    "firstNameField":"First Name",
+    "lastNameField":"Last Name",
+    "phoneField":"Phone",
+    "languageSelect":"Language",
+    "passwordField": "Password",
+    "passwordVerifField":"Password Verification",
+    "loginBtn":"Login",
+    "registerBtn":"Register",
+    "forgotPassword":"Forgot password ?",
+    "badLog":"Bad email and/or password",
+    "badReg":"Bad datas inserted"
+  },
+  "profile":{
+  "title": "Profiles"
+  },
+  "homeLink": "Home",
+  "productsLink": "Products",
+  "filmsLink": "Films",
+  "seriesLink": "Series",
+  "aboutLink": "About",
+  "searchField": "Search...",
+  "searchBtn": "Search",
+  "cartLink": "Cart",
+  "loginRegisterLink": "Login/Register",
+  "logoutLink": "Logout",
+  "contactLink": "Contact",
+  "offersLink": "Offers",
+  "profileLink": "My profile",
+  "ordersLink": "My orders"
+}

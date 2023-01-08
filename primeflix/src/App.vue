@@ -1,27 +1,28 @@
 <template>
   <div>
     <HeaderComp/>
-    <MainComp />
-    <div class="content">
-      <router-view/>
-    </div>
-    
+    <router-view/>
     <FooterComp />
+    
+    <BackgroundComp />
   </div>
 </template>
 
 <script>
-  // @ is an alias to /src
-  import HeaderComp from '@/components/partials/HeaderComponent'
-  import FooterComp from '@/components/partials/FooterComponent'
 
-  import MainComp from '@/components/navigation/MainComponent'
-  
+  import HeaderComp from '@/components/HeaderComponent'
+  import FooterComp from '@/components/FooterComponent'
+  import BackgroundComp from '@/components/BackgroundSvg.vue'
+
   export default {
     components: {
+      BackgroundComp,
       FooterComp,
-      MainComp,
       HeaderComp
+    },
+    created(){
+      this.$store.getters.getStatus;
     }
   }
+
 </script>

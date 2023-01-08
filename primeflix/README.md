@@ -1,4 +1,4 @@
-# primeflix
+# vuetest
 
 ## Project setup
 ```

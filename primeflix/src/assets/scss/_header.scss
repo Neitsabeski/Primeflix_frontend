@@ -1,0 +1,42 @@
+.navbar {
+  background-color: $myBlue;
+  position : fixed;
+  top: -0px;
+  z-index: 5;
+  width: 100%;
+  color: white;
+  text-transform: uppercase;
+}
+
+.nav-item .nav-link, .nav-link a {
+  color: white;
+  text-decoration: none;
+}
+  
+.navbar-brand a{
+  color: $myPink;
+}
+
+.nav-link a:hover {
+  color: aqua;
+}
+
+.nav-item .nav-link a:hover{
+  border-bottom: solid 1px aqua;
+}
+
+.notReady {
+  filter: invert(0.5);
+}
+
+.dropdown-menu a {
+  color: black;
+}
+
+.dropdown-menu .nav-link a:hover {
+  color: $myPink;
+}
+
+.dropdown-menu {
+  padding: 10px;
+}

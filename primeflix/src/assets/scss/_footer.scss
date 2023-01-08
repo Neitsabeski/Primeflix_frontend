@@ -1,0 +1,20 @@
+footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom:0;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    padding: 15px 0px;
+  }
+
+  .logo{
+    width: 22px;
+    height: 22px;
+    filter: invert(0.5);
+  }
+  
+  .logo:hover, .footlink:hover{
+    filter: invert(1);
+  }

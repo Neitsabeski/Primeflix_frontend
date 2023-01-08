@@ -1,0 +1,11 @@
+pages
+	Accueil 
+		GET api/products?recentlyAdded
+		GET api/products?genre&format&recentlyAdded&lang
+		GET api/products/id
+		
+	Login/Register
+		PUT api/register/ ?headers=datas
+		PUT api/login/ 	?headers=identifiant+mdp -> JWT
+		
+		

@@ -1,10 +1,22 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import store from './store' 
 
-import "bootstrap/dist/js/bootstrap.js"
+import axios from 'axios' 
+import VueAxios from 'vue-axios'
 
-import '../src/assets/scss/app.scss'
+import i18n from './i18n'
 
-createApp(App).use(store).use(router).mount('#app')
+import 'bootstrap';
+import './assets/scss/app.scss'
+
+import FontAwesomeIcon from "@/helpers/fontAwsome";
+
+createApp(App)
+    .component("FontAwesomeIcon", FontAwesomeIcon)
+    .use(i18n)
+    .use(store)
+    .use(VueAxios, axios)
+    .use(router)
+.mount('#app')

@@ -1,0 +1,36 @@
+{
+    "home":{
+      "title": "Dit is de startpagina"
+    },
+    "products":{
+      "title": "Dit is de productpagina"
+    },
+    "about":{
+      "title": "Dit is de pagina over"
+    },
+    "contact":{
+      "title": "Hier is de contactpagina"
+    },
+    "cart":{
+      "title": "Hier is de winkelwagenpagina"
+    },
+    "loginRegister":{
+      "title": "Hier is de authenticatiepagina"
+    },
+    "profile":{
+      "title": "Dit is de profielpagina"
+    },
+    "homeLink": "Thuis",
+    "productsLink": "Producten",
+    "moviesLink": "Films",
+    "seriesLink": "Serie",
+    "aboutLink": "Over",
+    "searchField": "Zoeken...",
+    "searchBtn": "Zoeken",
+    "cartLink": "Winkelwagen",
+    "loginRegisterLink": "Inloggen/Registreren",
+    "logoutLink": "Uitloggen",
+    "contactLink": "Contact"
+  }
+  
+  

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 81.86 81.86">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: url(#Nouvelle_nuance_de_motif_17);
+        stroke-dasharray: 0 10;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        fill: #2197d4;
+      }
+    </style>
+    <pattern id="Nouvelle_nuance_de_motif_17" data-name="Nouvelle nuance de motif 17" x="0" y="0" width="43.46" height="43.46" patternTransform="translate(-58.91 -58.74)" patternUnits="userSpaceOnUse" viewBox="0 0 43.46 43.46">
+      <g>
+        <rect class="cls-2" y="0" width="43.46" height="43.46"/>
+        <rect class="cls-3" x="0" y="0" width="43.46" height="43.46"/>
+      </g>
+    </pattern>
+  </defs>
+  <circle class="cls-1" cx="40.93" cy="40.93" r="38.43"/>
+</svg>

@@ -1,75 +1,85 @@
-/*
-    @import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
-*/
+@import 'bootstrap/dist/css/bootstrap.css';
+@import './font';
+@import './variables';
+@import './header';
+@import './footer.scss';
+@import './card';
+@import './form';
+@import './background';
+@import './products';
+@import './facebook';
 
-@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "./_variable.scss";
-@import './_home';
-     
-body {
-    background-color: rgba(45, 0, 89, 1);
-    background-image:   
-        radial-gradient(
-            circle farthest-corner at top left, rgba(201, 0, 118,1) 0%, rgba(225, 243, 97,0) 50%),
-        radial-gradient(
-            circle farthest-corner at top right, rgba(45, 0, 89, 1) 0%, rgba(45, 0, 89, 1) 10%),
-        radial-gradient(
-            circle farthest-side at bottom right, rgba(201, 0, 118,1) 0%, rgba(201, 0, 118,1) 33%),
-        radial-gradient(
-            circle farthest-side at bottom left, rgba(201, 0, 118,1) 0%, rgba(201, 0, 118,1) 33%),
-        radial-gradient(
-            ellipse at bottom center, rgba(201, 0, 118,1) 0%, rgba(201, 0, 118,1) 80%);
+.transparent {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
-nav, .nav-link, nav a, h1, footer {
-    color: white;
+* {
+  font-family: 'Poppins', sans-serif;
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#brand {
-    margin-left: 20px;
-    color: rgba(201, 0, 118,1);
+#app {
+  max-width: 100%;
+  padding-top: 60px;
 }
 
-.nav-link:hover, a:hover {
-    color:rgba(45, 0, 89, 1);
+
+body{
+  overflow: scroll;
+  position: relative;
+  padding-bottom: 7.4em;
+  background-color: $myBlue;
+  min-height: 100vh;
 }
 
-#brand:hover {
-    color: aqua;
+h1, h2, h3, h4, h5 {
+  color: white;
 }
 
-.nav-link, .path-nav li {
-    text-transform: uppercase;
+.btn-primary:hover{
+  color:$myPink;
+  background-color: white;
+  border-color: $myPink;
 }
 
-footer, nav {
-    background-color: rgba(0, 0, 0, 0.3);   
+.btn {
+  z-index: 100;
 }
 
-section {
-    color: white;
+.btn.btn-primary.disabled, .btn.btn-primary:disabled, .btn-primary, .btn-primary:active:focus{
+  color: white;
+  background-color: $myPink;
+  border-color: $myPink;
 }
 
-.catalog {
-    background-color: rgba(0, 0, 0, 0.3);
+.pinky {
+  color: $myPink;
 }
 
-footer {
-    width: 100%;
-    text-align: center;
-    margin-top: 50px;
-    padding: 15px 0px;
+.pannel {
+  background-color: $myDarkTransparent;
+  padding: 20px 5px 20px 5px;
+  color: white;
+
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.content {
-    min-height: 50vh;
+.container {
+  min-width: 75%;
 }
 
-.container * {
-    color: white;
+  
+.logow {
+  width: 25%;
+  filter: invert(1);
 }
 
-.path-nav li {
-    display: inline-block;
-    margin-right: 10px;
+.page-select {
+  width: 100%;
+  height: 60px;
+  padding-top: 20px;
 }
+

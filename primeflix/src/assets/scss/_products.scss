@@ -1,0 +1,28 @@
+.filtersMenu {
+    display: inline-block;
+    width: 100%;
+}
+
+.filtersMenu .filterBtn {
+    color: $myPink;
+    font-size: 20px;
+}
+
+.filtersMenu .filterBtn:hover {
+    text-decoration: underline;
+    color: aqua;
+}
+
+.filtersMenu ul {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+}
+
+.filtersMenu ul li {
+    overflow: hidden;
+}
+
+.filtersMenu input:checked {
+    accent-color: $myPink;
+}

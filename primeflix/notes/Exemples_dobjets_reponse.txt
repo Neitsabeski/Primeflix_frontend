@@ -1,0 +1,1015 @@
+GET https://localhost:5000/api/products
+
+[
+    {
+        "id": 7,
+        "title": "12 hommes en colère",
+        "releaseDate": "1957-01-01T00:00:00",
+        "duration": 96,
+        "stock": 0,
+        "rating": 3,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 3.5,
+        "directors": [
+            {
+                "id": 68,
+                "firstName": "Sidney",
+                "lastName": "Lumet"
+            }
+        ],
+        "actors": [
+            {
+                "id": 69,
+                "firstName": "Henry",
+                "lastName": "Fonda"
+            },
+            {
+                "id": 70,
+                "firstName": "Lee J.",
+                "lastName": "Cobb"
+            },
+            {
+                "id": 71,
+                "firstName": "Martin",
+                "lastName": "Balsam"
+            },
+            {
+                "id": 72,
+                "firstName": "John",
+                "lastName": "Fiedler"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 5,
+                "name": "Crime"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "title": "AU SECOURS",
+        "releaseDate": "1957-01-01T00:00:00",
+        "duration": 96,
+        "stock": 0,
+        "rating": 3,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 3.5,
+        "directors": [
+            {
+                "id": 45,
+                "firstName": "Frank",
+                "lastName": "Darabont"
+            }
+        ],
+        "actors": [
+            {
+                "id": 1,
+                "firstName": "Tim",
+                "lastName": "Robbins"
+            }
+        ],
+        "genres": [
+            {
+                "id": 1,
+                "name": "Horror"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Inception",
+        "releaseDate": "2010-01-01T00:00:00",
+        "duration": 148,
+        "stock": 2,
+        "rating": 5,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 5.0,
+        "directors": [
+            {
+                "id": 51,
+                "firstName": "Christopher",
+                "lastName": "Nolan"
+            }
+        ],
+        "actors": [
+            {
+                "id": 78,
+                "firstName": "Leonardo",
+                "lastName": "DiCaprio"
+            },
+            {
+                "id": 79,
+                "firstName": "Joseph",
+                "lastName": "Gordon-Levitt"
+            },
+            {
+                "id": 80,
+                "firstName": "Elliot",
+                "lastName": "Page"
+            },
+            {
+                "id": 81,
+                "firstName": "Ken",
+                "lastName": "Watanabe"
+            }
+        ],
+        "genres": [
+            {
+                "id": 6,
+                "name": "Action"
+            },
+            {
+                "id": 7,
+                "name": "Adventure"
+            },
+            {
+                "id": 9,
+                "name": "Sci-fi"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "title": "La liste de Schindler",
+        "releaseDate": "1993-01-01T00:00:00",
+        "duration": 195,
+        "stock": 1,
+        "rating": 3,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 5.0,
+        "directors": [
+            {
+                "id": 61,
+                "firstName": "Steven",
+                "lastName": "Spielberg"
+            }
+        ],
+        "actors": [
+            {
+                "id": 62,
+                "firstName": "Liam",
+                "lastName": "Neeson"
+            },
+            {
+                "id": 63,
+                "firstName": "Ralph",
+                "lastName": "Fiennes"
+            },
+            {
+                "id": 64,
+                "firstName": "Ben",
+                "lastName": "Kingsley"
+            },
+            {
+                "id": 65,
+                "firstName": "Caroline",
+                "lastName": "Goodall"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 4,
+                "name": "History"
+            },
+            {
+                "id": 8,
+                "name": "Biography"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Le parrain",
+        "releaseDate": "1972-01-01T00:00:00",
+        "duration": 175,
+        "stock": 2,
+        "rating": 5,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 4.0,
+        "directors": [
+            {
+                "id": 46,
+                "firstName": "Francis",
+                "lastName": "Ford Coppola"
+            }
+        ],
+        "actors": [
+            {
+                "id": 47,
+                "firstName": "Marlon",
+                "lastName": "Brando"
+            },
+            {
+                "id": 48,
+                "firstName": "Al",
+                "lastName": "Pacino"
+            },
+            {
+                "id": 49,
+                "firstName": "James",
+                "lastName": "Caan"
+            },
+            {
+                "id": 50,
+                "firstName": "Diane",
+                "lastName": "Keaton"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 5,
+                "name": "Crime"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Le parrain 2",
+        "releaseDate": "1974-01-01T00:00:00",
+        "duration": 202,
+        "stock": 7,
+        "rating": 5,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 4.0,
+        "directors": [
+            {
+                "id": 46,
+                "firstName": "Francis",
+                "lastName": "Ford Coppola"
+            }
+        ],
+        "actors": [
+            {
+                "id": 66,
+                "firstName": "Robert",
+                "lastName": "De Niro"
+            },
+            {
+                "id": 67,
+                "firstName": "Robert",
+                "lastName": "Duvall"
+            },
+            {
+                "id": 48,
+                "firstName": "Al",
+                "lastName": "Pacino"
+            },
+            {
+                "id": 50,
+                "firstName": "Diane",
+                "lastName": "Keaton"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 5,
+                "name": "Crime"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "title": "LE SECOND MOMENT DE VERITE",
+        "releaseDate": "1957-01-01T00:00:00",
+        "duration": 96,
+        "stock": 0,
+        "rating": 3,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 3.5,
+        "directors": [
+            {
+                "id": 45,
+                "firstName": "Frank",
+                "lastName": "Darabont"
+            }
+        ],
+        "actors": [
+            {
+                "id": 1,
+                "firstName": "Tim",
+                "lastName": "Robbins"
+            }
+        ],
+        "genres": [
+            {
+                "id": 2,
+                "name": "Comedy"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Le seigneur des anneaux : le retour du roi",
+        "releaseDate": "2003-01-01T00:00:00",
+        "duration": 201,
+        "stock": 0,
+        "rating": 4,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 2.5,
+        "directors": [
+            {
+                "id": 56,
+                "firstName": "Peter",
+                "lastName": "Jackson"
+            }
+        ],
+        "actors": [
+            {
+                "id": 57,
+                "firstName": "Elijah",
+                "lastName": "Wood"
+            },
+            {
+                "id": 58,
+                "firstName": "Viggo",
+                "lastName": "Mortensen"
+            },
+            {
+                "id": 59,
+                "firstName": "Ian",
+                "lastName": "McKellen"
+            },
+            {
+                "id": 60,
+                "firstName": "Orlando",
+                "lastName": "Bloom"
+            }
+        ],
+        "genres": [
+            {
+                "id": 6,
+                "name": "Action"
+            },
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 7,
+                "name": "Adventure"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Le seigneur des anneaux : les deux tours",
+        "releaseDate": "2002-01-01T00:00:00",
+        "duration": 179,
+        "stock": 1,
+        "rating": 4,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 3.0,
+        "directors": [
+            {
+                "id": 56,
+                "firstName": "Peter",
+                "lastName": "Jackson"
+            }
+        ],
+        "actors": [
+            {
+                "id": 57,
+                "firstName": "Elijah",
+                "lastName": "Wood"
+            },
+            {
+                "id": 58,
+                "firstName": "Viggo",
+                "lastName": "Mortensen"
+            },
+            {
+                "id": 59,
+                "firstName": "Ian",
+                "lastName": "McKellen"
+            },
+            {
+                "id": 60,
+                "firstName": "Orlando",
+                "lastName": "Bloom"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 6,
+                "name": "Action"
+            },
+            {
+                "id": 7,
+                "name": "Adventure"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "title": "Les évadés",
+        "releaseDate": "1994-01-01T00:00:00",
+        "duration": 142,
+        "stock": 5,
+        "rating": 5,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 3.0,
+        "directors": [
+            {
+                "id": 45,
+                "firstName": "Frank",
+                "lastName": "Darabont"
+            }
+        ],
+        "actors": [
+            {
+                "id": 1,
+                "firstName": "Tim",
+                "lastName": "Robbins"
+            },
+            {
+                "id": 42,
+                "firstName": "Morgan",
+                "lastName": "Freeman"
+            },
+            {
+                "id": 43,
+                "firstName": "Bob",
+                "lastName": "Gunton"
+            },
+            {
+                "id": 44,
+                "firstName": "William",
+                "lastName": "Sadler"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Pulp Fiction",
+        "releaseDate": "1994-01-01T00:00:00",
+        "duration": 154,
+        "stock": 1,
+        "rating": 5,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 4.0,
+        "directors": [
+            {
+                "id": 73,
+                "firstName": "Quentin",
+                "lastName": "Tartantino"
+            }
+        ],
+        "actors": [
+            {
+                "id": 74,
+                "firstName": "John",
+                "lastName": "Travolta"
+            },
+            {
+                "id": 75,
+                "firstName": "Uma",
+                "lastName": "Thurman"
+            },
+            {
+                "id": 76,
+                "firstName": "Samuel L.",
+                "lastName": "Jackson"
+            },
+            {
+                "id": 77,
+                "firstName": "Bruce",
+                "lastName": "Willis"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 5,
+                "name": "Crime"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "The dark knight",
+        "releaseDate": "2008-01-01T00:00:00",
+        "duration": 152,
+        "stock": 3,
+        "rating": 4,
+        "format": "Film",
+        "pictureUrl": "TODO",
+        "price": 3.5,
+        "directors": [
+            {
+                "id": 51,
+                "firstName": "Christopher",
+                "lastName": "Nolan"
+            }
+        ],
+        "actors": [
+            {
+                "id": 52,
+                "firstName": "Christian",
+                "lastName": "Bale"
+            },
+            {
+                "id": 53,
+                "firstName": "Heath",
+                "lastName": "Ledger"
+            },
+            {
+                "id": 54,
+                "firstName": "Aaron",
+                "lastName": "Eckhart"
+            },
+            {
+                "id": 55,
+                "firstName": "Michael",
+                "lastName": "Caine"
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 5,
+                "name": "Crime"
+            },
+            {
+                "id": 6,
+                "name": "Action"
+            }
+        ]
+    }
+]
+
+GET https://localhost:5000/api/products/1
+
+{
+    "id": 1,
+    "title": "Les évadés",
+    "releaseDate": "1994-01-01T00:00:00",
+    "duration": 142,
+    "stock": 5,
+    "rating": 5,
+    "format": "Film",
+    "pictureUrl": "TODO",
+    "price": 3.0,
+    "directors": [
+        {
+            "id": 45,
+            "firstName": "Frank",
+            "lastName": "Darabont"
+        }
+    ],
+    "actors": [
+        {
+            "id": 1,
+            "firstName": "Tim",
+            "lastName": "Robbins"
+        },
+        {
+            "id": 42,
+            "firstName": "Morgan",
+            "lastName": "Freeman"
+        },
+        {
+            "id": 43,
+            "firstName": "Bob",
+            "lastName": "Gunton"
+        },
+        {
+            "id": 44,
+            "firstName": "William",
+            "lastName": "Sadler"
+        }
+    ],
+    "genres": [
+        {
+            "id": 3,
+            "name": "Drama"
+        }
+    ]
+}
+
+GET https://localhost:5000/api/genres
+
+[
+    {
+        "id": 6,
+        "name": "Action"
+    },
+    {
+        "id": 7,
+        "name": "Adventure"
+    },
+    {
+        "id": 13,
+        "name": "Animation"
+    },
+    {
+        "id": 8,
+        "name": "Biography"
+    },
+    {
+        "id": 2,
+        "name": "Comedy"
+    },
+    {
+        "id": 5,
+        "name": "Crime"
+    },
+    {
+        "id": 19,
+        "name": "Documentary"
+    },
+    {
+        "id": 3,
+        "name": "Drama"
+    },
+    {
+        "id": 12,
+        "name": "Fantasy"
+    },
+    {
+        "id": 18,
+        "name": "Film noir"
+    },
+    {
+        "id": 4,
+        "name": "History"
+    },
+    {
+        "id": 1,
+        "name": "Horror"
+    },
+    {
+        "id": 17,
+        "name": "Musical"
+    },
+    {
+        "id": 15,
+        "name": "Mystery"
+    },
+    {
+        "id": 21,
+        "name": "Reality show"
+    },
+    {
+        "id": 10,
+        "name": "Romance"
+    },
+    {
+        "id": 9,
+        "name": "Sci-fi"
+    },
+    {
+        "id": 23,
+        "name": "Short film"
+    },
+    {
+        "id": 20,
+        "name": "Superhero"
+    },
+    {
+        "id": 22,
+        "name": "Talk show"
+    },
+    {
+        "id": 16,
+        "name": "Thriller"
+    },
+    {
+        "id": 14,
+        "name": "War"
+    },
+    {
+        "id": 11,
+        "name": "Western"
+    }
+]
+
+GET https://localhost:5000/api/genres/1
+
+{
+    "id": 1,
+    "name": "Horror"
+}
+
+GET https://localhost:5000/api/actors
+
+[
+    {
+        "id": 1,
+        "firstName": "Tim",
+        "lastName": "Robbins"
+    },
+    {
+        "id": 1,
+        "firstName": "Tim",
+        "lastName": "Robbins"
+    },
+    {
+        "id": 42,
+        "firstName": "Morgan",
+        "lastName": "Freeman"
+    },
+    {
+        "id": 43,
+        "firstName": "Bob",
+        "lastName": "Gunton"
+    },
+    {
+        "id": 44,
+        "firstName": "William",
+        "lastName": "Sadler"
+    },
+    {
+        "id": 47,
+        "firstName": "Marlon",
+        "lastName": "Brando"
+    },
+    {
+        "id": 48,
+        "firstName": "Al",
+        "lastName": "Pacino"
+    },
+    {
+        "id": 49,
+        "firstName": "James",
+        "lastName": "Caan"
+    },
+    {
+        "id": 50,
+        "firstName": "Diane",
+        "lastName": "Keaton"
+    },
+    {
+        "id": 52,
+        "firstName": "Christian",
+        "lastName": "Bale"
+    },
+    {
+        "id": 53,
+        "firstName": "Heath",
+        "lastName": "Ledger"
+    },
+    {
+        "id": 54,
+        "firstName": "Aaron",
+        "lastName": "Eckhart"
+    },
+    {
+        "id": 55,
+        "firstName": "Michael",
+        "lastName": "Caine"
+    },
+    {
+        "id": 57,
+        "firstName": "Elijah",
+        "lastName": "Wood"
+    },
+    {
+        "id": 58,
+        "firstName": "Viggo",
+        "lastName": "Mortensen"
+    },
+    {
+        "id": 59,
+        "firstName": "Ian",
+        "lastName": "McKellen"
+    },
+    {
+        "id": 60,
+        "firstName": "Orlando",
+        "lastName": "Bloom"
+    },
+    {
+        "id": 62,
+        "firstName": "Liam",
+        "lastName": "Neeson"
+    },
+    {
+        "id": 63,
+        "firstName": "Ralph",
+        "lastName": "Fiennes"
+    },
+    {
+        "id": 64,
+        "firstName": "Ben",
+        "lastName": "Kingsley"
+    },
+    {
+        "id": 65,
+        "firstName": "Caroline",
+        "lastName": "Goodall"
+    },
+    {
+        "id": 66,
+        "firstName": "Robert",
+        "lastName": "De Niro"
+    },
+    {
+        "id": 67,
+        "firstName": "Robert",
+        "lastName": "Duvall"
+    },
+    {
+        "id": 48,
+        "firstName": "Al",
+        "lastName": "Pacino"
+    },
+    {
+        "id": 50,
+        "firstName": "Diane",
+        "lastName": "Keaton"
+    },
+    {
+        "id": 69,
+        "firstName": "Henry",
+        "lastName": "Fonda"
+    },
+    {
+        "id": 70,
+        "firstName": "Lee J.",
+        "lastName": "Cobb"
+    },
+    {
+        "id": 71,
+        "firstName": "Martin",
+        "lastName": "Balsam"
+    },
+    {
+        "id": 72,
+        "firstName": "John",
+        "lastName": "Fiedler"
+    },
+    {
+        "id": 74,
+        "firstName": "John",
+        "lastName": "Travolta"
+    },
+    {
+        "id": 75,
+        "firstName": "Uma",
+        "lastName": "Thurman"
+    },
+    {
+        "id": 76,
+        "firstName": "Samuel L.",
+        "lastName": "Jackson"
+    },
+    {
+        "id": 77,
+        "firstName": "Bruce",
+        "lastName": "Willis"
+    },
+    {
+        "id": 78,
+        "firstName": "Leonardo",
+        "lastName": "DiCaprio"
+    },
+    {
+        "id": 79,
+        "firstName": "Joseph",
+        "lastName": "Gordon-Levitt"
+    },
+    {
+        "id": 80,
+        "firstName": "Elliot",
+        "lastName": "Page"
+    },
+    {
+        "id": 81,
+        "firstName": "Ken",
+        "lastName": "Watanabe"
+    },
+    {
+        "id": 57,
+        "firstName": "Elijah",
+        "lastName": "Wood"
+    },
+    {
+        "id": 58,
+        "firstName": "Viggo",
+        "lastName": "Mortensen"
+    },
+    {
+        "id": 59,
+        "firstName": "Ian",
+        "lastName": "McKellen"
+    },
+    {
+        "id": 60,
+        "firstName": "Orlando",
+        "lastName": "Bloom"
+    },
+    {
+        "id": 1,
+        "firstName": "Tim",
+        "lastName": "Robbins"
+    }
+]
+
+GET https://localhost:5000/api/directors
+
+[
+    {
+        "id": 45,
+        "firstName": "Frank",
+        "lastName": "Darabont"
+    },
+    {
+        "id": 45,
+        "firstName": "Frank",
+        "lastName": "Darabont"
+    },
+    {
+        "id": 46,
+        "firstName": "Francis",
+        "lastName": "Ford Coppola"
+    },
+    {
+        "id": 51,
+        "firstName": "Christopher",
+        "lastName": "Nolan"
+    },
+    {
+        "id": 56,
+        "firstName": "Peter",
+        "lastName": "Jackson"
+    },
+    {
+        "id": 61,
+        "firstName": "Steven",
+        "lastName": "Spielberg"
+    },
+    {
+        "id": 46,
+        "firstName": "Francis",
+        "lastName": "Ford Coppola"
+    },
+    {
+        "id": 68,
+        "firstName": "Sidney",
+        "lastName": "Lumet"
+    },
+    {
+        "id": 73,
+        "firstName": "Quentin",
+        "lastName": "Tartantino"
+    },
+    {
+        "id": 51,
+        "firstName": "Christopher",
+        "lastName": "Nolan"
+    },
+    {
+        "id": 56,
+        "firstName": "Peter",
+        "lastName": "Jackson"
+    },
+    {
+        "id": 45,
+        "firstName": "Frank",
+        "lastName": "Darabont"
+    }
+]
