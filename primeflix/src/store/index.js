@@ -164,6 +164,9 @@ const store = createStore({
     actions: {
         register: ({commit}, userInfos) => {
             commit('setStatus', 'loading');
+
+            console.log(userInfos);
+
             return new Promise((resolve, reject) => {
                 instance.post('/users/register', userInfos)
                 .then(function (response) {
@@ -232,7 +235,7 @@ const store = createStore({
         product: ({commit}, productId) => {
             
             var query = '';
-            query += utils.queryLang();
+            //query += utils.queryLang();
 
             return new Promise((resolve, reject) => {
                 instance.get('/product?id='+ productId + query)
