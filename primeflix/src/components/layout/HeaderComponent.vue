@@ -25,14 +25,14 @@
           </li>
           <li class="nav-item">
             <div class="nav-link" >
-                <router-link to="/products" @click="setFormat('films')">
+                <router-link to="/products" @click="setFormat('film')">
                   {{ $t('filmsLink')}}
                 </router-link>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-link">
-              <router-link to="/products" @click="setFormat('series')">
+              <router-link to="/products" @click="setFormat('serie')">
                 {{ $t('seriesLink')}}
               </router-link>
                 
@@ -109,7 +109,7 @@
 
 <script>
 
-    import LocaleSwitcher from "./LocaleSwitcher.vue";
+    import LocaleSwitcher from "../partial/LocaleSwitcher.vue";
     import { mapState } from 'vuex';
 
     export default {

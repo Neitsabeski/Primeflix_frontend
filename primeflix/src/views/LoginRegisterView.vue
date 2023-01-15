@@ -87,6 +87,10 @@
                                             <span v-else>{{ $t('loginRegister.loginBtn') }}</span>
                                         </button>
                                         <span @click="recover">{{ $t('loginRegister.forgotPassword') }}</span>
+                                        <hr/>
+                                        <div class="d-flex justify-content-center group form-outline mb-4">
+                                            <FBLogComp/>
+                                        </div>
                                     </div>
                                     <div v-else>
                                         <button class="btn btn-primary" :class="{ 'disabled': !validatedFields }"
@@ -95,16 +99,9 @@
                                             <span v-else>{{ $t('loginRegister.registerBtn') }}</span>
                                         </button>
                                     </div>
-                                </div>
-                                <hr/>
-                                <div class="d-flex justify-content-center group form-outline mb-4">
-                                    <FBLogComp />
-                                </div>
-                                
+                                </div>                                
                             </div>
-                            
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -114,7 +111,7 @@
 
 <script>
 
-    import FBLogComp from '@/components/FacebookLoginComponent.vue'
+    import FBLogComp from '@/components/partial/FacebookLoginComponent.vue'
     import { mapState } from 'vuex';
     import utils from '../helpers/utils';
 
@@ -186,12 +183,12 @@
                     //console.log(error);
                 })
             },
-            register: function (event) {
+            register: function () {
                 const self = this;
                 this.$store.dispatch('register', {
                     email: this.email,
-                    firstname: this.firstname,
-                    lastname: this.lastname,
+                    firstName: this.firstname,
+                    lastName: this.lastname,
                     phone: this.phone,
                     lang: this.lang,
                     password: this.password
@@ -201,7 +198,7 @@
                 }, function (error) {
                     //console.log(error);
                 })
-            },
+            }
         }
     }
 

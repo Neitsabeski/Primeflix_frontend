@@ -48,8 +48,8 @@
                                             </div>
                                             <ul class="collapse" id="collapseFormat">
                                                 <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'All'" :checked="'All' == params.format" /><label>All</label></li>
-                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'films'" :checked="'films' == params.format" /><label>Films</label></li>
-                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'series'" :checked="'series' == params.format" /><label>Series</label></li>
+                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'film'" :checked="'films' == params.format" /><label>Films</label></li>
+                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'serie'" :checked="'series' == params.format" /><label>Series</label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -59,38 +59,8 @@
                                     <div class="container">
                                         <div class="row">
 
-                                            <!-- CARDS -->
+                                            <ProductCardComp v-for="product in products" :key="product.id" :product="product"/>
 
-                                            <div v-for="product in products" v-bind:key=product.id
-                                                class="productItem col-md-2 card ">
-                                                <RouterLink v-bind:to="'/products/' + product.id">
-                                                <div class="cropped">
-                                                    <img v-if="!product.pictureUrl" class="card-img-top"
-                                                        src="../../public/img/products/noimage.png" alt="noimage" />
-                                                    <img v-else class="card-img-top" :src="product.pictureUrl"
-                                                        :alt="product.pictureUrl" />
-                                                </div>
-                                                <div class="card-body">
-                                                    
-                                                    <StarsComp :ratingP="product.rating"/>
-                                                    
-                                                </div>
-                                                <div class="card-title">
-                                                        {{ product.title }}
-                                                </div>
-                                                </RouterLink>
-                                                <div class="card-body">
-                                                    {{ product.format.name }}
-                                                    <button v-if="product.stock > 0" v-on:click="addToCart(product)"
-                                                        class="btn btn-primary">
-                                                        <font-awesome-icon icon="shopping-cart" /> {{ product.price }}€
-                                                    </button>
-                                                    <button v-else
-                                                        class="btn btn-primary disabled">
-                                                        <font-awesome-icon icon="shopping-cart" />
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <!-- PAGES SELECTION -->
@@ -123,87 +93,87 @@
 
 <script>
 
-    import StarsComp from '@/components/StarsComponent.vue'
+    import ProductCardComp from '@/components/product/ProductCardComponent.vue'
 
-export default {
-    name: 'Products',
-    components:{
-        StarsComp
-    },
-    data() {
-        return {
-            products: [],
-            totalPage: 0,
-            currentPage: 0,
-            
-            formatPicked: '',
-            genrePicked: '',
-            recentlyAdded: false,
-            
-            params: {
-                format:'All',
-                recentlyAdded: 'false',
-                pageSize: 5,
-                page: 1
-            },
-
-            cart: [],
-        }
-    },
-    created(){
-
-        this.params.format = this.$store.getters.getFormat;
-    },
-    mounted() {
-       //this.displayProducts();        
-        this.getProducts();
-    },
-    methods: {
-        displayProducts: function(){
-            this.products = this.$store.getters.getProducts;
-            this.totalPage = this.$store.getters.getTotalPages;
-            this.currentPage = this.$store.getters.getCurrentPage;
+    export default {
+        name: 'Products',
+        components:{
+            ProductCardComp
         },
-        addToCart: function (product) {
-            this.$store.commit('addToCart', product);
-            this.cart = this.$store.state.cart;
-        },
-        changePage: function (char) {
-            switch (char) {
-                case '-':
-                    if(this.params.page > 1){
-                        this.params.page -= 1;
-                        this.getProducts();
-                    }
-                    break;
-                case '+':
-                    if(this.params.page < this.totalPage){
-                        this.params.page += 1;
-                        this.getProducts();
-                    }
-                    break;
-                default:
+        data() {
+            return {
+                products: [],
+                totalPage: 0,
+                currentPage: 0,
+                
+                formatPicked: '',
+                genrePicked: '',
+                recentlyAdded: false,
+                
+                params: {
+                    format:'All',
+                    recentlyAdded: 'false',
+                    pageSize: 10,
+                    page: 1
+                },
+
+                cart: [],
             }
-            
         },
-        setFormat(){
-            this.params.format = this.formatPicked;
-            this.$store.commit('setFormat', this.formatPicked);
+        created(){
+
+            this.params.format = this.$store.getters.getFormat;
+        },
+        mounted() {
+            //this.displayProducts();        
             this.getProducts();
         },
-        setGenre(){
-            this.params.genre = this.genrePicked;
-            this.$store.commit('setGenre', this.genrePicked);
-            this.getProducts();
-        },
-        setRecentlyAdded(){
-            this.params.recentlyAdded = this.recentlyAdded;
-            this.$store.commit('setRecentlyAdded', this.recentlyAdded);
-            this.getProducts();
-        },
-        getProducts: function (event) {
-            const self = this;
-            this.$store.dispatch('products',this.params
+        methods: {
+            displayProducts: function(){
+                this.products = this.$store.getters.getProducts;
+                this.totalPage = this.$store.getters.getTotalPages;
+                this.currentPage = this.$store.getters.getCurrentPage;
+            },
+            addToCart: function (product) {
+                this.$store.commit('addToCart', product);
+                this.cart = this.$store.state.cart;
+            },
+            changePage: function (char) {
+                switch (char) {
+                    case '-':
+                        if(this.params.page > 1){
+                            this.params.page -= 1;
+                            this.getProducts();
+                        }
+                        break;
+                    case '+':
+                        if(this.params.page < this.totalPage){
+                            this.params.page += 1;
+                            this.getProducts();
+                        }
+                        break;
+                    default:
+                }
+                
+            },
+            setFormat(){
+                this.params.format = this.formatPicked;
+                this.$store.commit('setFormat', this.formatPicked);
+                this.getProducts();
+            },
+            setGenre(){
+                this.params.genre = this.genrePicked;
+                this.$store.commit('setGenre', this.genrePicked);
+                this.getProducts();
+            },
+            setRecentlyAdded(){
+                this.params.recentlyAdded = this.recentlyAdded;
+                this.$store.commit('setRecentlyAdded', this.recentlyAdded);
+                this.getProducts();
+            },
+            getProducts: function (event) {
+                const self = this;
+                this.$store.dispatch('products',this.params
                 ).then(function (response) {
                     self.displayProducts();
                 }, function (error) {

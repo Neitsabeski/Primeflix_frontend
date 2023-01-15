@@ -22,36 +22,8 @@
                   <div class="container" >
                     <div class="row">
                       
-                      <div v-for="product in products" v-bind:key=product.id
-                        class="productItem col-md-2 card ">
-                        <RouterLink v-bind:to="'/products/' + product.id">
-                        <div class="cropped">
-                            <img v-if="!product.pictureUrl" class="card-img-top"
-                                src="../../public/img/products/noimage.png" alt="noimage" />
-                            <img v-else class="card-img-top" :src="product.pictureUrl"
-                                :alt="product.pictureUrl" />
-                        </div>
-                        <div class="card-body">
-                            
-                            <StarsComp :ratingP="product.rating"/>
-                            
-                        </div>
-                        <div class="card-title">
-                                {{ product.title }}
-                        </div>
-                        </RouterLink>
-                        <div class="card-body">
-                            {{ product.format.name }}
-                            <button v-if="product.stock > 0" v-on:click="addToCart(product)"
-                                class="btn btn-primary">
-                                <font-awesome-icon icon="shopping-cart" /> {{ product.price }}€
-                            </button>
-                            <button v-else
-                                class="btn btn-primary disabled">
-                                <font-awesome-icon icon="shopping-cart" />
-                            </button>
-                        </div>
-                    </div>
+                      <ProductCardComp v-for="product in products" :key="product.id" :product="product"/>
+
                     </div>
                   </div>
                 </div>
@@ -66,12 +38,12 @@
 
 <script>
 
-import StarsComp from '@/components/StarsComponent.vue'
+import ProductCardComp from '@/components/product/ProductCardComponent.vue'
 
 export default {
   name: 'Home',
   components: {
-    StarsComp
+    ProductCardComp
   },
   data() {
     return {

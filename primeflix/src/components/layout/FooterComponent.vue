@@ -12,7 +12,7 @@
                 </div>
                 <div>
                     <router-link class="nav-link" to="/">
-                        <img src="../../public/logo.svg" class="logo"/>
+                        <img src="../../assets/img/logo.svg" class="logo"/>
                     </router-link>
                     
                 </div>

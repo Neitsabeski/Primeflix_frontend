@@ -10,9 +10,9 @@
 
 <script>
 
-  import HeaderComp from '@/components/HeaderComponent'
-  import FooterComp from '@/components/FooterComponent'
-  import BackgroundComp from '@/components/BackgroundSvg.vue'
+  import HeaderComp from '@/components/layout/HeaderComponent'
+  import FooterComp from '@/components/layout/FooterComponent'
+  import BackgroundComp from '@/components/layout/BackgroundSvg'
 
   export default {
     components: {

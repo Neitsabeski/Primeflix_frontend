@@ -38,7 +38,7 @@
                                                 {{ $t('product.rating')}}
                                             </h3>
                                             <div class="col-md-6">
-                                                {{ product.rating }}
+                                                <StarsComp :ratingP="product.rating"/>
                                             </div>
                                         </div>
                                         <hr />
@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import StarsComp from '@/components/StarsComponent.vue'
+import StarsComp from '@/components/product/StarsComponent.vue'
 import utils from '../helpers/utils'
 
 export default {
@@ -145,7 +145,7 @@ export default {
     },
     computed: {
         product: function () {
-            if(!this.$store.getters.getCurrentProduct) this.$router.push(`/404`);
+            //if(!this.$store.getters.getCurrentProduct) this.$router.push(`/404`);
 
             return this.$store.getters.getCurrentProduct;
         }

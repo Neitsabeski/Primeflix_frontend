@@ -6,12 +6,9 @@ const axios = require('axios');
 
 const instance = axios.create({
     //baseURL: 'https://virtserver.swaggerhub.com/SEBASTIENGARDIER/primeflix/1.0.0'
-    //baseURL: 'https://localhost:5000/api/'
-    baseURL: 'http://localhost:3000/'
+    baseURL: 'https://localhost:5000/api/'
+    //baseURL: 'http://localhost:3000/'
 });
-
-
-
 
 // Create a new store instance.
 const store = createStore({
@@ -58,15 +55,15 @@ const store = createStore({
             state.status = status;
         },
         logUser: function(state, data) {
-            state.user.userId = data[0].id;
-            state.user.token = data[0].token;
-            state.user.data.firstName = data[0].firstName;
-            state.user.data.lastName = data[0].lastName;
-            state.user.data.phone = data[0].phone;
-            state.user.data.lang = data[0].lang;
-            state.user.data.email = data[0].email;
 
-            localStorage.setItem('jwt', data[0].token)
+            console.log("logUser : " + data);
+
+            state.user.userId = data.id;
+            state.user.token = data.token;
+            state.user.data.firstName = data.firstName;
+            state.user.data.lang = data.language;
+
+            localStorage.setItem('jwt', data.token)
         },
         logOut: function(state){
             state.user.userId = -1;
@@ -107,16 +104,20 @@ const store = createStore({
         },
 
         alreadyConnected: function(state){
-            state.token = localStorage.getItem('jwt');
-            if(state.token) {
-                this.dispatch('user', state.token);
-                this.dispatch('cart', state.token);
+            state.user.token = localStorage.getItem('jwt');
+            if(state.user.token) {
+                this.dispatch('user', state.user.token);
+                this.dispatch('cart', state.user.token);
             }
         },
 
         setCurrentProduct(state, data){
-            state.currentProduct = data[0];
+            state.currentProduct = data;
         },
+
+        setFacebookToken(state, fbToken){
+            console.log(fbToken);
+        }
     },
     getters: {
         getLang: function(state){
@@ -183,7 +184,7 @@ const store = createStore({
 
             commit('setStatus', 'loading');
             return new Promise((resolve, reject) => {
-                instance.get('/users', userInfos)
+                instance.post('/users/login', userInfos)
                 .then(function (response) {
                     commit('setStatus', 'logged');
                     commit('logUser', response.data);
@@ -195,14 +196,27 @@ const store = createStore({
                 });
             })
         },
-        user: ({commit}, jwt ) => {
+        loginFacebook: ({commit}) => {
 
-            const config = {
-                headers: { Authorization: `Bearer ${jwt}` }
-            };
+            const fbToken = { "token": localStorage.get("fblst_559856828979383")};
 
             return new Promise((resolve, reject) => {
-                instance.get('/users', config)
+                instance.post('/users/login/facebook', fbToken)
+                .then(function (response) {
+                    commit('logUser', response.data);
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
+        user: ({commit}, jwt ) => {
+
+            const headers = { "Authorization": "Bearer " + jwt };
+
+            return new Promise((resolve, reject) => {
+                instance.get('/users', { headers })
                 .then(function (response) {
                     commit('setStatus', 'logged');
                     commit('logUser', response.data);
@@ -235,10 +249,10 @@ const store = createStore({
         product: ({commit}, productId) => {
             
             var query = '';
-            //query += utils.queryLang();
+            query += utils.queryLang();
 
             return new Promise((resolve, reject) => {
-                instance.get('/product?id='+ productId + query)
+                instance.get('/products/'+ productId + query)
                 .then(function (response) {
                     commit('setCurrentProduct', response.data);
                     resolve(response);
@@ -250,12 +264,10 @@ const store = createStore({
         },
         cart: ({commit}, jwt) => {
             
-            const config = {
-                headers: { Authorization: `Bearer ${jwt}` }
-            };
+            const headers = { "Authorization": "Bearer " + jwt };
 
             return new Promise((resolve, reject) => {
-                instance.get('/carts', config)
+                instance.get('/carts', { headers })
                 .then(function (response) {
                     commit('setCart', response.data)
                     resolve(response);
@@ -267,12 +279,10 @@ const store = createStore({
         },
         order: ({commit}, order, jwt) => {
 
-            const config = {
-                headers: { Authorization: `Bearer ${jwt}` }
-            };
+            const headers = { "Authorization": "Bearer " + jwt };
 
             return new Promise((resolve, reject) => {
-                instance.post('/carts', order, config)
+                instance.post('/carts', order, { headers })
                 .then(function (response) {
                     commit('setCart', response.data)
                     resolve(response);

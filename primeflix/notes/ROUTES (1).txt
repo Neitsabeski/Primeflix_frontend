@@ -8,10 +8,19 @@ Body :
     "password": "Sebastien",
     "firstName": "Sébastien",
     "lastName": "Garder",
-    "phone": "0473345232"
+    "phone": "0473345232",
+    "lang": "fr"
 }
 Valeur retournée si tout OK :
 Status 201 Created
+Valeur retournée si aucun objet n'est envoyé :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+Valeur retournée si un utilisateur avec cette adresse mail existe déjà :
+Status 409 Conflict. ErrorMessage : "A user with email address XXX already exists."
+Valeur retournée si le code du langage envoyé est erroné :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+Valeur retournée en cas d'erreur au niveau de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong saving user with email address XXX" ou "Something went wrong creating user's cart".
 
 Route : POST https://localhost:5000/api/users/login
 Token : NON
@@ -20,12 +29,37 @@ Body :
     "email": "sebastien.gardier@gmail.com",
     "password": "Sebastien"
 }
-Valeur retournée si tout OK : token :
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMyIsImVtYWlsIjoic2ViYXN0aWVuLmdhcmRpZXJAZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsIm5iZiI6MTY3MjY4NjY5NywiZXhwIjoxNjcyNzczMDk3LCJpYXQiOjE2NzI2ODY2OTd9.utfA7dztBi3Z7iqAg_vKiIeoj4-zXszICwT3UlMtoBQ
+Valeur retournée si tout OK : 
+{
+    "id": 21,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyMSIsImVtYWlsIjoibGF1cmVudC53ZW5raW5AZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsIm5iZiI6MTY3MzcxOTQ5MywiZXhwIjoxNjczODA1ODkzLCJpYXQiOjE2NzM3MTk0OTN9.XRxvp-axuJ-a5xmGIQx7oeEsssOuwiRHA0QGKEOqltY",
+    "firstName": "Sébastien",
+    "languageCode": "fr"
+}
+Valeur retournée s'il n'y aucun objet envoyé avec la requête :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
 Valeur retournée si l'utilisateur n'existe pas :
-Status 422 Unprocessable Entity. ErrorMessage : "User XXX doesn't exist"
+Status 404 NotFound.
 Valeur retournée si le mot de passe est erroné :
 Status 401 Unauthorized. ErrorMessage : "Wrong password".
+
+Route : POST https://localhost:5000/api/users/login/facebook
+Token : NON
+Body : 
+{
+    "token": "EAAJ6q9M4wQMBACQbz7ReI5GE2yxrgwVEu3jU4ZCkVY11GRbSH8ZC1tLGrEC2L3HG8cbt0zL4f5lBlGftzfUHzVCxRj8ueZCXeP9ZBpT2EPNPMMZCJB4rRINLMJypkakzlpnAcXTPsL2v8nV98f2JxjbxvwbrfFEaLPIkr3vhueinCLJBYknAxXg4hGILzAmlbRhuSphbWoWu50R3u5B76"
+}
+Valeur retournée si tout OK : 
+{
+    "id": 21,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyMSIsImVtYWlsIjoibGF1cmVudC53ZW5raW5AZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsIm5iZiI6MTY3MzcxOTQ5MywiZXhwIjoxNjczODA1ODkzLCJpYXQiOjE2NzM3MTk0OTN9.XRxvp-axuJ-a5xmGIQx7oeEsssOuwiRHA0QGKEOqltY",
+    "firstName": "Sébastien",
+    "languageCode": "fr"
+}
+Valeur retournée s'il n'y aucun objet envoyé avec la requête :
+Status 400 BadRequest. ErrorMessage : "No token provided".
+Valeur retournée si le token envoyé est erroné :
+Status 401 Unauthorized. ErrorMessage : "Wrong access token provided".
 
 Route : GET https://localhost:5000/api/users
 Token : OUI
@@ -96,7 +130,7 @@ Valeur retournée si l'utilisateur est admin :
         }
     }
 ]
-Valeur retournée si l'utilisateur n'est pas admin :
+Valeur retournée si l'utilisateur n'est pas admin (il récupère seulement ses données) :
 {
     "id": 12,
     "firstName": "Eliane",
@@ -113,6 +147,8 @@ Valeur retournée si l'utilisateur n'est pas admin :
         "name": "client"
     }
 }
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved" ou "User ID could not be retrieved".
 
 Route : GET https://localhost:5000/api/users/{userId}
 Token : OUI (l'utilisateur doit avoir le rôle d'admin)
@@ -133,8 +169,12 @@ Valeur retournée si tout OK :
         "name": "client"
     }
 }
-Valeur retournée si l'utilisateur n'existe pas:
+Valeur retournée si l'utilisateur demandé n'existe pas :
 Status 404 Not Found
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
 
 Route : PUT https://localhost:5000/api/users/{userId}
 Token : OUI (l'utilisateur doit avoir le rôle d'admin)
@@ -171,8 +211,41 @@ Body :
 }
 Valeur retournée si tout OK :
 Status 204 No Content
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
+Valeur retournée si l'ID de l'utilisateur envoyé en objet de la requête est différent de l'ID de l'utilisateur qui fait la demande de modification :
+Status 400 BadRequest. ErrorMessage : "User IDs are not the same".
 Valeur retournée si l'ID du langage fourni n'existe pas dans la base de données :
-Status 500 Internal Server Error. ErrorMessage : "The language doesn't exist"
+Status 400 BadRequest. ErrorMessage : "The language doesn't exist".
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the user XXX".
+
+Route : PUT https://localhost:5000/api/users/{userId}
+Token : OUI (l'utilisateur doit être admin)
+Body :
+{
+    "id": 11,
+    "firstName": "Laurent",
+    "lastName": "Wenkin",
+    "phone": "Laurent",
+    "email": "laurent.wenkin@gmail.com",
+    "languageId": 2,
+    "roleId": 1
+}
+Valeur retournée si tout OK :
+Status 204 No Content
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+Valeur retournée si l'ID de l'utilisateur envoyé en objet de la requête est différent de l'ID de l'utiliteur spécifié en paramètre de la route
+Status 400 BadRequest. ErrorMessage : "User IDs are not the same".
+Valeur retournée si l'ID du langage fourni n'existe pas dans la base de données :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+Valeur retournée si l'ID du rôle fourni n'existe pas dans la base de données :
+Status 400 BadRequest. ErrorMessage : "Role doesn't exist".
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the user XXX".
 
 Route : DELETE https://localhost:5000/api/users/{userId}
 Token : OUI (l'utilisateur doit avoir le rôle d'admin)
@@ -180,6 +253,10 @@ Valeur retournée si tout OK :
 Status 204 No Content
 Valeur retournée si l'ID fourni n'existe pas dans la base de données :
 Status 404 Not Found
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
 
 PRODUCTS
 
@@ -514,7 +591,6 @@ Status 500 Internal Server Error. ErrorMessage : Language doesn't exist.
 Route : POST https://localhost:5000/api/products
 Token : Oui (il faut être admin)
 Body :
-{
 {
     "originalTitle" : "Mon titre d'origine3",
     "englishTitle" : "Mon titre en anglais",
