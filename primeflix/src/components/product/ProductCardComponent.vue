@@ -1,6 +1,6 @@
 <template>
     <div class="productItem col-md-2 card ">
-        <RouterLink v-bind:to="'/products/' + product.id">
+        <RouterLink v-bind:to="'/shop/products/' + product.id">
         <div class="cropped">
             <img v-if="!product.pictureUrl" class="card-img-top"
                 src="../../assets/img/product/noimage.png" alt="noimage" />
@@ -40,6 +40,12 @@
         components:{
             StarsComp
         },
+        methods:{
+            addToCart: function (product) {
+                this.$store.commit('addToCart', product);
+                this.cart = this.$store.state.cart;
+            },
+        }
     }
 
 </script>

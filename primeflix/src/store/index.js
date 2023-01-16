@@ -14,72 +14,105 @@ const instance = axios.create({
 const store = createStore({
 
     state: {
+        // user status
         status: '',
         
+        // user
         user: {
-            userId: -1,
-            data: {},
+            data: { 
+            },
+            role: '',
+            id: -1,
             token: '',
         },
         
+        // products
         products: [],
         totalPages: 1,
         currentPage: 1,
         pageSize: 5,
-
-        lang: 'en',
-        recentlyAdded: 'false',
         format: '',
-        genre: '',
         
+        // product
         currentProduct: null,
-        
+
+        // cart
         cart: [],
         cartCount: 0,
     },
     mutations: {
-        setLang: function(state){
-            state.lang = i18n.global.locale;
-        },
-        setFormat: function(state, format){
-            state.format = format;
-        },
-        setGenre: function(state, genre){
-            state.genre = genre;
-        },
-        setRecentlyAdded: function(state, recentlyAdded){
-            state.recentlyAdded = recentlyAdded;
-        },
-
+        // user status
         setStatus: function(state, status) {
             state.status = status;
         },
+
+        // login register
+        alreadyConnected: function(state){
+            state.user.token = localStorage.getItem('jwt');
+            if(state.user.token != null) {
+                this.dispatch('user', state.user.token);
+                if(state.user.role != 'client'){
+                    this.logOut;
+                } else {
+                    this.dispatch('cart', state.user.token);
+                }
+            }
+        },
         logUser: function(state, data) {
-
-            console.log("logUser : " + data);
-
-            state.user.userId = data.id;
+            console.log("logUser data : " + data);
+            
+            localStorage.setItem('jwt', data.token)
             state.user.token = data.token;
+            state.user.role = data.role.name;
+            state.user.id = data.id;
+
             state.user.data.firstName = data.firstName;
             state.user.data.lang = data.language;
-
-            localStorage.setItem('jwt', data.token)
+            console.log("state.user : " + state.user);
+        },
+        setUser: function(state, data){
+            state.user.role = data.role.name;
+            state.user.id = data.id;
+            state.user.data.email = data.email;
+            state.user.data.firstName = data.firstName;
+            state.user.data.lastName = data.lastName;
+            state.user.data.address = data.address;
+            state.user.data.phone = data.phone;
+            state.user.data.lang = data.language.code;
         },
         logOut: function(state){
-            state.user.userId = -1;
-            state.user.token  = '';
-            state.user.data = {};
+            state.user = {
+                data: { 
+                },
+                role: '',
+                id: -1,
+                token: ''
+            },
             state.status = '';
 
             localStorage.removeItem('jwt');
+            localStorage.removeItem('cart');
+        },
+        setFacebookToken(state, fbToken){
+            console.log(fbToken);
         },
 
+        // products
         setProducts: function(state, data){
             state.products = data.products;
             state.totalPages = data.totalPages;
             state.currentPage = data.currentPage;
         },
+        setFormat: function(state, format){
+            state.format = format;
+        },
 
+        // product
+        setCurrentProduct(state, data){
+            state.currentProduct = data;
+        },
+        
+        // cart
         setCart: function(state, data){
             state.cart = data['products'];
             state.cartCount = state.cart.length;
@@ -102,22 +135,6 @@ const store = createStore({
 
             localStorage.cart = state.cart;
         },
-
-        alreadyConnected: function(state){
-            state.user.token = localStorage.getItem('jwt');
-            if(state.user.token) {
-                this.dispatch('user', state.user.token);
-                this.dispatch('cart', state.user.token);
-            }
-        },
-
-        setCurrentProduct(state, data){
-            state.currentProduct = data;
-        },
-
-        setFacebookToken(state, fbToken){
-            console.log(fbToken);
-        }
     },
     getters: {
         getLang: function(state){
@@ -188,6 +205,7 @@ const store = createStore({
                 .then(function (response) {
                     commit('setStatus', 'logged');
                     commit('logUser', response.data);
+                    //this.dispatch('user', response.data.token)
                     resolve(response);
                 })
                 .catch(function (error) {
@@ -219,7 +237,7 @@ const store = createStore({
                 instance.get('/users', { headers })
                 .then(function (response) {
                     commit('setStatus', 'logged');
-                    commit('logUser', response.data);
+                    commit('setUser', response.data[0]);
                     resolve(response);
                 })
                 .catch(function (error) {

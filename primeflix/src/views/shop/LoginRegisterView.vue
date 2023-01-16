@@ -113,7 +113,7 @@
 
     import FBLogComp from '@/components/partial/FacebookLoginComponent.vue'
     import { mapState } from 'vuex';
-    import utils from '../helpers/utils';
+    import utils from '../../helpers/utils';
 
 
     export default {
@@ -134,7 +134,7 @@
             }
         },
         mounted(){
-            if(this.$store.getters.getUser.userId > 0) this.$router.push('profile');
+            if(this.status == 'logged') this.$router.push('/shop/profile');
         },
         computed: {
             validatedFields: function () {
@@ -159,7 +159,7 @@
                     }
                 }
             },
-            ...mapState(['status'])
+            ...mapState(["status"])
         },
         methods: {
             switchToRegister: function () {
@@ -177,10 +177,10 @@
                     email: this.email,
                     password: this.password
                 }).then(function (response) {
-                    //console.log(response);
-                    self.$router.push('/profile');
+                    console.log(response);
+                    self.$router.push('/shop/profile');
                 }, function (error) {
-                    //console.log(error);
+                    console.log(error);
                 })
             },
             register: function () {

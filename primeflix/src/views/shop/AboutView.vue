@@ -10,7 +10,7 @@
                             <div class="col-lg-6 ">
                                 <div class="text-center">
                                     <h2 class="card_title">{{ $t('about.subTitle') }}</h2>
-                                    <img src="../../public/logo.svg" class="logow"/>
+                                    <img src="../../assets/img/logo.svg" class="logow"/>
                                 </div>
                             </div>
                             

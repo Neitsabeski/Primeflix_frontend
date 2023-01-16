@@ -1,87 +1,110 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LoginRegisterView from '../views/LoginRegisterView.vue'
-import ProfileView from '../views/ProfileView.vue'
-import ProductsView from '../views/ProductsView.vue'
-import ContactView from '../views/ContactView.vue'
-import CartView from '../views/CartView.vue'
-import OrdersView from '../views/OrdersView.vue'
-import ProductView from '../views/ProductView.vue'
-import SearchView from '../views/SearchView'
-import NotFound from '../views/NotFoundView'
-import SuccessOrderView from '../views/SuccessOrderView'
-import OrderView from '../views/OrderView'
+
+// shop
+import ShopView from '../views/ShopView'
+import HomeView from '../views/shop/HomeView.vue'
+import LoginRegisterView from '../views/shop/LoginRegisterView.vue'
+import ProfileView from '../views/shop/ProfileView.vue'
+import ProductsView from '../views/shop/ProductsView.vue'
+import ContactView from '../views/shop/ContactView.vue'
+import AboutView from '../views/shop/AboutView'
+import CartView from '../views/shop/CartView.vue'
+import OrdersView from '../views/shop/OrdersView.vue'
+import ProductView from '../views/shop/ProductView.vue'
+import SearchView from '../views/shop/SearchView'
+import NotFound from '../views/shop/NotFoundView'
+import SuccessOrderView from '../views/shop/SuccessOrderView'
+import OrderView from '../views/shop/OrderView'
+
+// office
+import OfficeView from '../views/OfficeView'
+import LoginView from '../views/office/LoginView'
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
+  { path: '/office', component: OfficeView, redirect: '/office/login',
+    children: [
+      {
+        path: '/office/login',
+        name: 'login',
+        component: LoginView
+      },
+      {
+        path: "/office/:pathMatch(.*)*",
+        redirect: '/office'
+      },
+    ]
   },
   {
-    path: '/products/',
-    name: 'products',
-    component: ProductsView,
-    props: true
-  },
-  {
-    path: '/products/:id',
-    name: 'product',
-    props: true,
-    component: ProductView
-  },
-  {
-    path: '/search',
-    name: 'search',
-    component: SearchView,
-  },
-  {
-    path: '/cart',
-    name: 'cart',
-    component: CartView
-  },
-  {
-    path: '/order',
-    name: 'order',
-    component: OrderView
-  },
-  {
-    path: '/success',
-    name: 'success',
-    component: SuccessOrderView
-  },
-  {
-    path: '/orders',
-    name: 'orders',
-    component: OrdersView
-  },
-  {
-    path: '/loginregister',
-    name: 'loginregister',
-    component: LoginRegisterView
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: ProfileView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: ContactView
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    name: 'notFound',
-    component: NotFound 
+    path: '/', component: ShopView, redirect: '/shop/',
+    children: [
+      {
+        path: '/shop/',
+        name: 'Home',
+        component: HomeView
+      },
+      {
+        path: '/shop/products/',
+        name: 'products',
+        component: ProductsView,
+        props: true
+      },
+      {
+        path: '/shop/products/:id',
+        name: 'product',
+        props: true,
+        component: ProductView
+      },
+      {
+        path: '/shop/search',
+        name: 'search',
+        component: SearchView,
+      },
+      {
+        path: '/shop/cart',
+        name: 'cart',
+        component: CartView
+      },
+      {
+        path: '/shop/order',
+        name: 'order',
+        component: OrderView
+      },
+      {
+        path: '/shop/success',
+        name: 'success',
+        component: SuccessOrderView
+      },
+      {
+        path: '/shop/orders',
+        name: 'orders',
+        component: OrdersView
+      },
+      {
+        path: '/shop/loginregister',
+        name: 'loginregister',
+        component: LoginRegisterView
+      },
+      {
+        path: '/shop/profile',
+        name: 'profile',
+        component: ProfileView
+      },
+      {
+        path: '/shop/about',
+        name: 'about',
+        component: AboutView
+      },
+      {
+        path: '/shop/contact',
+        name: 'contact',
+        component: ContactView
+      },
+      {
+        path: "/:pathMatch(.*)*",
+        name: 'notFound',
+        component: NotFound 
+      },
+    ]
   }
 ]
 

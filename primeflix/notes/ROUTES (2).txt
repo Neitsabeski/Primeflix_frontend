@@ -1,0 +1,2639 @@
+-------------------------------------------------------------------------------------------
+|							USERS	    							|
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/users/register
+
+Objectif : enregistrer un nouvel utilisateur
+
+Token : NON
+
+Body :
+{
+    "email": "sebastien.gardier@gmail.com",
+    "password": "Sebastien",
+    "firstName": "Sébastien",
+    "lastName": "Garder",
+    "phone": "0473345232",
+    "lang": "fr"
+}
+
+Valeur retournée si tout OK :
+Status 201 Created
+
+Valeur retournée si aucun objet n'est envoyé :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée si un utilisateur avec cette adresse mail existe déjà :
+Status 409 Conflict. ErrorMessage : "A user with email address XXX already exists."
+
+Valeur retournée si le code du langage envoyé est erroné :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+Valeur retournée en cas d'erreur au niveau de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong saving user with email address XXX" ou "Something went wrong creating user's cart".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/users/login
+
+Objectif : recevoir le token et les informations d'un utilisateur existant
+
+Token : NON
+
+Body : 
+{
+    "email": "sebastien.gardier@gmail.com",
+    "password": "Sebastien"
+}
+
+Valeur retournée si tout OK : 
+{
+    "id": 21,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyMSIsImVtYWlsIjoibGF1cmVudC53ZW5raW5AZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsIm5iZiI6MTY3MzcxOTQ5MywiZXhwIjoxNjczODA1ODkzLCJpYXQiOjE2NzM3MTk0OTN9.XRxvp-axuJ-a5xmGIQx7oeEsssOuwiRHA0QGKEOqltY",
+    "firstName": "Sébastien",
+    "languageCode": "fr",
+    "role": {
+        "id": 2,
+        "name": "admin"
+    }
+}
+
+Valeur retournée s'il n'y aucun objet envoyé avec la requête :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée si l'utilisateur n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le mot de passe est erroné :
+Status 401 Unauthorized. ErrorMessage : "Wrong password".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/users/login/facebook
+
+Objectif : recevoir le token et les informations d'un utilisateur existant s'étant loggé via son compte Facebook
+
+Token : NON
+
+Body : 
+{
+    "token": "EAAJ6q9M4wQMBACQbz7ReI5GE2yxrgwVEu3jU4ZCkVY11GRbSH8ZC1tLGrEC2L3HG8cbt0zL4f5lBlGftzfUHzVCxRj8ueZCXeP9ZBpT2EPNPMMZCJB4rRINLMJypkakzlpnAcXTPsL2v8nV98f2JxjbxvwbrfFEaLPIkr3vhueinCLJBYknAxXg4hGILzAmlbRhuSphbWoWu50R3u5B76"
+}
+
+Valeur retournée si tout OK : 
+{
+    "id": 21,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyMSIsImVtYWlsIjoibGF1cmVudC53ZW5raW5AZ21haWwuY29tIiwicm9sZSI6ImNsaWVudCIsIm5iZiI6MTY3MzcxOTQ5MywiZXhwIjoxNjczODA1ODkzLCJpYXQiOjE2NzM3MTk0OTN9.XRxvp-axuJ-a5xmGIQx7oeEsssOuwiRHA0QGKEOqltY",
+    "firstName": "Sébastien",
+    "languageCode": "fr",
+    "role": {
+        "id": 2,
+        "name": "admin"
+    }
+}
+
+Valeur retournée s'il n'y aucun objet envoyé avec la requête :
+Status 400 BadRequest. ErrorMessage : "No token provided".
+
+Valeur retournée si le token envoyé est erroné :
+Status 401 Unauthorized. ErrorMessage : "Wrong access token provided".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/users
+
+Objectif : recevoir la liste des utilisateurs (admin), recevoir les infos de l'utilisateur (client)
+
+Token : OUI
+
+Valeur retournée si l'utilisateur est admin :
+[
+    {
+        "id": 12,
+        "firstName": "Eliane",
+        "lastName": "Gemini",
+        "phone": "0478266000",
+        "email": "eliane.gemini@gmail.com",
+        "language": {
+            "id": 2,
+            "code": "en",
+            "name": "English"
+        },
+        "role": {
+            "id": 1,
+            "name": "customer"
+        }
+    },
+    {
+        "id": 11,
+        "firstName": "Laurent",
+        "lastName": "Wenkin",
+        "phone": "Laurent",
+        "email": "laurent.wenkin@gmail.com",
+        "language": {
+            "id": 2,
+            "code": "en",
+            "name": "English"
+        },
+        "role": {
+            "id": 1,
+            "name": "customer"
+        }
+    },
+    {
+        "id": 10,
+        "firstName": "Loris",
+        "lastName": "Sanfilippo",
+        "phone": "loris",
+        "email": "loris",
+        "language": {
+            "id": 2,
+            "code": "en",
+            "name": "English"
+        },
+        "role": {
+            "id": 1,
+            "name": "customer"
+        }
+    },
+    {
+        "id": 13,
+        "firstName": "Sébastien",
+        "lastName": "Garder",
+        "phone": "0473345232",
+        "email": "sebastien.gardier@gmail.com",
+        "language": {
+            "id": 2,
+            "code": "en",
+            "name": "English"
+        },
+        "role": {
+            "id": 2,
+            "name": "admin"
+        }
+    }
+]
+
+Valeur retournée si l'utilisateur n'est pas admin (il récupère seulement ses données) :
+{
+    "id": 12,
+    "firstName": "Eliane",
+    "lastName": "Gemini",
+    "phone": "0478266000",
+    "email": "eliane.gemini@gmail.com",
+    "language": {
+        "id": 2,
+        "code": "en",
+        "name": "English"
+    },
+    "role": {
+        "id": 1,
+        "name": "customer"
+    }
+}
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved" ou "User ID could not be retrieved".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/users/{userId}
+
+Objectif : recevoir les informations d'un utilisateur bien précis
+
+Token : OUI (l'utilisateur doit avoir le rôle d'admin)
+
+Valeur retournée si tout OK :
+{
+    "id": 10,
+    "firstName": "Loris",
+    "lastName": "Sanfilippo",
+    "phone": "loris",
+    "email": "loris",
+    "language": {
+        "id": 2,
+        "code": "en",
+        "name": "English"
+    },
+    "role": {
+        "id": 1,
+        "name": "client"
+    }
+}
+
+Valeur retournée si l'utilisateur demandé n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+-------------------------------------------------------------------------------------------
+
+Route : PUT https://localhost:5000/api/users
+
+Objectif : modifier les informations de l'utilisateur loggé
+
+Token : OUI (l'utilisateur ne doit pouvoir modifier que son profil)
+
+Body :
+{
+    "id": 11,
+    "firstName": "Laurent",
+    "lastName": "Wenkin",
+    "phone": "Laurent",
+    "email": "laurent.wenkin@gmail.com",
+    "languageId": 2,
+    "roleId": 1
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
+
+Valeur retournée si l'ID de l'utilisateur envoyé en objet de la requête est différent de l'ID de l'utilisateur qui fait la demande de modification :
+Status 400 BadRequest. ErrorMessage : "User IDs are not the same".
+
+Valeur retournée si l'ID du langage fourni n'existe pas dans la base de données :
+Status 400 BadRequest. ErrorMessage : "The language doesn't exist".
+
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the user XXX".
+
+-------------------------------------------------------------------------------------------
+
+Route : PUT https://localhost:5000/api/users/{userId}
+
+Objectif : modifier les informations d'un certain utilisateur
+
+Token : OUI (l'utilisateur doit être admin)
+
+Body :
+{
+    "id": 11,
+    "firstName": "Laurent",
+    "lastName": "Wenkin",
+    "phone": "Laurent",
+    "email": "laurent.wenkin@gmail.com",
+    "languageId": 2,
+    "roleId": 1
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si l'ID de l'utilisateur envoyé en objet de la requête est différent de l'ID de l'utiliteur spécifié en paramètre de la route
+Status 400 BadRequest. ErrorMessage : "User IDs are not the same".
+
+Valeur retournée si l'ID du langage fourni n'existe pas dans la base de données :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+Valeur retournée si l'ID du rôle fourni n'existe pas dans la base de données :
+Status 400 BadRequest. ErrorMessage : "Role doesn't exist".
+
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the user XXX".
+
+-------------------------------------------------------------------------------------------
+
+Route : DELETE https://localhost:5000/api/users/{userId}
+
+Objectif : supprimer un utilisateur
+
+Token : OUI (l'utilisateur doit avoir le rôle d'admin)
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si l'ID fourni n'existe pas dans la base de données :
+Status 404 NotFound.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong deleting XXX".
+
+-------------------------------------------------------------------------------------------
+|							PRODUCTS	    						|
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/products?page=1&pageSize=10&lang=fr&recentlyAdded=true&format=All&genre=horror
+
+Objectif : recevoir la liste de produits, filtrée en fonction des paramètres fournis à la requête
+
+Token : Non
+
+Valeur retournée si tout OK :
+{
+    "products": [
+        {
+            "id": 36,
+            "title": "Stranger things",
+            "releaseDate": "2016-01-01T00:00:00",
+            "stock": 1,
+            "rating": 5,
+            "format": {
+                "id": 2,
+                "name": "Serie"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/joCCbrgiXbVxcpnWOzrIwNz8tC6.jpg",
+            "price": 10.0,
+            "genres": [
+                {
+                    "id": 3,
+                    "name": "Drame"
+                },
+                {
+                    "id": 12,
+                    "name": "Fantastique"
+                },
+                {
+                    "id": 1,
+                    "name": "Horreur"
+                }
+            ]
+        },
+        {
+            "id": 31,
+            "title": "Avatar, le dernier maitre de l'air",
+            "releaseDate": "2005-01-01T00:00:00",
+            "stock": 5,
+            "rating": 4,
+            "format": {
+                "id": 2,
+                "name": "Serie"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/ff5F2NAlHa4TPxV0VheQNSmZlI3.jpg",
+            "price": 10.0,
+            "genres": [
+                {
+                    "id": 13,
+                    "name": "Animation"
+                },
+                {
+                    "id": 6,
+                    "name": "Action"
+                },
+                {
+                    "id": 7,
+                    "name": "Aventure"
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "title": "Game of Thrones",
+            "releaseDate": "2011-01-01T00:00:00",
+            "stock": 3,
+            "rating": 2,
+            "format": {
+                "id": 2,
+                "name": "Serie"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/gKepMfnseLPwbZ0U9E1LmMW2x4V.jpg",
+            "price": 10.0,
+            "genres": [
+                {
+                    "id": 3,
+                    "name": "Drame"
+                },
+                {
+                    "id": 6,
+                    "name": "Action"
+                },
+                {
+                    "id": 7,
+                    "name": "Aventure"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "title": "Inception",
+            "releaseDate": "2010-01-01T00:00:00",
+            "stock": 2,
+            "rating": 5,
+            "format": {
+                "id": 1,
+                "name": "Film"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/siwBgxiw39ox1eQ2GsTu49u7HNF.jpg",
+            "price": 5.0,
+            "genres": [
+                {
+                    "id": 6,
+                    "name": "Action"
+                },
+                {
+                    "id": 7,
+                    "name": "Aventure"
+                },
+                {
+                    "id": 9,
+                    "name": "Science-fiction"
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "title": "L'attaque des titans",
+            "releaseDate": "2013-01-01T00:00:00",
+            "stock": 3,
+            "rating": 4,
+            "format": {
+                "id": 2,
+                "name": "Serie"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/8C5gYahMFmzHKGNID8QrG5t25WU.jpg",
+            "price": 10.0,
+            "genres": [
+                {
+                    "id": 7,
+                    "name": "Aventure"
+                },
+                {
+                    "id": 6,
+                    "name": "Action"
+                },
+                {
+                    "id": 13,
+                    "name": "Animation"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Le seigneur des anneaux : le retour du roi",
+            "releaseDate": "2003-01-01T00:00:00",
+            "stock": 0,
+            "rating": 4,
+            "format": {
+                "id": 1,
+                "name": "Film"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+            "price": 2.5,
+            "genres": [
+                {
+                    "id": 6,
+                    "name": "Action"
+                },
+                {
+                    "id": 3,
+                    "name": "Drame"
+                },
+                {
+                    "id": 7,
+                    "name": "Aventure"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "title": "Le seigneur des anneaux : les deux tours",
+            "releaseDate": "2002-01-01T00:00:00",
+            "stock": 1,
+            "rating": 4,
+            "format": {
+                "id": 1,
+                "name": "Film"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg",
+            "price": 3.0,
+            "genres": [
+                {
+                    "id": 3,
+                    "name": "Drame"
+                },
+                {
+                    "id": 6,
+                    "name": "Action"
+                },
+                {
+                    "id": 7,
+                    "name": "Aventure"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "The dark knight : le chevalier noir",
+            "releaseDate": "2008-01-01T00:00:00",
+            "stock": 2,
+            "rating": 4,
+            "format": {
+                "id": 1,
+                "name": "Film"
+            },
+            "pictureUrl": "https://www.themoviedb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+            "price": 3.5,
+            "genres": [
+                {
+                    "id": 3,
+                    "name": "Drame"
+                },
+                {
+                    "id": 5,
+                    "name": "Crime"
+                },
+                {
+                    "id": 6,
+                    "name": "Action"
+                }
+            ]
+        }
+    ],
+    "totalPages": 1,
+    "currentPage": 1
+}
+
+Valeur retournée si la page sélectionnée excède le nombre total de pages : 
+Les éléments de la dernière page sont renvoyés.
+
+Valeur retournée si la page sélectionnée est inférieure à 1 :
+Status 400 BadRequest. ErrorMessage : "Page number must be a positive integer".
+
+Valeur retournée si le nombre d'élements par page sélectionné est égal ou inférieur à zéro :
+Status 400 BadRequest. ErrorMessage : "Page size must be a positive integer".
+
+Valeur retournée si la langue spécifiée n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+Valeur retournée si le format spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Format doesn't exist".
+
+Valeur retournée si un genre spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Genre doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/products/search/{searchText}?page=1&pageSize=10&lang=en
+
+Objectif : fournir la liste de produits dont un certain mot apparait dans le titre ou dans le synopsis
+
+Token : Non
+
+Valeur retournée si tout OK :
+{
+    "products": [
+        {
+            "id": 3,
+            "title": "The dark knight",
+            "releaseDate": "2008-01-01T00:00:00",
+            "stock": 3,
+            "rating": 4,
+            "format": {
+                "id": 1,
+                "name": "Film"
+            },
+            "pictureUrl": "Pictures/3.jpg",
+            "price": 3.5,
+            "genres": [
+                {
+                    "id": 3,
+                    "name": "Drama"
+                },
+                {
+                    "id": 5,
+                    "name": "Crime"
+                },
+                {
+                    "id": 6,
+                    "name": "Action"
+                }
+            ]
+        }
+    ],
+    "totalPages": 1,
+    "currentPage": 1
+}
+
+Valeur retournée si la page sélectionnée excède le nombre total de pages :
+Les éléments de la dernière page sont renvoyés.
+
+Valeur retournée si la page sélectionnée est inférieure à 1 :
+Status 400 BadRequest. ErrorMessage : "Page number must be a positive integer".
+
+Valeur retournée si le nombre d'élements par page sélectionné est égal ou inférieur à zéro :
+Status 400 BadRequest. ErrorMessage : "Page size must be a positive integer".
+
+Valeur retournée si la langue spécifiée n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/products/{productId}?lang=en
+
+Objectif : recevoir les informations détaillées d'un certain produit
+
+Token : NON
+
+Valeur retournée si tout OK :
+{
+    "id": 1,
+    "title": "The shawshank redemption",
+    "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "releaseDate": "1994-01-01T00:00:00",
+    "duration": 142,
+    "stock": 5,
+    "rating": 5,
+    "format": {
+        "id": 1,
+        "name": "Film"
+    },
+    "pictureUrl": "Pictures/1.jpg",
+    "price": 3.0,
+    "directors": [
+        {
+            "id": 45,
+            "firstName": "Frank",
+            "lastName": "Darabont"
+        }
+    ],
+    "actors": [
+        {
+            "id": 1,
+            "firstName": "Tim",
+            "lastName": "Robbins"
+        },
+        {
+            "id": 42,
+            "firstName": "Morgan",
+            "lastName": "Freeman"
+        },
+        {
+            "id": 43,
+            "firstName": "Bob",
+            "lastName": "Gunton"
+        },
+        {
+            "id": 44,
+            "firstName": "William",
+            "lastName": "Sadler"
+        }
+    ],
+    "genres": [
+        {
+            "id": 3,
+            "name": "Drama"
+        }
+    ]
+}
+
+Valeur retournée si le produit n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/products/genres/{productId}?lang=en
+
+Objectif : recevoir les genres d'un certain produit
+
+Token : Non
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 3,
+        "name": "Drama"
+    },
+    {
+        "id": 5,
+        "name": "Crime"
+    }
+]
+
+Valeur retournée si le produit n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/products
+
+Objectif : ajouter un nouveau produit
+
+Token : Oui (il faut être admin)
+
+Body :
+{
+    "originalTitle" : "Mon titre d'origine",
+    "englishTitle" : "Mon titre en anglais",
+    "frenchTitle": "Mon titre en français",
+    "englishSummary" : "Mon summary en anglais",
+    "frenchSummary" : "Mon summary en français",
+    "releaseDate": "1994-01-01T00:00:00",
+    "duration": 142,
+    "stock": 5,
+    "rating": 5,
+    "formatId":1,
+    "pictureUrl": "Pictures/1.jpg",
+    "price": 3.0,
+    "actorsId" : [ 42, 43 ],
+    "directorsId" : [ 45 ],
+    "genresId" : [ 1 ]
+}
+
+Valeur retournée si tout OK :
+Status 201 Created.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si un ID (format, acteur, réalisateur, genre,...) fourni n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si tous les ID (format, acteur, réalisateur, genre,...) ne sont pas fournis :
+Status 400 BadRequest.
+
+Valeur retournée si un produit avec le même titre et le même réalisateur existe déjà :
+Status 409 Conflict. ErrorMessage : "Product already exists".
+
+Valeur retournée si un problème survient au niveau de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong creating the product XXX".
+
+-------------------------------------------------------------------------------------------
+
+Route : PUT https://localhost:5000/api/products/{productId}
+
+Objectif : modifier un produit existant
+
+Token : Oui (l'utilisateur doit être admin)
+
+Body :
+{
+    "id": productId
+    "originalTitle" : "Mon titre d'origine modifié",
+    "englishTitle" : "Mon titre en anglais",
+    "frenchTitle": "Mon titre en français",
+    "englishSummary" : "Mon summary en anglais",
+    "frenchSummary" : "Mon summary en français",
+    "releaseDate": "1994-01-01T00:00:00",
+    "duration": 142,
+    "stock": 5,
+    "rating": 5,
+    "formatId":1,
+    "pictureUrl": "Pictures/1.jpg",
+    "price": 3.0,
+    "actorsId" : [ 42, 43 ],
+    "directorsId" : [ 45 ],
+    "genresId" : [ 1 ]
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'ID du produit en paramètre n'est pas le même que l'ID dans le body de la requête :
+Status 400 BadRequest. ErrorMessage : "Product IDs are not the same".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si l'ID fourni n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si un ID (format, acteur, réalisateur, genre,...) fourni n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si tous les ID (format, acteur, réalisateur, genre,...) ne sont pas fournis :
+Status 400 BadRequest.
+
+Valeur retournée si un produit avec le même titre et le même réalisateur existe déjà :
+Status 409 Conflict. ErrorMessage : "Product already exists".
+
+Valeur retournée si un problème survient au niveau de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the product XXX".
+
+-------------------------------------------------------------------------------------------
+
+Route : DELETE https://localhost:5000/api/products/{productId}
+
+Objectif : supprimer un produit existant
+
+Token : Oui (l'utilisateur doit être admin)
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si l'ID fourni n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+|							CARTS	    							|
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/carts?lang=fr
+
+Objectif : recevoir la liste des paniers (admin), recevoir son propre panier (client)
+
+Token : OUI (retourne le panier de tout l'utilisateur si client, retourne tous les paniers si admin)
+
+Valeur retournée si l'utilisateur est client :
+{
+    "id": 6,
+    "user": {
+        "id": 12,
+        "firstName": "Eliane",
+        "lastName": "Gemini",
+        "phone": "0478266000",
+        "email": "eliane.gemini@gmail.com"
+    },
+    "products": [
+        {
+            "id": 1,
+            "title": "Les évadés",
+            "price": 3.0,
+            "quantity": 1
+        },
+        {
+            "id": 2,
+            "title": "Le parrain",
+            "price": 3.0,
+            "quantity": 1
+        }
+    ]
+}
+
+Valeur retournée si l'utilisateur est admin :
+[
+    {
+        "id": 6,
+        "user": {
+            "id": 12,
+            "firstName": "Eliane",
+            "lastName": "Gemini",
+            "phone": "0478266000",
+            "email": "eliane.gemini@gmail.com"
+        },
+        "products": [
+            {
+                "id": 1,
+                "title": "Les évadés",
+                "price": 3.0,
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "user": {
+            "id": 13,
+            "firstName": "Sébastien",
+            "lastName": "Garder",
+            "phone": "0473345232",
+            "email": "sebastien.gardier@gmail.com"
+        },
+        "products": []
+    }
+]
+
+Valeur retourné si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved" ou "User ID could not be retrieved".
+
+Valeur retournée si le panier de l'utilisateur n'est pas trouvé :
+Status 404 NotFound.
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/carts
+
+Objectif : adapter le panier de l'utilisateur loggé
+
+Token : OUI (adapte le panier de l'utilisateur)
+
+Body :
+[
+    {
+        "productId": 1,
+        "quantity": 1
+    },
+    {
+        "productId": 2,
+        "quantity": 1
+    },
+
+]
+
+Valeur retournée si tout est OK :
+Status 204 NoContent.
+
+Valeur retournée si aucun produit n'est envoyé :
+Status 400 BadRequest. ErrorMessage : "No product was provided to add to the cart".
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID coult not be retrieved".
+
+Valeur retournée si l'ID d'un produit n'existe pas :
+Status 404 NotFound. ErrorMessage : "Product with ID X doesn't exist".
+
+Valeur retournée si la quantité demandée est supérieure à la quantité en stock :
+Status 409 Conflict. ErrorMessage : "Cart cannot be updated : the quantity requested for product(s) with ID XXX is not available in stock".
+
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong adding the product(s) to the cart".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/carts/empty
+
+Objectif : vider le panier de l'utilisateur loggé
+
+Token : OUI (vide le panier de l'utilisateur)
+
+Valeur retournée si tout est OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
+
+Valeur retournée si le panier de l'utilisateur est introuvable :
+Status 404 NotFound.
+
+Valeur retournée en cas d'erreur du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong emptying the user's cart".
+
+-------------------------------------------------------------------------------------------
+|							ORDERS    							|
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/orders
+
+Objectif : recevoir la liste de toutes les commandes (admin), recevoir la liste de toutes ses commandes (client)
+
+Token : Oui
+
+Valeur retournée si l'utilisateur est admin : il récupère toutes les commandes :
+[
+    {
+        "id": 25,
+        "user": {
+            "id": 22,
+            "firstName": "Cindy",
+            "lastName": "Hubinon",
+            "phone": "0473333333",
+            "email": "cindy.hubinon@gmail.com"
+        },
+        "date": "2023-01-14T18:53:05",
+        "total": 7.5,
+        "status": {
+            "id": 2,
+            "name": "Paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de l'Yser",
+            "number": "102",
+            "postalCode": "4432",
+            "city": "Ans",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 3,
+                    "title": "The dark knight",
+                    "price": 3.5
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 6,
+                    "title": "Le parrain 2",
+                    "price": 4.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 3,
+                    "title": "The dark knight",
+                    "price": 3.5
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 6,
+                    "title": "Le parrain 2",
+                    "price": 4.0
+                },
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "user": {
+            "id": 20,
+            "firstName": "Loris",
+            "lastName": "Sanfilippo",
+            "phone": "0473333333",
+            "email": "loris.sanfiliipo@gmail.com"
+        },
+        "date": "2023-01-14T18:59:06",
+        "total": 30.0,
+        "status": {
+            "id": 2,
+            "name": "Paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de l'Yser",
+            "number": "102",
+            "postalCode": "4432",
+            "city": "Ans",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 34,
+                    "title": "Rick et Morty",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 36,
+                    "title": "Stranger things",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 37,
+                    "title": "True Detective",
+                    "price": 10.0
+                },
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "user": {
+            "id": 20,
+            "firstName": "Loris",
+            "lastName": "Sanfilippo",
+            "phone": "0473333333",
+            "email": "loris.sanfiliipo@gmail.com"
+        },
+        "date": "2023-01-14T19:01:18",
+        "total": 30.0,
+        "status": {
+            "id": 2,
+            "name": "Paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue du tilleul",
+            "number": "40",
+            "postalCode": "4432",
+            "city": "Alleur",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 34,
+                    "title": "Rick et Morty",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 36,
+                    "title": "Stranger things",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 37,
+                    "title": "True Detective",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 34,
+                    "title": "Rick et Morty",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 36,
+                    "title": "Stranger things",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 37,
+                    "title": "True Detective",
+                    "price": 10.0
+                },
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "user": {
+            "id": 21,
+            "firstName": "Laurent",
+            "lastName": "Wenkin",
+            "phone": "0473333333",
+            "email": "laurent.wenkin@gmail.com"
+        },
+        "date": "2023-01-14T19:05:46",
+        "total": 5.0,
+        "status": {
+            "id": 2,
+            "name": "Paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de Liège",
+            "number": "44",
+            "postalCode": "4340",
+            "city": "Othée",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            }
+        ]
+    }
+]
+
+Valeur retournée si l'utilisateur est client : il ne récupère que ses propres commandes
+[
+    {
+        "id": 28,
+        "user": {
+            "id": 21,
+            "firstName": "Laurent",
+            "lastName": "Wenkin",
+            "phone": "0473333333",
+            "email": "laurent.wenkin@gmail.com"
+        },
+        "date": "2023-01-14T19:05:46",
+        "total": 5.0,
+        "status": {
+            "id": 2,
+            "name": "Paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de Liège",
+            "number": "44",
+            "postalCode": "4340",
+            "city": "Othée",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            }
+        ]
+    }
+]
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved" ou "User ID could not be retrieved".
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/orders/{orderId}
+
+Objectif : recevoir le détail d'une certaine commande (si l'utilisateur est un client, il doit s'agir d'une de ses propres commandes)
+
+Token : Oui
+
+Valeur retournée si l'utilisateur est admin :
+{
+    "id": 28,
+    "user": {
+        "id": 21,
+        "firstName": "Laurent",
+        "lastName": "Wenkin",
+        "phone": "0473333333",
+        "email": "laurent.wenkin@gmail.com"
+    },
+    "date": "2023-01-14T19:05:46",
+    "total": 5.0,
+    "status": {
+        "id": 2,
+        "name": "Paid"
+    },
+    "deliveryAddress": {
+        "street": "Rue de Liège",
+        "number": "44",
+        "postalCode": "4340",
+        "city": "Othée",
+        "country": "Belgique"
+    },
+    "details": [
+        {
+            "product": {
+                "id": 5,
+                "title": "La liste de Schindler",
+                "price": 5.0
+            },
+            "quantity": 1
+        },
+        {
+            "product": {
+                "id": 5,
+                "title": "La liste de Schindler",
+                "price": 5.0
+            },
+            "quantity": 1
+        }
+    ]
+}
+
+Valeur retournée si l'utilisateur est client :
+{
+    "id": 28,
+    "user": {
+        "id": 21,
+        "firstName": "Laurent",
+        "lastName": "Wenkin",
+        "phone": "0473333333",
+        "email": "laurent.wenkin@gmail.com"
+    },
+    "date": "2023-01-14T19:05:46",
+    "total": 5.0,
+    "status": {
+        "id": 2,
+        "name": "Paid"
+    },
+    "deliveryAddress": {
+        "street": "Rue de Liège",
+        "number": "44",
+        "postalCode": "4340",
+        "city": "Othée",
+        "country": "Belgique"
+    },
+    "details": [
+        {
+            "product": {
+                "id": 5,
+                "title": "La liste de Schindler",
+                "price": 5.0
+            },
+            "quantity": 1
+        },
+        {
+            "product": {
+                "id": 5,
+                "title": "La liste de Schindler",
+                "price": 5.0
+            },
+            "quantity": 1
+        }
+    ]
+}
+
+Valeur retournée si l'utilisateur est client et qu'il essaie de récupérer une commande qui n'est pas la sienne :
+Status 401 Unauthorized. ErrorMessage : "Order does not belong to user".
+
+Valeur retournée si l'ID de l'order n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/orders/status?status=paid&lang=en
+
+Objectif : recevoir toutes les commandes d'un certain statut (admin), recevoir toutes ses commandes d'un certain statut (client)
+
+Token : Oui
+
+Valeur retournée si l'utilisateur est admin : il récupère toutes les commandes :
+[
+    {
+        "id": 25,
+        "user": {
+            "id": 22,
+            "firstName": "Cindy",
+            "lastName": "Hubinon",
+            "phone": "0473333333",
+            "email": "cindy.hubinon@gmail.com"
+        },
+        "date": "2023-01-14T18:53:05",
+        "total": 7.5,
+        "status": {
+            "id": 2,
+            "name": "paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de l'Yser",
+            "number": "102",
+            "postalCode": "4432",
+            "city": "Ans",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 3,
+                    "title": "The dark knight",
+                    "price": 3.5
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 6,
+                    "title": "Le parrain 2",
+                    "price": 4.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 3,
+                    "title": "The dark knight",
+                    "price": 3.5
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 6,
+                    "title": "Le parrain 2",
+                    "price": 4.0
+                },
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "user": {
+            "id": 20,
+            "firstName": "Loris",
+            "lastName": "Sanfilippo",
+            "phone": "0473333333",
+            "email": "loris.sanfiliipo@gmail.com"
+        },
+        "date": "2023-01-14T19:01:18",
+        "total": 30.0,
+        "status": {
+            "id": 2,
+            "name": "paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue du tilleul",
+            "number": "40",
+            "postalCode": "4432",
+            "city": "Alleur",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 34,
+                    "title": "Rick et Morty",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 36,
+                    "title": "Stranger things",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 37,
+                    "title": "True Detective",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 34,
+                    "title": "Rick et Morty",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 36,
+                    "title": "Stranger things",
+                    "price": 10.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 37,
+                    "title": "True Detective",
+                    "price": 10.0
+                },
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "user": {
+            "id": 21,
+            "firstName": "Laurent",
+            "lastName": "Wenkin",
+            "phone": "0473333333",
+            "email": "laurent.wenkin@gmail.com"
+        },
+        "date": "2023-01-14T19:05:46",
+        "total": 5.0,
+        "status": {
+            "id": 2,
+            "name": "paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de Liège",
+            "number": "44",
+            "postalCode": "4340",
+            "city": "Othée",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            }
+        ]
+    }
+]
+
+Valeur retournée si l'utilisateur est client : il récupère ses commandes
+[
+    {
+        "id": 28,
+        "user": {
+            "id": 21,
+            "firstName": "Laurent",
+            "lastName": "Wenkin",
+            "phone": "0473333333",
+            "email": "laurent.wenkin@gmail.com"
+        },
+        "date": "2023-01-14T19:05:46",
+        "total": 5.0,
+        "status": {
+            "id": 2,
+            "name": "paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de Liège",
+            "number": "44",
+            "postalCode": "4340",
+            "city": "Othée",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "user": {
+            "id": 21,
+            "firstName": "Laurent",
+            "lastName": "Wenkin",
+            "phone": "0473333333",
+            "email": "laurent.wenkin@gmail.com"
+        },
+        "date": "2023-01-15T19:05:46",
+        "total": 5.0,
+        "status": {
+            "id": 2,
+            "name": "paid"
+        },
+        "deliveryAddress": {
+            "street": "Rue de Liège",
+            "number": "44",
+            "postalCode": "4340",
+            "city": "Othée",
+            "country": "Belgique"
+        },
+        "details": [
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            },
+            {
+                "product": {
+                    "id": 5,
+                    "title": "La liste de Schindler",
+                    "price": 5.0
+                },
+                "quantity": 1
+            }
+        ]
+    }
+]
+
+Valeur retournée si le bearer token est erroné :
+Status 401 Unauthorized. ErrorMessage : "User role could not be retrieved" ou "User ID could not be retrieved".
+
+Valeur retournée si le statut spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Status doesn't exist".
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/orders
+
+Objectif : créer la commande, une fois que l'utilisateur a ajouté son adresse de livraison.
+
+Token : Oui
+
+Body :
+{
+    "street" : "Rue de la Collectivité",
+    "number" : "30",
+    "postalCode" : "4100",
+    "City": "Seraing",
+    "Country": "Belgique"
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
+
+Valeur retournée si aucune adresse de livraison n'est envoyée :
+Status 400 BadRequest. ErrorMessage : "No delivery address was provided".
+
+Valeur retournée si le panier de l'utilisateur n'est pas retrouvé :
+Status 404 NotFound.
+
+Valeur retournée si un ou des produit(s) du panier n'est / ne sont plus disponible(s) dans la quantité demandée :
+Status 409 Conflict. ErrorMessage : "Order cannot be created : the quantity requested for product(s) with ID XXX is not available in stock".
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong creating the user's order".
+
+-------------------------------------------------------------------------------------------
+
+Route : PUT https://localhost:5000/api/orders/{orderId}
+
+Objectif : adapter le statut d'une commande existante
+
+Token : Oui (l'utilisateur doit être admin)
+
+Body :
+{
+    "orderId" : 25,
+    "statusId": 3
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si l'orderID dans l'URL de la requête est différent de l'ID dans le body de la requête :
+Status 400 BedRequest. ErrorMessage : "Order IDs are not the same".
+
+Valeur retournée si l'ID du statut n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Status doesn't exist".
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the order's status".
+
+-------------------------------------------------------------------------------------------
+|						  ORDERSTATUSES   						|
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/orderstatus?lang=en
+
+Objectif : recevoir la liste des statuts de commande possibles
+
+Token : Oui (l'utilisateur doit être admin)
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 2,
+        "name": "Paid"
+    },
+    {
+        "id": 3,
+        "name": "Shipped"
+    },
+    {
+        "id": 4,
+        "name": "Delivered"
+    },
+    {
+        "id": 5,
+        "name": "Cancelled"
+    },
+    {
+        "id": 1,
+        "name": "Created"
+    }
+]
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User rold could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+|							PAYMENT    							|
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/payment/checkout
+
+Objectif : recevoir l'URL redirigeant l'utilisateur vers la page de paiement Stripe pour sa commande
+
+Token : Oui
+
+Valeur retournée si tout OK :
+https://checkout.stripe.com/c/pay/cs_test_a1SFg3dxPMmEu5Q253MamGVaq0rbFuR2OMZrnI4FDctVzhCV3DB0ADSbPG#fidkdWxOYHwnPyd1blpxYHZxWjA0SElRUTFBU082R39WQnJdUW5MPWpJYH80M3NLTVVGPHA1aEZVQD0wU1R9VX83XVx0MDxIQjFWREpycmswV3VDd0didTRkXEl0U3MyYjBVZ0hCTUpiNk01NTVRUmJOfG9ddicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl
+
+-------------------------------------------------------------------------------------------
+|							GENRES    							|
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/genres?lang=en
+
+Objectif : recevoir la liste des genres
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 1,
+        "name": "Horror"
+    },
+    {
+        "id": 2,
+        "name": "Comedy"
+    },
+    {
+        "id": 3,
+        "name": "Drama"
+    },
+    {
+        "id": 4,
+        "name": "History"
+    },
+    {
+        "id": 5,
+        "name": "Crime"
+    },
+    {
+        "id": 6,
+        "name": "Action"
+    },
+    {
+        "id": 7,
+        "name": "Adventure"
+    },
+    {
+        "id": 8,
+        "name": "Biography"
+    },
+    {
+        "id": 9,
+        "name": "Sci-Fi"
+    },
+    {
+        "id": 10,
+        "name": "Romance"
+    },
+    {
+        "id": 11,
+        "name": "Western"
+    },
+    {
+        "id": 12,
+        "name": "Fantasy"
+    },
+    {
+        "id": 13,
+        "name": "Animation"
+    },
+    {
+        "id": 14,
+        "name": "War"
+    },
+    {
+        "id": 15,
+        "name": "Mystery"
+    },
+    {
+        "id": 16,
+        "name": "Thriller"
+    },
+    {
+        "id": 17,
+        "name": "Musical"
+    },
+    {
+        "id": 18,
+        "name": "Film noir"
+    },
+    {
+        "id": 19,
+        "name": "Documentary"
+    },
+    {
+        "id": 20,
+        "name": "Superhero"
+    },
+    {
+        "id": 21,
+        "name": "Reality show"
+    },
+    {
+        "id": 22,
+        "name": "Talk show"
+    },
+    {
+        "id": 23,
+        "name": "Short film"
+    }
+]
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/genres/{genreId}?lang=en
+
+Objectif : récupérer un genre bien précis
+
+Token : NON
+
+Valeur retournée si tout OK :
+{
+    "id": 1,
+    "name": "Horror"
+}
+
+Valeur retournée si l'ID du genre n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/genres/products/{productId}?lang=en
+
+Objectif : recevoir les genres d'un produit bien précis
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 3,
+        "name": "Drama"
+    },
+    {
+        "id": 5,
+        "name": "Crime"
+    }
+]
+
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+Valeur retournée si l'ID du produit n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/genres/{genreId}/products?lang=en
+
+Objectif : recevoir les produits d'un genre bien précis
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 32,
+        "title": "Friends",
+        "releaseDate": "1994-01-01T00:00:00",
+        "stock": 3,
+        "rating": 4,
+        "format": {
+            "id": 2,
+            "name": "Serie"
+        },
+        "pictureUrl": "https://www.themoviedb.org/t/p/original/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
+        "price": 10.0,
+        "genres": null
+    },
+    {
+        "id": 34,
+        "title": "Rick and Morty",
+        "releaseDate": "2013-01-01T00:00:00",
+        "stock": 1,
+        "rating": 4,
+        "format": {
+            "id": 2,
+            "name": "Serie"
+        },
+        "pictureUrl": "https://www.themoviedb.org/t/p/original/2jS5LyatFPXNm1PaYe63vKdSBCM.jpg",
+        "price": 10.0,
+        "genres": null
+    },
+    {
+        "id": 35,
+        "title": "The office",
+        "releaseDate": "2005-01-01T00:00:00",
+        "stock": 0,
+        "rating": 4,
+        "format": {
+            "id": 2,
+            "name": "Serie"
+        },
+        "pictureUrl": "https://www.themoviedb.org/t/p/original/xjGbTzFRyIdOaI91d9OhdOo2xD2.jpg",
+        "price": 8.0,
+        "genres": null
+    }
+]
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+Valeur retournée si l'ID du genre n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/genres
+
+Objectif : ajoutr un nouveau genre
+
+Token : OUI (l'utilisateur doit être admin)
+
+Body :
+{
+    "englishName" : "genreName",
+    "frenchName": "nomGenre"
+}
+
+Valeur retournée si tout OK :
+Status 201 Created.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si aucune donnée n'est envoyée durant la requête :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée si un genre avec le même nom existe déjà :
+Status 409 Conflict. ErrorMessage : "Genre already exists".
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong adding the genre".
+
+-------------------------------------------------------------------------------------------
+
+Route : PUT https://localhost:5000/api/genres/{genreId}
+
+Objectif : modifier un genre existant
+
+Token : OUI (l'utilisateur doit être admin)
+
+Body :
+{
+    "id": 28,
+    "englishName" : "newGenreName",
+    "frenchName": "nouveauNomGenre"
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si aucune donnée n'est envoyée lors de la requête :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée si l'ID du genre passé en paramètre de l'URL est différent de celui du body de la requête :
+Status 400 BadRequest. ErrorMessage : "Genre IDs are not the same".
+
+Valeur retournée si le nom du genre existe déjà :
+Status 409 Conflict. ErrorMessage : "Genre name already exists".
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating the genre".
+
+-------------------------------------------------------------------------------------------
+
+Route : DELETE https://localhost:5000/api/genres/{genreId}
+
+Objectif : supprimer un genre existant
+
+Token : OUI (l'utilisateur doit être admin)
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si l'ID du genre n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong deleting the genre".
+
+-------------------------------------------------------------------------------------------
+|					CELEBRITIES    					   	 |
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/celebrities
+
+Objectif : récupérer la liste de toutes les célébrités (acteurs et réalisateurs)
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 172,
+        "firstName": "Jennifer",
+        "lastName": "Aniston"
+    },
+    {
+        "id": 69,
+        "firstName": "Henry",
+        "lastName": "Fonda"
+    },
+    {
+        "id": 46,
+        "firstName": "Francis",
+        "lastName": "Ford Coppola"
+    },
+    {
+        "id": 42,
+        "firstName": "Morgan",
+        "lastName": "Freeman"
+    },
+    {
+        "id": 161,
+        "firstName": "Martin",
+        "lastName": "Freeman"
+    },
+    {
+        "id": 176,
+        "firstName": "James",
+        "lastName": "Gandolfini"
+    },
+    {
+        "id": 65,
+        "firstName": "Caroline",
+        "lastName": "Goodall"
+    },
+    {
+        "id": 79,
+        "firstName": "Joseph",
+        "lastName": "Gordon-Levitt"
+    },
+    {
+        "id": 182,
+        "firstName": "Spencer",
+        "lastName": "Grammer"
+    },
+    {
+        "id": 163,
+        "firstName": "Rupert",
+        "lastName": "Graves"
+    },
+    {
+        "id": 200,
+        "firstName": "Josh",
+        "lastName": "Grelle"
+    },
+    {
+        "id": 156,
+        "firstName": "Scott",
+        "lastName": "Grimes"
+    },
+    {
+        "id": 146,
+        "firstName": "Anna",
+        "lastName": "Gunn"
+    },
+    {
+        "id": 57,
+        "firstName": "Elijah",
+        "lastName": "Wood"
+    }
+]
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/celebrities/{celebrityId}
+
+Objectif : recevoir les données d'une célébrité bien précise
+
+Token : NON
+
+Valeur retournée si tout OK :
+{
+    "id": 77,
+    "firstName": "Bruce",
+    "lastName": "Willis"
+}
+
+Valeur retournée si l'ID de la célébrité n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/celebrities
+
+Objectif : créer une nouvelle célébrité
+
+Token : OUI (l'utilisateur doit être admin)
+
+Body :
+{
+    "firstName" : "test",
+    "lastName": "test"
+}
+
+Valeur retournée si tout OK :
+Status 201 Created.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si aucune donnée n'est envoyée lors de la requête :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée si une célébrité avec les mêmes nom et prénom existe déjà :
+Status 409 Conflict. ErrorMessage : "Celebrity XXX already exists".
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong saving XXX".
+
+-------------------------------------------------------------------------------------------
+
+Route : PUT https://localhost:5000/api/celebrities/{celebrityId}
+
+Objectif : modifier les données d'une célébrité existante
+
+Token : OUI (l'utilisateur doit être admin)
+
+Body :
+{
+    "id": 208,
+    "firstName" : "test1",
+    "lastName": "test1"
+}
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si aucune donnée n'est envoyée lors de la requête :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée si une célébrité avec les mêmes nom et prénom existe déjà :
+Status 409 Conflict. ErrorMessage : "Celebrity XXX already exists".
+
+Valeur retournée si l'ID de la célébrité fourni en paramètre de l'URL est différent de celui fourni dans le body :
+Status 400 BadRequest. ErrorMessage : "User IDs are not the same".
+
+Valeur retournée si l'ID de la célébrité n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong updating XXX".
+
+-------------------------------------------------------------------------------------------
+
+Route : DELETE https://localhost:5000/api/celebrities/{celebrityId}
+
+Objectif : supprimer une célébrité existante
+
+Token : OUI (l'utilisateur doit être admin)
+
+Valeur retournée si tout OK :
+Status 204 NoContent.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User role could not be retrieved".
+
+Valeur retournée si l'utilisateur n'est pas admin :
+Status 401 Unauthorized. ErrorMessage : "User is not an admin".
+
+Valeur retournée si l'ID de la célébrité n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si une erreur survient du côté de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong deleting XXX".
+
+-------------------------------------------------------------------------------------------
+|						ACTORS    						 |
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/actors
+
+Objectif : récupérer la liste de tous les acteurs
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 1,
+        "firstName": "Tim",
+        "lastName": "Robbins"
+    },
+    {
+        "id": 42,
+        "firstName": "Morgan",
+        "lastName": "Freeman"
+    },
+    {
+        "id": 163,
+        "firstName": "Rupert",
+        "lastName": "Graves"
+    },
+    {
+        "id": 164,
+        "firstName": "Dominic",
+        "lastName": "West"
+    },
+    {
+        "id": 206,
+        "firstName": "Alison",
+        "lastName": "Brie"
+    }
+]
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/actors/{celebrityId}
+
+Objectif : récupérer les informations d'une célébrité bien précise
+
+Token : NON
+
+Valeur retournée si tout OK :
+{
+    "id": 164,
+    "firstName": "Dominic",
+    "lastName": "West"
+}
+
+Valeur retournée si l'ID de l'acteur n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/actors/products/{productId}
+
+Objectif : récupérer la liste d'acteurs d'un produit
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 1,
+        "firstName": "Tim",
+        "lastName": "Robbins"
+    },
+    {
+        "id": 42,
+        "firstName": "Morgan",
+        "lastName": "Freeman"
+    },
+    {
+        "id": 43,
+        "firstName": "Bob",
+        "lastName": "Gunton"
+    },
+    {
+        "id": 44,
+        "firstName": "William",
+        "lastName": "Sadler"
+    }
+]
+
+Valeur retournée si l'ID du produit n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/actors/{celebrityId}/products?lang=en
+
+Objectif : récupérer la liste de produits d'un acteur bien précis
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 1,
+        "title": "The shawshank redemption",
+        "releaseDate": "1994-01-01T00:00:00",
+        "stock": 2,
+        "rating": 5,
+        "format": {
+            "id": 1,
+            "name": "Film"
+        },
+        "pictureUrl": "https://www.themoviedb.org/t/p/original/orcTUEAuVyGYjUM47HRhb7DRLRa.jpg",
+        "price": 3.0,
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            }
+        ]
+    }
+]
+
+Valeur retournée si l'ID de l'acteur n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+|						DIRECTORS   	  					 |
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/directors
+
+Objectif : récupérer la liste de réalisateur
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 45,
+        "firstName": "Frank",
+        "lastName": "Darabont"
+    },
+    {
+        "id": 46,
+        "firstName": "Francis",
+        "lastName": "Ford Coppola"
+    },
+    {
+        "id": 51,
+        "firstName": "Christopher",
+        "lastName": "Nolan"
+    },
+    {
+        "id": 56,
+        "firstName": "Peter",
+        "lastName": "Jackson"
+    },
+    {
+        "id": 61,
+        "firstName": "Steven",
+        "lastName": "Spielberg"
+    },
+    {
+        "id": 46,
+        "firstName": "Francis",
+        "lastName": "Ford Coppola"
+    },
+    {
+        "id": 68,
+        "firstName": "Sidney",
+        "lastName": "Lumet"
+    },
+    {
+        "id": 73,
+        "firstName": "Quentin",
+        "lastName": "Tartantino"
+    },
+    {
+        "id": 51,
+        "firstName": "Christopher",
+        "lastName": "Nolan"
+    },
+    {
+        "id": 56,
+        "firstName": "Peter",
+        "lastName": "Jackson"
+    },
+    {
+        "id": 207,
+        "firstName": "Emerald",
+        "lastName": "Fennel"
+    }
+]
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/directors/{celebrityId}
+
+Objectif : récupérer les informations d'un réalisateur bien précis
+
+Token : NON
+
+Valeur retournée si tout OK :
+{
+    "id": 56,
+    "firstName": "Peter",
+    "lastName": "Jackson"
+}
+
+Valeur retournée si l'ID du réalisateur n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/directors/products/{productId}
+
+Objectif : récupérer les réalisateurs d'un produit
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 45,
+        "firstName": "Frank",
+        "lastName": "Darabont"
+    }
+]
+
+Valeur retournée si l'ID du produit n'existe pas :
+Status 404 NotFound.
+
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/directors/{celebrityId}/products?lang=en
+
+Objectif : récupérer les produits d'un réalisateur
+
+Token : NON
+
+Valeur retournée si tout OK :
+[
+    {
+        "id": 4,
+        "title": "The lord of the rings : the return of the king",
+        "releaseDate": "2003-01-01T00:00:00",
+        "stock": 0,
+        "rating": 4,
+        "format": {
+            "id": 1,
+            "name": "Film"
+        },
+        "pictureUrl": "https://www.themoviedb.org/t/p/original/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+        "price": 2.5,
+        "genres": [
+            {
+                "id": 6,
+                "name": "Action"
+            },
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 7,
+                "name": "Adventure"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "The lord of the rings : the two towers",
+        "releaseDate": "2002-01-01T00:00:00",
+        "stock": 1,
+        "rating": 4,
+        "format": {
+            "id": 1,
+            "name": "Film"
+        },
+        "pictureUrl": "https://www.themoviedb.org/t/p/original/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg",
+        "price": 3.0,
+        "genres": [
+            {
+                "id": 3,
+                "name": "Drama"
+            },
+            {
+                "id": 6,
+                "name": "Action"
+            },
+            {
+                "id": 7,
+                "name": "Adventure"
+            }
+        ]
+    }
+]
+
+Valeur retournée si l'ID du réalisateur n'existe pas :
+Status 404 NotFound.
+
+Valeur retournée si le langage spécifié n'existe pas :
+Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
+
+-------------------------------------------------------------------------------------------
+|					     ADDRESSES	  					 |
+-------------------------------------------------------------------------------------------
+
+Route : GET https://localhost:5000/api/address
+
+Objectif : récupérer l'adresse de l'utilisateur loggé
+
+Token : OUI (renvoie l'adresse de l'utilisateur)
+
+Valeur retournée si tout OK :
+{
+    "street": "Rue du tilleul",
+    "number": "40",
+    "postalCode": "4432",
+    "city": "Alleur",
+    "country": "Belgique"
+}
+
+Valeur retournée si aucune adresse n'est encodée pour cet utilisateur :
+Status 404 NotFound().
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
+
+-------------------------------------------------------------------------------------------
+
+Route : POST https://localhost:5000/api/address
+
+Objectif : ajoute ou modifie l'adresse de l'utilisateur loggé
+
+Token : OUI (ajoute OU modifie l'adresse de l'utilisateur)
+
+Body :
+{
+    "street": "Rue du tilleul",
+    "number": "40",
+    "postalCode": "4432",
+    "city": "Alleur",
+    "country": "Belgique"
+}
+
+Valeur retournée si tout est OK :
+Status 201 Created.
+
+Valeur retournée si le bearer token est erroné :
+Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
+
+Valeur retournée si aucune adresse n'est envoyée :
+Status 400 BadRequest. ErrorMessage : "No data was provided".
+
+Valeur retournée en cas d'erreur au niveau de l'API :
+Status 500 Internal Server Error. ErrorMessage : "Something went wrong adding the user's address".

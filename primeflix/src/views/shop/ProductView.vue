@@ -125,7 +125,7 @@
 
 <script>
 import StarsComp from '@/components/product/StarsComponent.vue'
-import utils from '../helpers/utils'
+import utils from '../../helpers/utils'
 
 export default {
     name: 'Product',

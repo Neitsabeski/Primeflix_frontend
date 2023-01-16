@@ -18,21 +18,21 @@
           </li>
           <li class="nav-item">
             <div class="nav-link">
-              <router-link to="/products" @click="setFormat('All')">
+              <router-link to="/shop/products" @click="setFormat('All')">
                 {{ $t('productsLink')}}
               </router-link>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-link" >
-                <router-link to="/products" @click="setFormat('film')">
+                <router-link to="/shop/products" @click="setFormat('film')">
                   {{ $t('filmsLink')}}
                 </router-link>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-link">
-              <router-link to="/products" @click="setFormat('serie')">
+              <router-link to="/shop/products" @click="setFormat('serie')">
                 {{ $t('seriesLink')}}
               </router-link>
                 
@@ -61,7 +61,7 @@
           
           <li class="nav-item">
             <div class="nav-link">
-                <router-link to="/cart">
+                <router-link to="/shop/cart">
                   {{ $t('cartLink')}} <font-awesome-icon icon="shopping-cart" />(<span class="pinky">{{ this.$store.state.cartCount }}</span>)
                 </router-link>
               </div>
@@ -69,7 +69,7 @@
 
           <li class="nav-item">
             <div v-if="status != 'logged'" class="nav-link">
-              <router-link to="/loginregister">
+              <router-link to="/shop/loginregister">
                 {{ $t('loginRegisterLink')}} <span class="pinky"><font-awesome-icon icon="sign-in" /></span>
               </router-link>
             </div>
@@ -82,12 +82,12 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" >
                     <li>
-                      <router-link to="/profile">
+                      <router-link to="/shop/profile">
                         {{ $t('profileLink')}}
                       </router-link>
                     </li>
                     <li>
-                      <router-link to="/orders">
+                      <router-link to="/shop/orders">
                         {{ $t('ordersLink')}}
                       </router-link>
                     </li>
@@ -123,7 +123,6 @@
       },
       computed: {
           ...mapState(["status"]),
-
       },
       mounted() {
         this.user = this.$store.getters.getUser;
@@ -132,7 +131,7 @@
         search: function(event){
           const self = this;
           this.searchField = '';
-          self.$router.push('/search');
+          self.$router.push('/shop/search');
         },
         setFormat(format){
           this.$store.commit('setFormat', format)
@@ -140,7 +139,7 @@
         logOut(){
           console.log("logout");
           this.$store.commit('logOut');
-          this.$router.push('/loginRegister');
+          this.$router.push('/shop/loginRegister');
         }
       }
     }

@@ -47,9 +47,9 @@
                                                 Format
                                             </div>
                                             <ul class="collapse" id="collapseFormat">
-                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'All'" :checked="'All' == params.format" /><label>All</label></li>
-                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'film'" :checked="'films' == params.format" /><label>Films</label></li>
-                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'serie'" :checked="'series' == params.format" /><label>Series</label></li>
+                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="''" :checked="'' == params.format" /><label>All</label></li>
+                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'film'" :checked="'film' == params.format" /><label>Films</label></li>
+                                                <li><input v-on:change="setFormat" v-model="formatPicked" name="format" type="radio" v-bind:value="'serie'" :checked="'serie' == params.format" /><label>Series</label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -121,11 +121,9 @@
             }
         },
         created(){
-
             this.params.format = this.$store.getters.getFormat;
         },
-        mounted() {
-            //this.displayProducts();        
+        mounted() {       
             this.getProducts();
         },
         methods: {
@@ -133,10 +131,6 @@
                 this.products = this.$store.getters.getProducts;
                 this.totalPage = this.$store.getters.getTotalPages;
                 this.currentPage = this.$store.getters.getCurrentPage;
-            },
-            addToCart: function (product) {
-                this.$store.commit('addToCart', product);
-                this.cart = this.$store.state.cart;
             },
             changePage: function (char) {
                 switch (char) {
@@ -158,17 +152,17 @@
             },
             setFormat(){
                 this.params.format = this.formatPicked;
-                this.$store.commit('setFormat', this.formatPicked);
+                this.params.page = 1;
                 this.getProducts();
             },
             setGenre(){
                 this.params.genre = this.genrePicked;
-                this.$store.commit('setGenre', this.genrePicked);
+                this.params.page = 1;
                 this.getProducts();
             },
             setRecentlyAdded(){
                 this.params.recentlyAdded = this.recentlyAdded;
-                this.$store.commit('setRecentlyAdded', this.recentlyAdded);
+                this.params.page = 1;
                 this.getProducts();
             },
             getProducts: function (event) {
