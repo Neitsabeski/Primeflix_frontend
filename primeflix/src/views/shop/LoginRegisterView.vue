@@ -140,7 +140,6 @@
             this.user = this.$store.getters.getUser;
         },
         mounted(){
-
             if(this.status == 'logged') this.$router.push('/shop/profile');
         },
         computed: {
@@ -188,7 +187,7 @@
                     self.$router.push('/shop/profile');
                 }, function (error) {
                     //console.log(error);
-                    self.error = error.response.data;
+                    self.error = error.response.state;
                 })
             },
             register: function () {
@@ -205,7 +204,7 @@
                     self.login();
                 }, function (error) {
                     //console.log(error.response.data);
-                    self.error = error.response.data;
+                    self.error = error.response.state;
                 })
             }
         }

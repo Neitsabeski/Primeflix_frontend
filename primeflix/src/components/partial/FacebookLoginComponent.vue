@@ -59,7 +59,7 @@
                             console.log(response);
                             router.push('/shop/profile');
                         }, function (error) {
-                            //console.log(error);
+                            console.log(error);
                             self.error = error.response.data;
                         })
                     }

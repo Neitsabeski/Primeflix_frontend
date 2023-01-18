@@ -117,6 +117,7 @@
       data: function() {
         return {
           user: '',
+          name: '',
           searchField: ''
         }
         

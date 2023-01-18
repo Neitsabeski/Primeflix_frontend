@@ -152,7 +152,7 @@
                 if(this.sameAddress) {
                     this.pAddress = this.dAddress;
                 } else {
-                    pAddress = {
+                    this.pAddress = {
                         street:'',
                         number:'',
                         postalCode:'',

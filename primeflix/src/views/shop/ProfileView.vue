@@ -30,7 +30,7 @@
                                             <div class="col pinky text-uppercase">{{ $t('profile.firstName') }} </div>
                                             <div class="col">
                                                 <div v-if="mode == 'read'">{{ user.data.firstName || emptyField }}</div>
-                                                <div v-if="mode == 'edit'"><input v-model="firstname" class="form-control" type="text" :placeholder="user.data.firstName" required /></div>
+                                                <div v-if="mode == 'edit'"><input v-model="firstName" class="form-control" type="text" :placeholder="user.data.firstName" required /></div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -38,7 +38,7 @@
                                             <div class="col">
                                                 <div>
                                                     <div v-if="mode == 'read'">{{user.data.lastName || emptyField }}</div>
-                                                    <div v-if="mode == 'edit'"><input v-model="firstname" class="form-control" type="text" :placeholder="user.data.lastName" required /></div>
+                                                    <div v-if="mode == 'edit'"><input v-model="lastName" class="form-control" type="text" :placeholder="user.data.lastName" required /></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,7 +55,7 @@
                                         <div class="row">
                                             <div class="col pinky text-uppercase">{{ $t('profile.email') }}</div>
                                             <div class="col overflow-hidden">
-                                                <div>{{ user.data.email || emptyField }}</div>
+                                                <div>{{ this.user.data.email || emptyField }}</div>
                                             </div>
                                         </div>
                                         <hr/>
@@ -92,7 +92,12 @@
             return {
                 mode: 'read',
                 user: null,
-                userModify: null,
+                
+                firstName: '',
+                lastName: '',
+                phone:'',
+                lang:'',
+
                 emptyField: 'NaN',
             }
         },
@@ -101,7 +106,6 @@
         },
         mounted(){
             this.getUser();
-            
             if(this.status != 'logged') this.$router.push('/shop/loginregister');
         },
         computed: {
@@ -110,24 +114,30 @@
         methods: {
             switchMode: function(){
                 if(this.mode == 'read'){
-                    this.userModify = this.user;
                     this.mode = 'edit';
+
+                    this.firstName = this.user.data.firstName;
+                    this.lastName =  this.user.data.lastName;
+                    this.phone =  this.user.data.phone;
+                    this.lang =  this.user.data.lang;
                 }
                 else if(this.mode == 'edit') {
                     this.mode = 'read';
-                    this.userModify = null;
+                    
+                    this.firstName='';
+                    this.lastName='';
+                    this.phone='';
+                    this.lang='';
                 }
             },
             setUserStructure: function(){
-                console.log(this.userModify);
                 return {
-                    "id": this.userModify.id,
-                    "firstName": this.userModify.data.firstName,
-                    "lastName": this.userModify.data.lastName,
-                    "phone": this.userModify.data.phone,
-                    "email": this.userModify.data.email,
-                    "languageCode": this.userModify.data.lang,
-                    //adresse
+                    "id": this.user.id,
+                    "firstName": this.firstName,
+                    "lastName": this.lastName,
+                    "phone": this.phone || '',
+                    "email": this.user.data.email,
+                    "languageCode": this.lang,
                 };
             },
             saveInfos: function(){
@@ -137,7 +147,7 @@
                     "jwt": this.user.token
                 })
                 .then(function (response) {
-                    
+                    self.getUser();
                 }, function (error) {
                     //console.log(error);
                 });

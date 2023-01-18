@@ -87,6 +87,7 @@ const store = createStore({
             state.user.data.lastName = data.lastName;
             state.user.data.phone = data.phone;
             state.user.data.lang = data.language.code;
+            this.commit('setLanguage', data.language.code);
         },
         logOut: function(state){
             state.user = {
@@ -288,6 +289,7 @@ const store = createStore({
             return new Promise(async (resolve, reject) => {
                 await instance.post('/users/login/facebook', fbToken)
                 .then(function (response) {
+                    commit('setStatus', 'logged');
                     commit('logUser', response.data);
                     resolve(response);
                 })
@@ -315,7 +317,6 @@ const store = createStore({
         modifyProfile: ({commit}, data) => {
             const headers = { "Authorization": "Bearer " + data.jwt };
             const userInfos = data.infos;
-            console.log(userInfos);
             return new Promise((resolve, reject) => {
                 instance.put('/users', userInfos, { headers })
                 .then(function (response) {
