@@ -1,13 +1,16 @@
 <template>
     <div>
-        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" scope="public_profile,email"  @login="checkLoginState"></div>
+        <a href="#" @click='doLogin' class="facebookBtn">
+            <font-awesome-icon icon="fa-brands fa-facebook" /> Sign in using Facebook
+        </a>
     </div>
-</template>
-    
-     
+</template> 
     
 <script>
 
+    
+    import store from '../../store/index'
+    import router from '../../router/index'
 
     export default {
         data() {
@@ -16,15 +19,13 @@
             }
         },
         mounted() {
-
             if (typeof FB === "undefined") {
                 this.fbInit();
-            } else {
-                FB.XFBML.parse();
             }
         },
         methods: {
             fbInit(){
+                
                 window.fbAsyncInit = function() {
                     FB.init({
                         appId      : '559856828979383',
@@ -33,6 +34,7 @@
                         version    : 'v15.0',
                     });
                 };
+                
                 (function(d, s, id) {
                     var js,
                         fjs = d.getElementsByTagName(s)[0];
@@ -46,17 +48,22 @@
 
                 })(document, "script", "facebook-jssdk");
             },
-            
-            checkLoginState: function() {
+            doLogin: function(){
+                FB.login(function (loginResponse) {
+                    var self = this;
+                    if (loginResponse.status === 'connected') {
+                        localStorage.facebookToken = localStorage.getItem("fblst_559856828979383");
 
-                console.log("Check");
-
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') this.loginFacebook();
-                });
-            },
-            loginFacebook: function(){
-                console.log("go");
+                        store.dispatch('loginFacebook')
+                        .then(function (response) {
+                            console.log(response);
+                            router.push('/shop/profile');
+                        }, function (error) {
+                            //console.log(error);
+                            self.error = error.response.data;
+                        })
+                    }
+                })
             }
         }
     }

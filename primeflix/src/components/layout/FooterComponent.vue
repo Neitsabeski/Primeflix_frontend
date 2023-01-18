@@ -3,10 +3,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <router-link class="nav-link" to="/contact">
+                    <router-link class="nav-link" to="/shop/contact">
                         <span class="footlink">{{ $t('contactLink')}}</span>
                     </router-link>
-                    <router-link class="nav-link" to="/about">
+                    <router-link class="nav-link" to="/shop/about">
                         <span class="footlink">{{ $t('aboutLink')}}</span>
                     </router-link>
                 </div>

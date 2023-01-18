@@ -2,11 +2,20 @@ import i18n from '@/i18n';
 
 var utils = {
     
+    setCartStructure(cart){
+        var sCart = [];
+        cart.forEach(item => {
+            sCart.push({"productId": item.id, "quantity": item.quantity});
+        });
+        return sCart
+    },
+
     queryLang(){
         return '?lang=' + i18n.global.locale;
     },
 
     queryParams(params){
+
         var query = '';
         
         Object.keys(params).forEach(key => {
@@ -35,8 +44,8 @@ var utils = {
     },
 
     hashSha256(message){
-        var sha256 = require('js-sha256');
-        var hash = sha256.create();
+        var sha256 = require('js-sha256');
+        var hash = sha256.create();
         console.log(sha256(message));
         return message;
     },

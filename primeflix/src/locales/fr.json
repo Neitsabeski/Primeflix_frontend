@@ -8,6 +8,23 @@
     "title": "Erreur",
     "subTitle": "404 Non trouvé"
   },
+  "order": {
+    "title": "Commande",
+    "subTitle": "Votre commande",
+    "productsTitle": "Produits",
+    "infosTitle": "Informations",
+    "deliveryAddress": "Adresse de livraison",
+    "paiementAddress": "Adresse de facturation",
+    "sameAddress": "Utiliser l'adresse de livraison comme adresse de facturation",
+    "placeOrderBtn": "Commander"
+  },
+  "address":{
+    "street": "Rue",
+    "number": "Numéro",
+    "postalCode": "Code postal",
+    "city": "Ville",
+    "country": "Pays"
+  },
   "orders": {
     "title": "Commandes",
     "subTitle": "Vos commandes",

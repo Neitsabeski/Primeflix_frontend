@@ -8,6 +8,23 @@
     "title": "Error",
     "subTitle": "404 Not found"
   },
+  "order": {
+    "title": "Order",
+    "subTitle": "Your order",
+    "productsTitle": "Products",
+    "infosTitle": "Informations",
+    "deliveryAddress": "Shipping Address",
+    "paiementAddress": "Invoice address",
+    "sameAddress": "Use shipping address as invoice address",
+    "placeOrderBtn": "Order"
+  },
+  "address":{
+    "street": "Street",
+    "number": "Number",
+    "postalCode": "Postal Code",
+    "city": "City",
+    "country": "Country"
+  },
   "orders": {
     "title": "Orders",
     "subTitle": "Your orders",

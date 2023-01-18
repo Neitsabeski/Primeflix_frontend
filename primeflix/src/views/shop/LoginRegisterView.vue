@@ -70,12 +70,14 @@
                                 <div class="d-flex justify-content-center group form-outline mb-4">
                                     <div v-if="mode == 'login' && status == 'error_login'">
                                         <span>
-                                            {{ $t('loginRegister.badLog') }}
+                                            <!--{{ $t('loginRegister.badLog') }}-->
+                                            {{ error }}
                                         </span>
                                     </div>
-                                    <div v-if="mode == 'register' && status == 'error_login'">
+                                    <div v-if="mode == 'register' && status == 'error_register'">
                                         <span>
-                                            {{ $t('loginRegister.badReg') }}
+                                            <!--{{ $t('loginRegister.badReg') }}-->
+                                            {{ error }}
                                         </span>
                                     </div>
                                 </div>
@@ -87,10 +89,7 @@
                                             <span v-else>{{ $t('loginRegister.loginBtn') }}</span>
                                         </button>
                                         <span @click="recover">{{ $t('loginRegister.forgotPassword') }}</span>
-                                        <hr/>
-                                        <div class="d-flex justify-content-center group form-outline mb-4">
-                                            <FBLogComp/>
-                                        </div>
+                                        
                                     </div>
                                     <div v-else>
                                         <button class="btn btn-primary" :class="{ 'disabled': !validatedFields }"
@@ -99,7 +98,11 @@
                                             <span v-else>{{ $t('loginRegister.registerBtn') }}</span>
                                         </button>
                                     </div>
-                                </div>                                
+                                </div> 
+                                <hr/>
+                                <div class="d-flex justify-content-center group form-outline mb-4">
+                                    <FBLogComp/>
+                                </div>                   
                             </div>
                         </div>
                     </div>
@@ -115,7 +118,6 @@
     import { mapState } from 'vuex';
     import utils from '../../helpers/utils';
 
-
     export default {
         name: 'LoginRegister',
         components: {
@@ -130,10 +132,15 @@
                 phone: '',
                 lang: '',
                 password: '',
-                passwordverification: ''
+                passwordverification: '',
+                error: ''
             }
         },
+        created: function () {
+            this.user = this.$store.getters.getUser;
+        },
         mounted(){
+
             if(this.status == 'logged') this.$router.push('/shop/profile');
         },
         computed: {
@@ -175,12 +182,13 @@
                 const self = this;
                 this.$store.dispatch('login', {
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    isAdmin: false
                 }).then(function (response) {
-                    console.log(response);
                     self.$router.push('/shop/profile');
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
+                    self.error = error.response.data;
                 })
             },
             register: function () {
@@ -196,7 +204,8 @@
                     //console.log(response);
                     self.login();
                 }, function (error) {
-                    //console.log(error);
+                    //console.log(error.response.data);
+                    self.error = error.response.data;
                 })
             }
         }

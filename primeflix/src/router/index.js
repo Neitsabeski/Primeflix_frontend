@@ -21,13 +21,14 @@ import OfficeView from '../views/OfficeView'
 import LoginView from '../views/office/LoginView'
 
 const routes = [
-  { path: '/office', component: OfficeView, redirect: '/office/login',
+  {
+    path: '/office/login',
+    name: 'login',
+    component: LoginView
+  },
+  {    
+    path: '/office', component: OfficeView, redirect: '/office/',
     children: [
-      {
-        path: '/office/login',
-        name: 'login',
-        component: LoginView
-      },
       {
         path: "/office/:pathMatch(.*)*",
         redirect: '/office'

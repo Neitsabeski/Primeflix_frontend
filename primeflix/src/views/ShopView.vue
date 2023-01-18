@@ -21,8 +21,7 @@
         HeaderShopComp
       },
       created(){
-        this.$store.getters.getStatus;
-        this.$store.commit('alreadyConnected');
+        this.$store.commit('alreadyConnected', false);
       }
     }
   

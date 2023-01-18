@@ -1,6 +1,6 @@
 <template>
     <div>
-      <HeaderOfficeComp v-if="checkStatus"/>
+      <HeaderOfficeComp/>
       <router-view/>
     </div>
   </template>
@@ -15,15 +15,6 @@
         },
         components: {
             HeaderOfficeComp
-        },
-        created(){
-            this.status = this.$store.getters.getStatus;
-            this.$store.commit('alreadyConnected');
-        },
-        methods: {
-            checkStatus() {
-                return this.status != '' && this.status != 'client';
-            }
         }
     }
   

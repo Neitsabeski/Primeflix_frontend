@@ -18,7 +18,7 @@
           </li>
           <li class="nav-item">
             <div class="nav-link">
-              <router-link to="/shop/products" @click="setFormat('All')">
+              <router-link to="/shop/products" @click="setFormat('')">
                 {{ $t('productsLink')}}
               </router-link>
             </div>
@@ -129,15 +129,14 @@
       },
       methods: {
         search: function(event){
-          const self = this;
-          this.searchField = '';
-          self.$router.push('/shop/search');
+          this.$store.commit('setSearchText', this.searchField);
+          this.searchField = '';  
+          this.$router.push({ path:'/shop/search', replace: true});
         },
         setFormat(format){
           this.$store.commit('setFormat', format)
         },
         logOut(){
-          console.log("logout");
           this.$store.commit('logOut');
           this.$router.push('/shop/loginRegister');
         }

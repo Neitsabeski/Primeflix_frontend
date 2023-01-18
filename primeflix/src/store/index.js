@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import i18n from '../i18n'
-import utils from '@/helpers/utils';
+import utils from '@/helpers/utils'
 
 const axios = require('axios');
 
@@ -32,7 +32,11 @@ const store = createStore({
         currentPage: 1,
         pageSize: 5,
         format: '',
-        
+        genres: [],
+
+        //search
+        searchText: '',
+
         // product
         currentProduct: null,
 
@@ -47,28 +51,33 @@ const store = createStore({
         },
 
         // login register
-        alreadyConnected: function(state){
+        alreadyConnected: function(state, isAdmin){
+
             state.user.token = localStorage.getItem('jwt');
-            if(state.user.token != null) {
-                this.dispatch('user', state.user.token);
-                if(state.user.role != 'client'){
-                    this.logOut;
+            state.user.facebookToken = localStorage.getItem('facebookToken');
+
+            if(state.user.facebookToken || state.user.token){
+                if(state.user.facebookToken) {
+                    this.dispatch('loginFacebook', state.user.facebookToken);
+                } else if(state.user.token) {
+                    this.dispatch('loginToken', state.user.token);
+                }
+                if(isAdmin){
+                    this.commit('logOut');
                 } else {
                     this.dispatch('cart', state.user.token);
                 }
             }
         },
         logUser: function(state, data) {
-            console.log("logUser data : " + data);
-            
             localStorage.setItem('jwt', data.token)
             state.user.token = data.token;
             state.user.role = data.role.name;
             state.user.id = data.id;
-
             state.user.data.firstName = data.firstName;
-            state.user.data.lang = data.language;
-            console.log("state.user : " + state.user);
+            state.user.data.lang = data.languageCode;
+            this.commit('setLanguage', data.languageCode);
+            this.dispatch('cart', state.user.token);
         },
         setUser: function(state, data){
             state.user.role = data.role.name;
@@ -76,7 +85,6 @@ const store = createStore({
             state.user.data.email = data.email;
             state.user.data.firstName = data.firstName;
             state.user.data.lastName = data.lastName;
-            state.user.data.address = data.address;
             state.user.data.phone = data.phone;
             state.user.data.lang = data.language.code;
         },
@@ -84,20 +92,30 @@ const store = createStore({
             state.user = {
                 data: { 
                 },
-                role: '',
+                role: 'customer',
                 id: -1,
                 token: ''
             },
             state.status = '';
-
+            state.cart = [];
+            state.cartCount = 0;
             localStorage.removeItem('jwt');
+            localStorage.removeItem('facebookToken');
             localStorage.removeItem('cart');
+            i18n.global.locale = 'en';
         },
         setFacebookToken(state, fbToken){
             console.log(fbToken);
         },
+        setLanguage(state, langCode){
+            i18n.global.locale = langCode;
+        },
 
         // products
+        setGenres: function(state, data){
+
+            state.genres = data;
+        },
         setProducts: function(state, data){
             state.products = data.products;
             state.totalPages = data.totalPages;
@@ -107,6 +125,11 @@ const store = createStore({
             state.format = format;
         },
 
+        //search
+        setSearchText: function(state, text){
+            state.searchText = text;
+        },
+
         // product
         setCurrentProduct(state, data){
             state.currentProduct = data;
@@ -114,29 +137,44 @@ const store = createStore({
         
         // cart
         setCart: function(state, data){
-            state.cart = data['products'];
-            state.cartCount = state.cart.length;
+            if(data[0].products.length > 0){
+                state.cart = data[0].products;
+                state.cartCount = state.cart.length;
+            }
         },
         addToCart: function(state, product){
-
-            let found = state.cart.find(item => item.product.id == product.id);
-
+            console.log(product);
+            let found = state.cart.find(item => item.id == product.id);
             if (found) {
                 if(product.stock > found.quantity) {
                     found.quantity ++;
-                    state.cartCount ++;
                 }
             } else {
                 if(product.stock > 0){
-                    state.cart.push({"product": product, "quantity": 1});
+                    state.cart.push({ "id": product.id, "title": product.title, "price": product.price, "quantity": 1, "stock": product.stock});
                     state.cartCount ++;
                 }
             }
-
-            localStorage.cart = state.cart;
+            this.dispatch('saveCart',  { "cart": state.cart, "jwt": state.user.token});
         },
+        removeFromCart: function(state, product){
+            let found = state.cart.find(item => item.id == product.id);
+            if (found) {
+                if(1 < found.quantity) {
+                    found.quantity --;
+                } else {
+                    var index = state.cart.indexOf(found);
+                    state.cart.splice(index, 1);
+                    state.cartCount --;
+                }
+            }
+            this.dispatch('saveCart',  { "cart": state.cart, "jwt": state.user.token});
+        },
+        
     },
     getters: {
+
+        // Filters
         getLang: function(state){
             return state.lang;
         },
@@ -150,6 +188,7 @@ const store = createStore({
             return state.recentlyAdded;
         },
 
+        // User
         getStatus: function(state){
             return state.status;
         },
@@ -157,6 +196,7 @@ const store = createStore({
             return state.user;
         },
 
+        // Cart
         getCart: function(state){
             return state.cart;
         },
@@ -164,6 +204,10 @@ const store = createStore({
             return state.cartCount;
         },
 
+        // Products
+        getGenres: function(state){
+            return state.genres;
+        },
         getProducts: function(state){
             return state.products;
         },
@@ -174,19 +218,21 @@ const store = createStore({
             return state.totalPages;
         },
 
+        // Search
+        getSearchText: function(state){
+            return state.searchText;
+        },
+
+        // Product
         getCurrentProduct: function(state){
             return state.currentProduct;
         },
-        
     },
     actions: {
         register: ({commit}, userInfos) => {
             commit('setStatus', 'loading');
-
-            console.log(userInfos);
-
-            return new Promise((resolve, reject) => {
-                instance.post('/users/register', userInfos)
+            return new Promise(async (resolve, reject) => {
+                await instance.post('/users/register', userInfos)
                 .then(function (response) {
                     commit('setStatus', 'created');
                     resolve(response);
@@ -198,14 +244,37 @@ const store = createStore({
             })
         },
         login: ({commit}, userInfos) => {
+            commit('setStatus', 'loading');
+            return new Promise(async (resolve, reject) => {
+                await instance.post('/users/login', { "email":userInfos.email, "password": userInfos.password})
+                .then(function (response) {
+                    if(userInfos.isAdmin == false && response.data.role.name == 'customer'){
+                        commit('setStatus', 'logged');
+                        commit('logUser', response.data);
+                        resolve(response);
+                    } else if(userInfos.isAdmin == true && response.data.role.name != 'customer'){
+                        commit('setStatus', 'logged');
+                        commit('logUser', response.data);
+                        resolve(response);
+                    } else {
+                        commit('setStatus', 'error_login');
+                        resolve(false);
+                    }
+                })
+                .catch(function (error) {
+                    commit('setStatus', 'error_login');
+                    reject(error);
+                });
+            })
+        },
+        loginToken: ({commit}, jwt) => {
 
             commit('setStatus', 'loading');
-            return new Promise((resolve, reject) => {
-                instance.post('/users/login', userInfos)
+            return new Promise(async (resolve, reject) => {
+                await instance.post('/users/login/token', { "token": jwt })
                 .then(function (response) {
                     commit('setStatus', 'logged');
                     commit('logUser', response.data);
-                    //this.dispatch('user', response.data.token)
                     resolve(response);
                 })
                 .catch(function (error) {
@@ -215,26 +284,23 @@ const store = createStore({
             })
         },
         loginFacebook: ({commit}) => {
-
-            const fbToken = { "token": localStorage.get("fblst_559856828979383")};
-
-            return new Promise((resolve, reject) => {
-                instance.post('/users/login/facebook', fbToken)
+            const fbToken = { "token": localStorage.getItem("facebookToken")};
+            return new Promise(async (resolve, reject) => {
+                await instance.post('/users/login/facebook', fbToken)
                 .then(function (response) {
                     commit('logUser', response.data);
                     resolve(response);
                 })
                 .catch(function (error) {
+                    commit('setStatus', 'error_login');
                     reject(error);
                 });
             })
         },
         user: ({commit}, jwt ) => {
-
             const headers = { "Authorization": "Bearer " + jwt };
-
-            return new Promise((resolve, reject) => {
-                instance.get('/users', { headers })
+            return new Promise(async (resolve, reject) => {
+                await instance.get('/users', { headers })
                 .then(function (response) {
                     commit('setStatus', 'logged');
                     commit('setUser', response.data[0]);
@@ -246,17 +312,57 @@ const store = createStore({
                 });
             })
         },
+        modifyProfile: ({commit}, data) => {
+            const headers = { "Authorization": "Bearer " + data.jwt };
+            const userInfos = data.infos;
+            console.log(userInfos);
+            return new Promise((resolve, reject) => {
+                instance.put('/users', userInfos, { headers })
+                .then(function (response) {
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
+        genres: ({commit}) => {
+            var query = '';
+            query += utils.queryLang();
+            return new Promise((resolve, reject) => {
+                instance.get('/genres' + query)
+                .then(function (response) {
+                    commit('setGenres', response.data);
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
         products: ({commit}, params) => {
-
             var query = '';
             query += utils.queryLang();
             query += utils.queryParams(params);
-
             return new Promise((resolve, reject) => {
                 instance.get('/products' + query)
                 .then(function (response) {
                     commit('setProducts', response.data);
-                    
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
+        search: ({commit}, items) => {
+            var query = '';
+            query += utils.queryLang();
+            query += utils.queryParams(items.params);
+            return new Promise((resolve, reject) => {
+                instance.get('/products/search/' + items.text + query)
+                .then(function (response) {
+                    commit('setProducts', response.data);
                     resolve(response);
                 })
                 .catch(function (error) {
@@ -265,10 +371,8 @@ const store = createStore({
             })
         },
         product: ({commit}, productId) => {
-            
             var query = '';
             query += utils.queryLang();
-
             return new Promise((resolve, reject) => {
                 instance.get('/products/'+ productId + query)
                 .then(function (response) {
@@ -281,11 +385,11 @@ const store = createStore({
             })
         },
         cart: ({commit}, jwt) => {
-            
             const headers = { "Authorization": "Bearer " + jwt };
-
+            var query = '';
+            query += utils.queryLang();
             return new Promise((resolve, reject) => {
-                instance.get('/carts', { headers })
+                instance.get('/carts' + query, { headers })
                 .then(function (response) {
                     commit('setCart', response.data)
                     resolve(response);
@@ -295,14 +399,13 @@ const store = createStore({
                 });
             })
         },
-        order: ({commit}, order, jwt) => {
-
-            const headers = { "Authorization": "Bearer " + jwt };
-
+        saveCart: ({commit}, data) => {
+            const headers = { "Authorization": "Bearer " + data.jwt };
+            const cart = utils.setCartStructure(data.cart);
             return new Promise((resolve, reject) => {
-                instance.post('/carts', order, { headers })
+                instance.post('/carts', cart, { headers })
                 .then(function (response) {
-                    commit('setCart', response.data)
+                    //commit('setCart', response.data)
                     resolve(response);
                 })
                 .catch(function (error) {

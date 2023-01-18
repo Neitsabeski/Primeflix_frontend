@@ -16,7 +16,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="products.length > 0" class="row">
+                            <div class="row">
                                 <div class="col">
                                     <div class="row filtersMenu pannel">
                                         <h3>{{ $t('products.filters') }} <font-awesome-icon icon="fa-solid fa-filter" /></h3> 
@@ -37,9 +37,7 @@
                                             </div>
                                             <ul class="collapse" id="collapseGenre">
                                                 <li><input v-on:change="setGenre" v-model="genrePicked" name="genre" type="radio" v-bind:value="''" checked /><label>All</label></li>
-                                                <li><input v-on:change="setGenre" v-model="genrePicked" name="genre" type="radio" v-bind:value="'Horror'" /><label>Horror</label></li>
-                                                <li><input v-on:change="setGenre" v-model="genrePicked" name="genre" type="radio" v-bind:value="'Romantic'" /><label>Romantic</label></li>
-                                                <li><input v-on:change="setGenre" v-model="genrePicked" name="genre" type="radio" v-bind:value="'Adventure'" /><label>Adventure</label></li>
+                                                <li v-for="genre in genres"><input v-on:change="setGenre" v-model="genrePicked" name="genre" type="radio" v-bind:value="genre.name" /><label>{{ genre.name }}</label></li>
                                             </ul>
                                         </div>
                                         <div class="filterSection" >
@@ -64,7 +62,7 @@
                                         </div>
                                     </div>
                                     <!-- PAGES SELECTION -->
-
+                                    <div v-if="products.length > 0" >
                                         <div class="row pinky text-center page-select">
                                             <div class="col-md-4">
                                                 <span v-if="currentPage > 1" class="card_action"
@@ -81,6 +79,7 @@
                                                 <span v-else> {{ $t('products.nextBtn') }} &#62; </span>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -117,13 +116,16 @@
                     page: 1
                 },
 
+                genres: [],
+
                 cart: [],
             }
         },
         created(){
             this.params.format = this.$store.getters.getFormat;
         },
-        mounted() {       
+        mounted() {
+            this.getGenres();    
             this.getProducts();
         },
         methods: {
@@ -131,6 +133,9 @@
                 this.products = this.$store.getters.getProducts;
                 this.totalPage = this.$store.getters.getTotalPages;
                 this.currentPage = this.$store.getters.getCurrentPage;
+            },
+            displayGenres: function(){
+                this.genres = this.$store.getters.getGenres;
             },
             changePage: function (char) {
                 switch (char) {
@@ -148,7 +153,6 @@
                         break;
                     default:
                 }
-                
             },
             setFormat(){
                 this.params.format = this.formatPicked;
@@ -164,6 +168,15 @@
                 this.params.recentlyAdded = this.recentlyAdded;
                 this.params.page = 1;
                 this.getProducts();
+            },
+            getGenres: function(){
+                const self = this;
+                this.$store.dispatch('genres'
+                ).then(function (response) {
+                    self.displayGenres();
+                }, function (error) {
+                    console.log(error);
+                })
             },
             getProducts: function (event) {
                 const self = this;

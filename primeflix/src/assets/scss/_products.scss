@@ -17,6 +17,10 @@
     list-style: none;
     padding: 0;
     display: inline-block;
+    max-height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .filtersMenu ul li {
