@@ -61,7 +61,7 @@
                             self.error = error.response.data;
                         })
                     }
-                })
+                }, {scope: 'email'});
             }
         }
     }

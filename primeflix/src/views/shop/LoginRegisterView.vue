@@ -108,11 +108,14 @@
                                             <span>{{ $t('loginRegister.recoverBtn') }}</span>
                                         </button>
                                     </div>
-                                </div> 
-                                <hr/>
-                                <div v-if="mode != 'recover'" class="d-flex justify-content-center group form-outline mb-4">
-                                    <FBLogComp/>
-                                </div>                   
+                                </div>
+                                <div v-if="mode != 'recover'" >
+                                    <hr/>
+                                    <div class="d-flex justify-content-center group form-outline mb-4">
+                                        <FBLogComp/>
+                                    </div>  
+                                </div>
+                                                 
                             </div>
                         </div>
                     </div>
