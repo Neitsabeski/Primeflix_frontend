@@ -13,7 +13,7 @@ import OrdersView from '../views/shop/OrdersView.vue'
 import ProductView from '../views/shop/ProductView.vue'
 import SearchView from '../views/shop/SearchView'
 import NotFound from '../views/shop/NotFoundView'
-import SuccessOrderView from '../views/shop/SuccessOrderView'
+import OrderCloseView from '../views/shop/OrderCloseView'
 import OrderView from '../views/shop/OrderView'
 
 // office
@@ -71,9 +71,16 @@ const routes = [
         component: OrderView
       },
       {
-        path: '/shop/success',
+        path: '/shop/ordersuccess',
         name: 'success',
-        component: SuccessOrderView
+        component: OrderCloseView,
+        props: { state: "success" }
+      },
+      {
+        path: '/shop/ordercancel',
+        name: 'cancel',
+        component: OrderCloseView,
+        props: { state: "cancel" }
       },
       {
         path: '/shop/orders',

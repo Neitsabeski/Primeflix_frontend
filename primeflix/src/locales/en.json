@@ -19,6 +19,15 @@
     "placeOrderBtn": "Order",
     "phone": "Phone number"
   },
+  "orderClose": {
+    "orderClose": "Order state",
+    "orderSuccess": "Success order",
+    "orderCancel": "Order cancel",
+    "paiementSuccess": "Paiement is ok, order is validate",
+    "paiementCancel": "Paiement error, order is canceled",
+    "myOrdersBtn": "My orders",
+    "checkOrders": "You can check the order status in your orders section." 
+  },
   "address":{
     "street": "Street",
     "number": "Number",

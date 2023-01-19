@@ -418,8 +418,7 @@ const store = createStore({
             return new Promise((resolve, reject) => {
                 instance.post('/payment/checkout', data.informations, { headers })
                 .then(function (response) {
-                    console.log(response);
-                    resolve(response);
+                    resolve(response.data);
                 })
                 .catch(function (error) {
                     reject(error);

@@ -197,7 +197,7 @@
                 const token = this.$store.getters.getUser.token;
                 this.$store.dispatch('order', { "informations":infos, "jwt":token}
                 ).then(function (response) {
-                    //self.$router.push('/shop/order');
+                    window.location.href = response;
                 }, function (error) {
                     console.log(error);
                 })

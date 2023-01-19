@@ -19,6 +19,15 @@
     "placeOrderBtn": "Commander",
     "phone": "Numéro de téléphone"
   },
+  "orderClose": {
+    "orderClose": "Etat de la commande",
+    "orderSuccess": "Commande validée",
+    "orderCancel": "Commande annulée",
+    "paiementSuccess": "Paiement réussi, la commande est validée",
+    "paiementCancel": "Erreur de paiement, la commande est annulée",
+    "myOrdersBtn": "Mes commandes",
+    "checkOrders": "Pour vérifier l'état de la commande, rendez-vous dans l'espace de vos commandes." 
+  },
   "address":{
     "street": "Rue",
     "number": "Numéro",
