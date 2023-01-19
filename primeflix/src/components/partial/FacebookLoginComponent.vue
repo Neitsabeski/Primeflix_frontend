@@ -53,10 +53,8 @@
                     var self = this;
                     if (loginResponse.status === 'connected') {
                         localStorage.facebookToken = localStorage.getItem("fblst_559856828979383");
-
                         store.dispatch('loginFacebook')
                         .then(function (response) {
-                            console.log(response);
                             router.push('/shop/profile');
                         }, function (error) {
                             console.log(error);

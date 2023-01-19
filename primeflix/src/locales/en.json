@@ -16,7 +16,8 @@
     "deliveryAddress": "Shipping Address",
     "paiementAddress": "Invoice address",
     "sameAddress": "Use shipping address as invoice address",
-    "placeOrderBtn": "Order"
+    "placeOrderBtn": "Order",
+    "phone": "Phone number"
   },
   "address":{
     "street": "Street",
@@ -143,7 +144,9 @@
     "registerBtn":"Register",
     "forgotPassword":"Forgot password ?",
     "badLog":"Bad email and/or password",
-    "badReg":"Bad datas inserted"
+    "badReg":"Bad datas inserted",
+    "recoverSubTitle": "Recover",
+    "recoverBtn": "Send request"
   },
   "profile":{
   "title": "Profile",

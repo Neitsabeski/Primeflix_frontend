@@ -16,7 +16,8 @@
     "deliveryAddress": "Adresse de livraison",
     "paiementAddress": "Adresse de facturation",
     "sameAddress": "Utiliser l'adresse de livraison comme adresse de facturation",
-    "placeOrderBtn": "Commander"
+    "placeOrderBtn": "Commander",
+    "phone": "Numéro de téléphone"
   },
   "address":{
     "street": "Rue",
@@ -142,7 +143,9 @@
     "registerBtn":"Inscription",
     "forgotPassword":"Mot de passe oublié ?",
     "badLog":"Mauvais email et/ou mot de passe",
-    "badReg":"Mauvaises données insérées"
+    "badReg":"Mauvaises données insérées",
+    "recoverSubTitle": "Récuperation",
+    "recoverBtn": "Envoyer la demande"
   },
   "profile":{
     "title": "Profil",

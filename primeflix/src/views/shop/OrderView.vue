@@ -41,6 +41,12 @@
                                 <div>
                                     <h3>{{ $t('order.infosTitle') }}</h3>
                                     <div>
+                                        <h4>{{ $t('order.phone') }}</h4>
+                                        <div class="group form-outline mb-4">
+                                            <input v-model="user.data.phone" class="form-control" type="tel" :placeholder="$t('loginRegister.phoneField')" required />
+                                        </div>
+                                    </div>
+                                    <div>
                                         <h4>{{ $t('order.deliveryAddress') }}</h4>
                                         <div class="row form-outline mb-4">
                                             <div class="group col-md-9">
@@ -117,6 +123,8 @@
         name: '',
         data(){
             return {
+                cart: [],
+                user: {},
                 sameAddress: true,
                 dAddress: {
                     street:'',
@@ -136,9 +144,10 @@
         },
         created(){
             this.cart = this.$store.getters.getCart;
+            this.user = this.$store.getters.getUser;
         },
         mounted(){
-            // if(this.status != 'logged') this.$router.push('/shop/loginRegister');
+            if(this.status != 'logged') this.$router.push('/shop');
         },
         computed: {
             

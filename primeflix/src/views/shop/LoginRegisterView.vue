@@ -14,15 +14,19 @@
                                 <div class="text-center">
                                     <h2 class="card_title">
                                         <span v-if="mode == 'login'">{{ $t('loginRegister.loginSubTitle') }}</span>
-                                        <span v-else>{{ $t('loginRegister.registerSubTitle') }}</span>
+                                        <span v-if="mode == 'register'">{{ $t('loginRegister.registerSubTitle') }}</span>
+                                        <span v-if="mode == 'recover'">{{ $t('loginRegister.recoverSubTitle') }}</span>
                                     </h2>
 
                                     <p class="card_subtitle">
                                         <span v-if="mode == 'login'">
                                             {{ $t('loginRegister.noAccount') }}<span class="card_action" @click="switchToRegister">{{ $t('loginRegister.registerHere') }}</span>
                                         </span>
-                                        <span v-else>
+                                        <span v-if="mode == 'register'">
                                             {{ $t('loginRegister.alreadyAccount') }}<span class="card_action" @click="switchToLogin"> {{ $t('loginRegister.loginHere') }}</span>
+                                        </span>
+                                        <span v-if="mode == 'recover'">
+                                            <span class="card_action" @click="switchToLogin"> {{ $t('loginRegister.loginHere') }}</span>
                                         </span>
                                     </p>
                                 </div>
@@ -57,7 +61,7 @@
                                 </div>
 
                                 <!-- Password section -->
-                                <div class="group form-outline mb-4">
+                                <div class="group form-outline mb-4" v-if="mode != 'recover'">
                                     <input v-model="password" class="form-control" type="password" :placeholder="$t('loginRegister.passwordField')" required />
                                 </div>
 
@@ -88,19 +92,25 @@
                                             <span v-if="status == 'loading'">{{ $t('loginRegister.loginBtn') }} ...</span>
                                             <span v-else>{{ $t('loginRegister.loginBtn') }}</span>
                                         </button>
-                                        <span @click="recover">{{ $t('loginRegister.forgotPassword') }}</span>
+                                        <span @click="switchToRecover">{{ $t('loginRegister.forgotPassword') }}</span>
                                         
                                     </div>
-                                    <div v-else>
+                                    <div v-if="mode == 'register'">
                                         <button class="btn btn-primary" :class="{ 'disabled': !validatedFields }"
                                             @click="register">
                                             <span v-if="status == 'loading'">{{ $t('loginRegister.registerBtn') }} ...</span>
                                             <span v-else>{{ $t('loginRegister.registerBtn') }}</span>
                                         </button>
                                     </div>
+                                    <div v-if="mode == 'recover'">
+                                        <button class="btn btn-primary" :class="{ 'disabled': !validatedFields }"
+                                            @click="recover">
+                                            <span>{{ $t('loginRegister.recoverBtn') }}</span>
+                                        </button>
+                                    </div>
                                 </div> 
                                 <hr/>
-                                <div class="d-flex justify-content-center group form-outline mb-4">
+                                <div v-if="mode != 'recover'" class="d-flex justify-content-center group form-outline mb-4">
                                     <FBLogComp/>
                                 </div>                   
                             </div>
@@ -156,9 +166,15 @@
                     } else {
                         return false;
                     }
-                } else {
-                    if (this.email != ""
+                } else if(this.mode == 'login') {
+                    if (utils.ValidateEmail(this.email)
                         && this.password != "") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else if (this.mode == 'recover') {
+                    if (utils.ValidateEmail(this.email)) {
                         return true;
                     } else {
                         return false;
@@ -173,6 +189,12 @@
             },
             switchToLogin: function () {
                 this.mode = 'login';
+            },
+            switchToRecover: function(){
+                this.mode = 'recover';
+            },
+            recover: function(event){
+                this.switchToLogin();
             },
             login: function (event) {
 

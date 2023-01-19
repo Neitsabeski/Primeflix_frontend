@@ -144,7 +144,6 @@ const store = createStore({
             }
         },
         addToCart: function(state, product){
-            console.log(product);
             let found = state.cart.find(item => item.id == product.id);
             if (found) {
                 if(product.stock > found.quantity) {
