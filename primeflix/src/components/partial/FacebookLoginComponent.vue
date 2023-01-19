@@ -61,7 +61,10 @@
                             self.error = error.response.data;
                         })
                     }
-                }, {scope: 'email'});
+                }, {
+                    scope: 'email',
+                    return_scopes: true
+                });
             }
         }
     }
