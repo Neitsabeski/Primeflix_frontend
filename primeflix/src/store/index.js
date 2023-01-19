@@ -413,6 +413,19 @@ const store = createStore({
                 });
             })
         },
+        order: ({commit}, data) => {
+            const headers = { "Authorization": "Bearer " + data.jwt };
+            return new Promise((resolve, reject) => {
+                instance.post('/payment/checkout', data.informations, { headers })
+                .then(function (response) {
+                    console.log(response);
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
     }
 })
 

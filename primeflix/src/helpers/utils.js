@@ -102,6 +102,45 @@ var utils = {
         } else {
             return false;
         }
+    },
+
+    validateAddress(address) {
+        return this.validateStreet(address.street)
+                && this.validateNumber(address.number)
+                && this.validatePostalCode(address.postalCode)
+                && this.validateCity(address.city)
+                && this.validateCountry(address.country);
+    },
+
+    validateStreet(street){
+        return this.ValidateFullName(street);
+    },
+
+    validateNumber(number){
+        var validRegex = /^([1-9][0-9]{0,4})$/;
+        if (number.match(validRegex)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    validatePostalCode(postalCode){
+        var validRegex = /^[0-9]{4}$/;
+        if (postalCode.match(validRegex)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    validateCity(city){
+        return this.ValidateName(city);
+    },
+
+    validateCountry(country){
+        return this.ValidateName(country);
+        return true;
     }
 }
 

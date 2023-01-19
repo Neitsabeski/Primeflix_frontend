@@ -43,7 +43,7 @@
                                     <div>
                                         <h4>{{ $t('order.phone') }}</h4>
                                         <div class="group form-outline mb-4">
-                                            <input v-model="user.data.phone" class="form-control" type="tel" :placeholder="$t('loginRegister.phoneField')" required />
+                                            <input v-model="phone" class="form-control" type="tel" :placeholder="$t('loginRegister.phoneField')" required />
                                         </div>
                                     </div>
                                     <div>
@@ -98,9 +98,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary" @click="go()">go</button>
                                     <div class="text-center">
-                                        <button class="btn btn-primary" :class="{ 'disabled': !validatedFieldsOrders }"
+                                        <button class="btn btn-primary" :class="{ 'disabled': !validatedFieldsOrders() }"
                                             @click="placeOrder">
                                             {{ $t('order.placeOrderBtn') }}
                                         </button>
@@ -118,14 +117,15 @@
 <script>
 
     import { mapState } from 'vuex';
+    import utils from '@/helpers/utils'
 
     export default {
         name: '',
         data(){
             return {
                 cart: [],
-                user: {},
                 sameAddress: true,
+                phone: '',
                 dAddress: {
                     street:'',
                     number:'',
@@ -144,7 +144,7 @@
         },
         created(){
             this.cart = this.$store.getters.getCart;
-            this.user = this.$store.getters.getUser;
+            this.phone = this.$store.getters.getUser.data.phone || '';
         },
         mounted(){
             if(this.status != 'logged') this.$router.push('/shop');
@@ -183,15 +183,24 @@
                 this.cart = this.$store.getters.getCart;
                 console.log(this.cart);
             },
-            go(){
-                if(this.sameAddress) this.copyAddress();
-                console.log("dAddress : ");
-                console.log(this.dAddress);
-                console.log("pAddress : ");
-                console.log(this.pAddress);
-            },
             validatedFieldsOrders: function(){
-                return true;
+                if(this.sameAddress) this.copyAddress();
+                if(utils.ValidatePhone(this.phone) && utils.validateAddress(this.dAddress) && utils.validateAddress(this.pAddress)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            placeOrder: function(){
+                const self = this;
+                const infos = { "shippingAddress":this.dAddress, "invoiceAddress":this.pAddress };
+                const token = this.$store.getters.getUser.token;
+                this.$store.dispatch('order', { "informations":infos, "jwt":token}
+                ).then(function (response) {
+                    //self.$router.push('/shop/order');
+                }, function (error) {
+                    console.log(error);
+                })
             }
         }
     }

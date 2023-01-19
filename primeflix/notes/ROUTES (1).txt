@@ -246,7 +246,7 @@ Body :
     "lastName": "Wenkin",
     "phone": "Laurent",
     "email": "laurent.wenkin@gmail.com",
-    "languageId": 2,
+    "languageCode": "fr",
     "roleId": 1
 }
 
@@ -259,7 +259,7 @@ Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
 Valeur retournée si l'ID de l'utilisateur envoyé en objet de la requête est différent de l'ID de l'utilisateur qui fait la demande de modification :
 Status 400 BadRequest. ErrorMessage : "User IDs are not the same".
 
-Valeur retournée si l'ID du langage fourni n'existe pas dans la base de données :
+Valeur retournée si le code du langage fourni n'existe pas dans la base de données :
 Status 400 BadRequest. ErrorMessage : "The language doesn't exist".
 
 Valeur retournée en cas d'erreur du côté de l'API :
@@ -875,13 +875,15 @@ Valeur retournée si l'utilisateur est client :
             "id": 1,
             "title": "Les évadés",
             "price": 3.0,
-            "quantity": 1
+            "quantity": 1,
+		"stock": 1
         },
         {
             "id": 2,
             "title": "Le parrain",
             "price": 3.0,
-            "quantity": 1
+            "quantity": 1,
+		"stock": 2
         }
     ]
 }
@@ -902,7 +904,8 @@ Valeur retournée si l'utilisateur est admin :
                 "id": 1,
                 "title": "Les évadés",
                 "price": 3.0,
-                "quantity": 1
+                "quantity": 1,
+		    "stock": 2
             }
         ]
     },
@@ -1014,13 +1017,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "Paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de l'Yser",
-            "number": "102",
-            "postalCode": "4432",
-            "city": "Ans",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1054,7 +1050,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     },
     {
         "id": 26,
@@ -1071,13 +1081,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "Paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de l'Yser",
-            "number": "102",
-            "postalCode": "4432",
-            "city": "Ans",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1103,7 +1106,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     },
     {
         "id": 27,
@@ -1120,13 +1137,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "Paid"
         },
-        "deliveryAddress": {
-            "street": "Rue du tilleul",
-            "number": "40",
-            "postalCode": "4432",
-            "city": "Alleur",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1176,7 +1186,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     },
     {
         "id": 28,
@@ -1193,13 +1217,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "Paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de Liège",
-            "number": "44",
-            "postalCode": "4340",
-            "city": "Othée",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1217,7 +1234,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     }
 ]
 
@@ -1238,13 +1269,6 @@ Valeur retournée si l'utilisateur est client : il ne récupère que ses propres
             "id": 2,
             "name": "Paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de Liège",
-            "number": "44",
-            "postalCode": "4340",
-            "city": "Othée",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1262,7 +1286,21 @@ Valeur retournée si l'utilisateur est client : il ne récupère que ses propres
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     }
 ]
 
@@ -1296,13 +1334,6 @@ Valeur retournée si l'utilisateur est admin :
         "id": 2,
         "name": "Paid"
     },
-    "deliveryAddress": {
-        "street": "Rue de Liège",
-        "number": "44",
-        "postalCode": "4340",
-        "city": "Othée",
-        "country": "Belgique"
-    },
     "details": [
         {
             "product": {
@@ -1320,7 +1351,21 @@ Valeur retournée si l'utilisateur est admin :
             },
             "quantity": 1
         }
-    ]
+    ],
+    "shippingAddress": {
+        "street": "Rue Devant Les Ecoliers",
+        "number": "7",
+        "postalCode": "4020",
+        "city": "Liège",
+        "country": "Belgique"
+    },
+    "invoiceAddress": {
+        "street": "Rue Devant Les Ecoliers",
+        "number": "7",
+        "postalCode": "4020",
+        "city": "Liège",
+        "country": "Belgique"
+    }
 }
 
 Valeur retournée si l'utilisateur est client :
@@ -1339,13 +1384,6 @@ Valeur retournée si l'utilisateur est client :
         "id": 2,
         "name": "Paid"
     },
-    "deliveryAddress": {
-        "street": "Rue de Liège",
-        "number": "44",
-        "postalCode": "4340",
-        "city": "Othée",
-        "country": "Belgique"
-    },
     "details": [
         {
             "product": {
@@ -1363,7 +1401,21 @@ Valeur retournée si l'utilisateur est client :
             },
             "quantity": 1
         }
-    ]
+    ],
+    "shippingAddress": {
+        "street": "Rue Devant Les Ecoliers",
+        "number": "7",
+        "postalCode": "4020",
+        "city": "Liège",
+        "country": "Belgique"
+    },
+    "invoiceAddress": {
+        "street": "Rue Devant Les Ecoliers",
+        "number": "7",
+        "postalCode": "4020",
+        "city": "Liège",
+        "country": "Belgique"
+    }
 }
 
 Valeur retournée si l'utilisateur est client et qu'il essaie de récupérer une commande qui n'est pas la sienne :
@@ -1397,13 +1449,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de l'Yser",
-            "number": "102",
-            "postalCode": "4432",
-            "city": "Ans",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1437,7 +1482,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     },
     {
         "id": 27,
@@ -1454,13 +1513,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "paid"
         },
-        "deliveryAddress": {
-            "street": "Rue du tilleul",
-            "number": "40",
-            "postalCode": "4432",
-            "city": "Alleur",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1510,7 +1562,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     },
     {
         "id": 28,
@@ -1527,13 +1593,6 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
             "id": 2,
             "name": "paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de Liège",
-            "number": "44",
-            "postalCode": "4340",
-            "city": "Othée",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1551,7 +1610,21 @@ Valeur retournée si l'utilisateur est admin : il récupère toutes les commande
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     }
 ]
 
@@ -1572,13 +1645,6 @@ Valeur retournée si l'utilisateur est client : il récupère ses commandes
             "id": 2,
             "name": "paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de Liège",
-            "number": "44",
-            "postalCode": "4340",
-            "city": "Othée",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1596,7 +1662,21 @@ Valeur retournée si l'utilisateur est client : il récupère ses commandes
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     },
     {
         "id": 29,
@@ -1613,13 +1693,6 @@ Valeur retournée si l'utilisateur est client : il récupère ses commandes
             "id": 2,
             "name": "paid"
         },
-        "deliveryAddress": {
-            "street": "Rue de Liège",
-            "number": "44",
-            "postalCode": "4340",
-            "city": "Othée",
-            "country": "Belgique"
-        },
         "details": [
             {
                 "product": {
@@ -1637,7 +1710,21 @@ Valeur retournée si l'utilisateur est client : il récupère ses commandes
                 },
                 "quantity": 1
             }
-        ]
+        ],
+        "shippingAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        },
+        "invoiceAddress": {
+            "street": "Rue Devant Les Ecoliers",
+            "number": "7",
+            "postalCode": "4020",
+            "city": "Liège",
+            "country": "Belgique"
+        }
     }
 ]
 
@@ -1649,41 +1736,6 @@ Status 400 BadRequest. ErrorMessage : "Status doesn't exist".
 
 Valeur retournée si le langage spécifié n'existe pas :
 Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
-
--------------------------------------------------------------------------------------------
-
-Route : POST https://localhost:5000/api/orders
-
-Objectif : créer la commande, une fois que l'utilisateur a ajouté son adresse de livraison.
-
-Token : Oui
-
-Body :
-{
-    "street" : "Rue de la Collectivité",
-    "number" : "30",
-    "postalCode" : "4100",
-    "City": "Seraing",
-    "Country": "Belgique"
-}
-
-Valeur retournée si tout OK :
-Status 204 NoContent.
-
-Valeur retournée si le bearer token est erroné :
-Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
-
-Valeur retournée si aucune adresse de livraison n'est envoyée :
-Status 400 BadRequest. ErrorMessage : "No delivery address was provided".
-
-Valeur retournée si le panier de l'utilisateur n'est pas retrouvé :
-Status 404 NotFound.
-
-Valeur retournée si un ou des produit(s) du panier n'est / ne sont plus disponible(s) dans la quantité demandée :
-Status 409 Conflict. ErrorMessage : "Order cannot be created : the quantity requested for product(s) with ID XXX is not available in stock".
-
-Valeur retournée si une erreur survient du côté de l'API :
-Status 500 Internal Server Error. ErrorMessage : "Something went wrong creating the user's order".
 
 -------------------------------------------------------------------------------------------
 
@@ -1769,6 +1821,24 @@ Route : POST https://localhost:5000/api/payment/checkout
 Objectif : recevoir l'URL redirigeant l'utilisateur vers la page de paiement Stripe pour sa commande
 
 Token : Oui
+
+Body :
+{
+    "shippingAddress": {
+        "street" : "Rue Devant Les Ecoliers",
+        "number": "7",
+        "postalCode" : "4020",
+        "city": "Liège",
+        "country": "Belgique"
+    },
+        "invoiceAddress": {
+        "street" : "Rue Devant Les Ecoliers",
+        "number": "7",
+        "postalCode" : "4020",
+        "city": "Liège",
+        "country": "Belgique"
+    }
+}
 
 Valeur retournée si tout OK :
 https://checkout.stripe.com/c/pay/cs_test_a1SFg3dxPMmEu5Q253MamGVaq0rbFuR2OMZrnI4FDctVzhCV3DB0ADSbPG#fidkdWxOYHwnPyd1blpxYHZxWjA0SElRUTFBU082R39WQnJdUW5MPWpJYH80M3NLTVVGPHA1aEZVQD0wU1R9VX83XVx0MDxIQjFWREpycmswV3VDd0didTRkXEl0U3MyYjBVZ0hCTUpiNk01NTVRUmJOfG9ddicpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl
@@ -2583,57 +2653,3 @@ Status 404 NotFound.
 
 Valeur retournée si le langage spécifié n'existe pas :
 Status 400 BadRequest. ErrorMessage : "Language doesn't exist".
-
--------------------------------------------------------------------------------------------
-|					     ADDRESSES	  					 |
--------------------------------------------------------------------------------------------
-
-Route : GET https://localhost:5000/api/address
-
-Objectif : récupérer l'adresse de l'utilisateur loggé
-
-Token : OUI (renvoie l'adresse de l'utilisateur)
-
-Valeur retournée si tout OK :
-{
-    "street": "Rue du tilleul",
-    "number": "40",
-    "postalCode": "4432",
-    "city": "Alleur",
-    "country": "Belgique"
-}
-
-Valeur retournée si aucune adresse n'est encodée pour cet utilisateur :
-Status 404 NotFound().
-
-Valeur retournée si le bearer token est erroné :
-Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
-
--------------------------------------------------------------------------------------------
-
-Route : POST https://localhost:5000/api/address
-
-Objectif : ajoute ou modifie l'adresse de l'utilisateur loggé
-
-Token : OUI (ajoute OU modifie l'adresse de l'utilisateur)
-
-Body :
-{
-    "street": "Rue du tilleul",
-    "number": "40",
-    "postalCode": "4432",
-    "city": "Alleur",
-    "country": "Belgique"
-}
-
-Valeur retournée si tout est OK :
-Status 201 Created.
-
-Valeur retournée si le bearer token est erroné :
-Status 400 BadRequest. ErrorMessage : "User ID could not be retrieved".
-
-Valeur retournée si aucune adresse n'est envoyée :
-Status 400 BadRequest. ErrorMessage : "No data was provided".
-
-Valeur retournée en cas d'erreur au niveau de l'API :
-Status 500 Internal Server Error. ErrorMessage : "Something went wrong adding the user's address".
