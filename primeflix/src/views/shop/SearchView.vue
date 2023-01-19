@@ -61,6 +61,7 @@
         components:{
             ProductCardComp
         },
+        props:['key'],
         data() {
             return {
                 

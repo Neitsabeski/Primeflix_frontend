@@ -18,24 +18,23 @@
           </li>
           <li class="nav-item">
             <div class="nav-link">
-              <router-link to="/shop/products" @click="setFormat('')">
+              <router-link to="/shop/products" @click="setFormat(''), refresh()">
                 {{ $t('productsLink')}}
               </router-link>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-link" >
-                <router-link to="/shop/products" @click="setFormat('film')">
+                <router-link to="/shop/products" @click="setFormat('film'), refresh()">
                   {{ $t('filmsLink')}}
                 </router-link>
             </div>
           </li>
           <li class="nav-item">
             <div class="nav-link">
-              <router-link to="/shop/products" @click="setFormat('serie')">
+              <router-link to="/shop/products" @click="setFormat('serie'), refresh()">
                 {{ $t('seriesLink')}}
               </router-link>
-                
             </div>
           </li>
           <li class="nav-item">
@@ -56,7 +55,7 @@
           </div>
           
           <li class="nav-item">
-            <LocaleSwitcher/>
+            <LocaleSwitcher @langChange="refresh()"/>
           </li>
           
           <li class="nav-item">
@@ -118,7 +117,8 @@
         return {
           user: '',
           name: '',
-          searchField: ''
+          searchField: '',
+          iteration: 0
         }
         
       },
@@ -130,9 +130,14 @@
       },
       methods: {
         search: function(event){
+          this.iteration ++;
           this.$store.commit('setSearchText', this.searchField);
           this.searchField = '';  
-          this.$router.push({ path:'/shop/search', replace: true});
+          this.$router.push({ path:'/shop/search'});
+          this.refresh();
+        },
+        refresh(){
+          this.$emit('refresh');
         },
         setFormat(format){
           this.$store.commit('setFormat', format)

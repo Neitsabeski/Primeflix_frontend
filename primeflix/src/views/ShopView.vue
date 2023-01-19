@@ -1,7 +1,7 @@
 <template>
     <div>
-      <HeaderShopComp/>
-      <router-view/>
+      <HeaderShopComp @refresh="increase" />
+      <router-view :key="it" />
       <FooterComp />
       
       <BackgroundComp />
@@ -20,8 +20,18 @@
         FooterComp,
         HeaderShopComp
       },
+      data(){
+        return {
+          it: 0
+        }
+      },
       created(){
         this.$store.commit('alreadyConnected', false);
+      },
+      methods:{
+        increase: function(){
+          this.it++;
+        }
       }
     }
   
