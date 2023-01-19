@@ -33,25 +33,27 @@
                                             </p>
                                         </div>
                                         <hr />
-                                        <div class="row">
+                                        <div v-if="product.rating" class="row">
                                             <h3 class="col-md-6 pinky">
                                                 {{ $t('product.rating')}}
                                             </h3>
                                             <div class="col-md-6">
                                                 <StarsComp :ratingP="product.rating"/>
                                             </div>
+                                            <hr />
                                         </div>
-                                        <hr />
-                                        <div class="row">
+                                        
+                                        <div v-if="product.released" class="row">
                                             <h3 class="col-md-6 pinky">
                                                 {{ $t('product.released')}}
                                             </h3>
                                             <p class="col-md-6">
                                                 {{ dateFormat(product.releaseDate) }}
                                             </p>
+                                            <hr />
                                         </div>
-                                        <hr />
-                                        <div class="row">
+                                        
+                                        <div v-if="product.summary" class="row">
                                             <h3 class="col-md-6 pinky">
                                                 {{ $t('product.summary')}}
                                             </h3>
@@ -59,9 +61,10 @@
                                             <p>
                                                 {{ product.summary }}
                                             </p>
+                                            <hr />
                                         </div>
-                                        <hr />
-                                        <div class="row">
+                                        
+                                        <div v-if="product.genres.length > 0" class="row">
                                             <h3 class="col-md-6 pinky">
                                                 {{ $t('product.genres')}}
                                             </h3>
@@ -70,9 +73,10 @@
                                                     {{ genre.name }}
                                                 </li>
                                             </ul>
+                                            <hr />
                                         </div>
-                                        <hr />
-                                        <div class="row">
+                                        
+                                        <div v-if="product.directors.length > 0" class="row">
                                             <h3 class="col-md-6 pinky">
                                                 {{ $t('product.directors')}}
                                             </h3>
@@ -81,9 +85,10 @@
                                                     {{ director.firstName }} {{ director.lastName }}
                                                 </li>
                                             </ul>
+                                            <hr />
                                         </div>
-                                        <hr />
-                                        <div class="row">
+                                        
+                                        <div v-if="product.actors.length > 0" class="row">
                                             <h3 class="col-md-6 pinky">
                                                 {{ $t('product.actors')}}
                                             </h3>
@@ -92,8 +97,9 @@
                                                     {{ actor.firstName }} {{ actor.lastName }}
                                                 </li>
                                             </ul>
+                                            <hr />
                                         </div>
-                                        <hr />
+                                       
                                     </div>
                                 </div>
                             </div>

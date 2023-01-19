@@ -33,7 +33,8 @@
   "search":{
     "title": "Recherche",
     "subTitle": "Résultats de la recherche",
-    "noResult": "Pas de résultats"
+    "noResult": "Pas de résultats",
+    "for": "Pour"
   },
   "products":{
     "title": "Produits",

@@ -14,9 +14,9 @@
                                         <span v-if="products.length > 0">{{ $t('search.subTitle')}}</span>
                                         <span v-else>{{ $t('search.noResult')}}</span>
                                     </h2>
+                                    <span v-if="text">{{ $t('search.for') }} "{{ this.text }}"</span>
                                 </div>
                             </div>
-                        
 
                             <div v-if="products.length > 0" class="row justify-content-center">
                                 <div class="col-md-10">
@@ -64,7 +64,8 @@
         props:['key'],
         data() {
             return {
-                
+                text: '',
+
                 products: [],
                 totalPage: 0,
                 currentPage: 0,
@@ -103,10 +104,10 @@
                 }
             },
             getProducts: function (event) {
-                const text = this.$store.getters.getSearchText;
-                if(text){
+                this.text = this.$store.getters.getSearchText;
+                if(this.text){
                     const self = this;
-                    this.$store.dispatch('search', { "params":this.params, "text": text}
+                    this.$store.dispatch('search', { "params":this.params, "text": this.text}
                     ).then(function (response) {
                         self.displayProducts();
                     }, function (error) {

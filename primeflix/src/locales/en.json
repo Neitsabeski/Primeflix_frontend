@@ -32,8 +32,9 @@
   },
   "search":{
     "title": "Search",
-    "subTitle": "Search resultats",
-    "noResult": "No match"
+    "subTitle": "Search results",
+    "noResult": "No match",
+    "for": "For"
   },
   "products":{
     "title": "Products",

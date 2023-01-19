@@ -59,13 +59,16 @@
                                             </div>
                                         </div>
                                         <div class="group form-outline mb-4">
-                                            <input v-model="dAddress.country" class="form-control" type="text" :placeholder="$t('address.country')" required />
+                                            <input v-model="dAddress.country" class="form-control" type="text" :placeholder="$t('address.country')" disabled required />
                                         </div>
                                     </div>
                                     <div>
+                                        <input  v-on:change="setSameAddress" v-model="sameAddress" name="sameAddress" type="checkbox" v-bind:value="sameAddress" data-bs-toggle="collapse" data-bs-target="#invoiceAddress"/>
+                                        <label>{{ $t('order.sameAddress') }}</label>
+                                    </div>
+                                    <div class="collapse" id="invoiceAddress">
                                         <h4>{{ $t('order.paiementAddress') }}</h4>
-                                        <input  v-on:change="setSameAddress" v-model="sameAddress" name="sameAddress" type="checkbox" v-bind:value="sameAddress" /><label>{{ $t('order.sameAddress') }}</label>
-                                        <div v-if="!sameAddress">
+                                        <div>
                                             <div class="row form-outline mb-4">
                                                 <div class="group col-md-9">
                                                     <input v-model="pAddress.street" class="form-control" type="text" :placeholder="$t('address.street')" required />
@@ -83,12 +86,13 @@
                                                 </div>
                                             </div>
                                             <div class="group form-outline mb-4">
-                                                <input v-model="pAddress.country" class="form-control" type="text" :placeholder="$t('address.country')" required />
+                                                <input v-model="pAddress.country" class="form-control" type="text" :placeholder="$t('address.country')" disabled required />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
+                                    <button class="btn btn-primary" @click="go()">go</button>
                                     <div class="text-center">
                                         <button class="btn btn-primary" :class="{ 'disabled': !validatedFieldsOrders }"
                                             @click="placeOrder">
@@ -113,21 +117,20 @@
         name: '',
         data(){
             return {
-                status: '',
                 sameAddress: true,
                 dAddress: {
                     street:'',
                     number:'',
                     postalCode:'',
                     city:'',
-                    country:''
+                    country:'Belgium'
                 },
                 pAddress: {
                     street:'',
                     number:'',
                     postalCode:'',
                     city:'',
-                    country:''
+                    country:'Belgium'
                 }
             }
         },
@@ -138,6 +141,7 @@
             // if(this.status != 'logged') this.$router.push('/shop/loginRegister');
         },
         computed: {
+            
             ...mapState(["status"]),
             total: function(){
                 var total = 0;
@@ -149,22 +153,37 @@
         },
         methods: {
             setSameAddress: function(){
-                if(this.sameAddress) {
-                    this.pAddress = this.dAddress;
-                } else {
+                if(!this.sameAddress) {
                     this.pAddress = {
                         street:'',
                         number:'',
                         postalCode:'',
                         city:'',
-                        country:''
+                        country:'Belgium'
                     }
                 }
+            },
+            copyAddress(){
+                this.pAddress.street = this.dAddress.street,
+                this.pAddress.number = this.dAddress.number,
+                this.pAddress.postalCode = this.dAddress.postalCode,
+                this.pAddress.city = this.dAddress.city,
+                this.pAddress.country = this.dAddress.country
             },
             displayCart(){
                 this.cart = this.$store.getters.getCart;
                 console.log(this.cart);
             },
+            go(){
+                if(this.sameAddress) this.copyAddress();
+                console.log("dAddress : ");
+                console.log(this.dAddress);
+                console.log("pAddress : ");
+                console.log(this.pAddress);
+            },
+            validatedFieldsOrders: function(){
+                return true;
+            }
         }
     }
 
