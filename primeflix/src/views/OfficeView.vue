@@ -30,6 +30,12 @@
                   </span>
                 </li>
                 <li class="nav-item">
+                  <span class="nav-link" @click="setComponent('Stocks')">
+                    <font-awesome-icon icon="fa-solid fa-cubes-stacked" />
+                    Stocks
+                  </span>
+                </li>
+                <li class="nav-item">
                   <span class="nav-link" @click="setComponent('Customers')">
                     <font-awesome-icon icon="fa-solid fa-user" />
                     Customers
@@ -60,6 +66,7 @@
               <OrdersComp v-if="selectedComponent == 'Orders'"/>
               <PromotionsComp v-if="selectedComponent == 'Promotions'"/>
               <ProductsComp v-if="selectedComponent == 'Products'"/>
+              <StocksComp v-if="selectedComponent == 'Stocks'"/>
               <CustomersComp v-if="selectedComponent == 'Customers'"/>
               <EmployeesComp v-if="selectedComponent == 'Employees'"/>
             </div>
@@ -75,6 +82,7 @@
     import OrdersComp from '@/components/office/OrdersComponent'
     import PromotionsComp from '@/components/office/PromotionsComponent'
     import ProductsComp from '@/components/office/ProductsComponent'
+    import StocksComp from '@/components/office/StocksComponent'
     import CustomersComp from '@/components/office/CustomersComponent'
     import EmployeesComp from '@/components/office/EmployeesComponent'
 
@@ -87,6 +95,7 @@
         OrdersComp,
         PromotionsComp,
         ProductsComp,
+        StocksComp,
         CustomersComp,
         EmployeesComp
       },
