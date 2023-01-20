@@ -425,6 +425,18 @@ const store = createStore({
                 });
             })
         },
+        orders: ({commit}, jwt) => {
+            const headers = { "Authorization": "Bearer " + jwt };
+            return new Promise((resolve, reject) => {
+                instance.get('/orders', { headers })
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+            })
+        },
     }
 })
 

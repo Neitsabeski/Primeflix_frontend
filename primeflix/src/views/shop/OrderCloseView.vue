@@ -42,6 +42,8 @@
 
 <script>
 
+    import { mapState } from 'vuex';
+
     export default {
         name: 'OrderClose',
         props: ['state'],
@@ -49,7 +51,13 @@
             myOrders: function(){
                 this.$router.push('/shop/orders');
             }
-        }
+        },
+        mounted(){
+            if(this.status != 'logged') this.$router.push('/shop/loginregister');
+        },
+        computed: {
+            ...mapState(["status"]),
+        },
     }
 
 </script>
