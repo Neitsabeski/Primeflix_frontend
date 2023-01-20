@@ -80,14 +80,17 @@ const store = createStore({
             this.dispatch('cart', state.user.token);
         },
         setUser: function(state, data){
-            state.user.role = data.role.name;
-            state.user.id = data.id;
-            state.user.data.email = data.email;
-            state.user.data.firstName = data.firstName;
-            state.user.data.lastName = data.lastName;
-            state.user.data.phone = data.phone;
-            state.user.data.lang = data.language.code;
-            this.commit('setLanguage', data.language.code);
+
+            if(state.user.role == 'customer'){
+                state.user.role = data.role.name;
+                state.user.id = data.id;
+                state.user.data.email = data.email;
+                state.user.data.firstName = data.firstName;
+                state.user.data.lastName = data.lastName;
+                state.user.data.phone = data.phone;
+                state.user.data.lang = data.language.code;
+                this.commit('setLanguage', data.language.code);
+            }
         },
         logOut: function(state){
             state.user = {

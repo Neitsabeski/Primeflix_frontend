@@ -1,0 +1,42 @@
+#office .nav-item .nav-link {
+    color: white;
+}
+
+#office .nav-link:hover {
+    cursor: pointer;
+    color: cyan;
+}
+
+#office table thead  {
+    color: $myPink;
+}
+
+#office table tbody  {
+    color: white;
+}
+
+.btn-dashboard {
+    width: 200px;
+    color: white;
+    border-color: white;
+    margin-right: 1em;
+}
+
+.btn-dashboard:hover {
+    border-color: $myPink;
+    color: $myPink;
+}
+
+#office .display {
+    max-height: 475px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.btn-next {
+    cursor: pointer;
+}
+
+.btn-previous {
+    cursor: pointer;
+}

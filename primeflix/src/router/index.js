@@ -27,8 +27,13 @@ const routes = [
     component: LoginView
   },
   {    
-    path: '/office', component: OfficeView, redirect: '/office/',
+    path: '/office', component: OfficeView, redirect: '/office/', props: true,
     children: [
+      {
+        path: "/office/",
+        name: 'Office',
+        component: OfficeView
+      },
       {
         path: "/office/:pathMatch(.*)*",
         redirect: '/office'
