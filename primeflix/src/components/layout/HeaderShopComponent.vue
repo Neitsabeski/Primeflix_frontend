@@ -120,7 +120,6 @@
           searchField: '',
           iteration: 0
         }
-        
       },
       computed: {
           ...mapState(["status"]),

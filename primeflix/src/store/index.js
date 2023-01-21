@@ -95,6 +95,7 @@ const store = createStore({
         logOut: function(state){
             state.user = {
                 data: { 
+                    firstName: ''
                 },
                 role: 'customer',
                 id: -1,

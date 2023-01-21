@@ -52,9 +52,6 @@
                 this.$router.push('/shop/orders');
             }
         },
-        mounted(){
-            if(this.status != 'logged') this.$router.push('/shop/loginregister');
-        },
         computed: {
             ...mapState(["status"]),
         },
